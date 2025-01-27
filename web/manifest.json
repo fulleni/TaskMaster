@@ -1,6 +1,6 @@
 {
-    "name": "todos",
-    "short_name": "todos",
+    "name": "TaskMaster",
+    "short_name": "TaskMaster",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

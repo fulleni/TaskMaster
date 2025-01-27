@@ -14,7 +14,32 @@ void main() async {
 
   final todosRepository = TodosRepository(todosClient: todosClient);
 
-  runApp(App(
-    todosRepository: todosRepository,
-  ));
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'TaskMaster',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: MyHomePage(),
+    );
+  }
+}
+
+class MyHomePage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('TaskMaster'),
+      ),
+      body: Center(
+        child: Text('Hello, world!'),
+      ),
+    );
+  }
 }

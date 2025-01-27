@@ -1,5 +1,5 @@
-name: task_master
-description: "A new Flutter project."
+name: taskmaster
+description: A new Flutter project named TaskMaster.
 publish_to: 'none'
 version: 0.2.0
 
@@ -31,3 +31,5 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   generate: true
+  assets:
+    - assets/
