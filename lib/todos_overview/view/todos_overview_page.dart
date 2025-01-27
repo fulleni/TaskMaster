@@ -26,7 +26,7 @@ class _TodosOverviewView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Todos Overview'),
+        title: Text('🎯 TaskManager'),
         actions: [
           _TodosOverviewFilterButton(),
           _TodosOverviewOptionsButton(),
