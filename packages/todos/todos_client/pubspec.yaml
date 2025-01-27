@@ -1,0 +1,23 @@
+name: todos_client
+description: "The interface and models for an API providing access to todos."
+version: 0.0.1
+publish_to: none
+
+environment:
+  sdk: ^3.6.1
+  flutter: ">=1.17.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  equatable: ^2.0.7
+  uuid: ^4.5.1
+  json_annotation: ^4.9.0
+  meta: ^1.15.0
+  
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
+  json_serializable: ^6.9.3
+  build_runner: ^2.4.14

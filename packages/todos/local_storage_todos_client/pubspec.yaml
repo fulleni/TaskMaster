@@ -1,0 +1,22 @@
+name: local_storage_todos_client
+description: A Flutter implementation of the TodosApi that uses local storage.
+publish_to: none
+
+environment:
+  sdk: ^3.6.1
+  flutter: ">=1.17.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  meta: ^1.15.0
+  rxdart: ^0.28.0
+  shared_preferences: ^2.4.0
+  todos_client:
+    path: ../todos_client
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
+  mocktail: ^1.0.4
