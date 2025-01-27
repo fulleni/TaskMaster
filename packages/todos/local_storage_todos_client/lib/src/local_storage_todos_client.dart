@@ -59,7 +59,14 @@ class LocalStorageTodosClient extends TodosClient {
           .toList();
       _todoStreamController.add(todos);
     } else {
-      _todoStreamController.add(const []);
+      final mockedTodos = List.generate(
+        5,
+        (index) => Todo(
+          title: 'Mocked Todo $index',
+          description: 'Description for mocked todo $index',
+        ),
+      );
+      _todoStreamController.add(mockedTodos);
     }
   }
 
@@ -107,7 +114,7 @@ class LocalStorageTodosClient extends TodosClient {
   ///
   /// Returns the number of todos that were cleared.
   @override
-  Future<int> clearCompleted() async {
+  Future<int> deleteCompleted() async {
     final todos = [..._todoStreamController.value];
     final completedTodosAmount = todos.where((t) => t.isCompleted).length;
     todos.removeWhere((t) => t.isCompleted);

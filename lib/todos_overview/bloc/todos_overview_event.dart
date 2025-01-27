@@ -46,11 +46,8 @@ final class TodosOverviewToggleCompleteAll extends TodosOverviewEvent {
   List<Object> get props => [isCompleted];
 }
 
-/// Event to clear all completed todos.
-final class TodosOverviewClearCompleted extends TodosOverviewEvent {}
-
 /// Event to delete all completed todos.
-final class TodosOverviewDeleteAllCompleted extends TodosOverviewEvent {}
+final class TodosOverviewDeleteCompleted extends TodosOverviewEvent {}
 
 /// Event to filter the todos.
 final class TodosOverviewFilterTodos extends TodosOverviewEvent {

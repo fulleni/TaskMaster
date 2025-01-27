@@ -14,8 +14,7 @@ class TodosOverviewBloc extends Bloc<TodosOverviewEvent, TodosOverviewState> {
     on<TodosOverviewUndoDelete>(_onUndoDelete);
     on<TodosOverviewToggleTodoCompleted>(_onToggleTodoCompleted);
     on<TodosOverviewToggleCompleteAll>(_onToggleCompleteAll);
-    on<TodosOverviewClearCompleted>(_onClearCompleted);
-    on<TodosOverviewDeleteAllCompleted>(_onDeleteAllCompleted);
+    on<TodosOverviewDeleteCompleted>(_onDeleteCompleted);
     on<TodosOverviewFilterTodos>(_onFilterTodos);
   }
 
@@ -124,36 +123,18 @@ class TodosOverviewBloc extends Bloc<TodosOverviewEvent, TodosOverviewState> {
     }
   }
 
-  /// Handles the [TodosOverviewClearCompleted] event.
-  ///
-  /// Emits a loading state, then attempts to clear all completed todos.
-  /// If successful, reloads todos.
-  /// If an error occurs, emits a failure state.
-  Future<void> _onClearCompleted(
-    TodosOverviewClearCompleted event,
-    Emitter<TodosOverviewState> emit,
-  ) async {
-    emit(state.copyWith(status: TodosOverviewStatus.loading));
-    try {
-      await _todosRepository.clearCompleted();
-      add(TodosOverviewLoadTodos());
-    } catch (_) {
-      emit(state.copyWith(status: TodosOverviewStatus.failure));
-    }
-  }
-
-  /// Handles the [TodosOverviewDeleteAllCompleted] event.
+  /// Handles the [TodosOverviewDeleteCompleted] event.
   ///
   /// Emits a loading state, then attempts to delete all completed todos.
   /// If successful, reloads todos.
   /// If an error occurs, emits a failure state.
-  Future<void> _onDeleteAllCompleted(
-    TodosOverviewDeleteAllCompleted event,
+  Future<void> _onDeleteCompleted(
+    TodosOverviewDeleteCompleted event,
     Emitter<TodosOverviewState> emit,
   ) async {
     emit(state.copyWith(status: TodosOverviewStatus.loading));
     try {
-      await _todosRepository.clearCompleted();
+      await _todosRepository.deleteCompleted();
       add(TodosOverviewLoadTodos());
     } catch (_) {
       emit(state.copyWith(status: TodosOverviewStatus.failure));

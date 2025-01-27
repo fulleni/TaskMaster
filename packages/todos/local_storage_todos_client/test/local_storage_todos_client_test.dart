@@ -110,7 +110,7 @@ void main() {
               LocalStorageTodosClient.kTodosCollectionKey, any()))
           .thenAnswer((_) async => true);
 
-      final clearedCount = await client.clearCompleted();
+      final clearedCount = await client.deleteCompleted();
 
       expect(clearedCount, 1);
       verify(() => plugin.setString(

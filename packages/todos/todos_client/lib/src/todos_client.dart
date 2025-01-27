@@ -24,7 +24,7 @@ abstract class TodosClient {
   /// Deletes all completed todos.
   ///
   /// Returns the number of deleted todos.
-  Future<int> clearCompleted();
+  Future<int> deleteCompleted();
 
   /// Sets the `isCompleted` state of all todos to the given value.
   ///
