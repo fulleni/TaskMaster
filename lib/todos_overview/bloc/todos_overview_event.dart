@@ -51,3 +51,13 @@ final class TodosOverviewClearCompleted extends TodosOverviewEvent {}
 
 /// Event to delete all completed todos.
 final class TodosOverviewDeleteAllCompleted extends TodosOverviewEvent {}
+
+/// Event to filter the todos.
+final class TodosOverviewFilterTodos extends TodosOverviewEvent {
+  const TodosOverviewFilterTodos(this.filter);
+
+  final TodosOverviewFilter filter;
+
+  @override
+  List<Object> get props => [filter];
+}
