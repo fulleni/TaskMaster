@@ -56,6 +56,7 @@ class TodosOverviewBloc extends Bloc<TodosOverviewEvent, TodosOverviewState> {
   ) async {
     emit(state.copyWith(status: TodosOverviewStatus.loading));
     try {
+      print('Deleting todo with id: ${event.id}');
       final todo = state.todos.firstWhere((todo) => todo.id == event.id);
       await _todosRepository.deleteTodo(event.id);
       emit(state.copyWith(lastDeletedTodo: todo));
@@ -173,9 +174,9 @@ class TodosOverviewBloc extends Bloc<TodosOverviewEvent, TodosOverviewState> {
     emit(state.copyWith(status: TodosOverviewStatus.loading));
     try {
       // insert the original todo to db.
-      // 
+      //
       // note:
-      // "updated todo" and the "initial todo" has the same id, 
+      // "updated todo" and the "initial todo" has the same id,
       //  so,
       // "updated todo" will be overridden by the "initial todo".
       await _todosRepository.saveTodo(event.initialTodo);

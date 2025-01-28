@@ -95,42 +95,59 @@ class _TodosOverviewView extends StatelessWidget {
             } else if (state.status == TodosOverviewStatus.failure) {
               return Center(child: Text('Failed to load todos'));
             } else if (state.todos.isEmpty) {
-              return Center(child: Text('No todos available'));
+              return RefreshIndicator(
+                onRefresh: () async {
+                  context.read<TodosOverviewBloc>().add(TodosOverviewLoadTodos());
+                },
+                child: ListView(
+                  children: [
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height / 2,
+                      child: Center(child: Text('No todos available')),
+                    ),
+                  ],
+                ),
+              );
             } else {
-              return ListView.builder(
-                itemCount: state.todos.length,
-                itemBuilder: (context, index) {
-                  final todo = state.todos[index];
-                  return Dismissible(
-                    key: Key(todo.id),
-                    onDismissed: (direction) {
-                      context.read<TodosOverviewBloc>().add(
-                            TodosOverviewDeleteTodo(todo.id),
+              return RefreshIndicator(
+                onRefresh: () async {
+                  context.read<TodosOverviewBloc>().add(TodosOverviewLoadTodos());
+                },
+                child: ListView.builder(
+                  itemCount: state.todos.length,
+                  itemBuilder: (context, index) {
+                    final todo = state.todos[index];
+                    return Dismissible(
+                      key: Key(todo.id),
+                      onDismissed: (direction) {
+                        context.read<TodosOverviewBloc>().add(
+                              TodosOverviewDeleteTodo(todo.id),
+                            );
+                      },
+                      background: Container(color: Colors.red),
+                      child: ListTile(
+                        title: Text(todo.title),
+                        subtitle: Text(todo.description),
+                        trailing: Checkbox(
+                          value: todo.isCompleted,
+                          onChanged: (value) {
+                            context.read<TodosOverviewBloc>().add(
+                                  TodosOverviewToggleTodoCompleted(
+                                      todo.id, value!),
+                                );
+                          },
+                        ),
+                        onTap: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (_) => TodosEditPage(todo: todo),
+                            ),
                           );
-                    },
-                    background: Container(color: Colors.red),
-                    child: ListTile(
-                      title: Text(todo.title),
-                      subtitle: Text(todo.description),
-                      trailing: Checkbox(
-                        value: todo.isCompleted,
-                        onChanged: (value) {
-                          context.read<TodosOverviewBloc>().add(
-                                TodosOverviewToggleTodoCompleted(
-                                    todo.id, value!),
-                              );
                         },
                       ),
-                      onTap: () {
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (_) => TodosEditPage(todo: todo),
-                          ),
-                        );
-                      },
-                    ),
-                  );
-                },
+                    );
+                  },
+                ),
               );
             }
           },

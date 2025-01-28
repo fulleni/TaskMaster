@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:taskmaster/todos_add/view/todos_add_page.dart';
+import 'package:taskmaster/todos_overview/bloc/todos_overview_bloc.dart';
+import 'package:todos_repository/todos_repository.dart';
 import '../cubit/home_cubit.dart';
 import '../../todos_overview/view/todos_overview_page.dart';
 import '../../todos_stats/view/todos_stats_page.dart';
@@ -16,9 +19,19 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (_) => HomeCubit(),
-      child: const _HomeView(), // Use the _HomeView widget
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (_) => HomeCubit(),
+          // Use the _HomeView widget
+        ),
+        BlocProvider(
+          create: (context) => TodosOverviewBloc(
+            todosRepository: context.read<TodosRepository>(),
+          ),
+        ),
+      ],
+      child: const _HomeView(),
     );
   }
 }
@@ -39,6 +52,43 @@ class _HomeView extends StatelessWidget {
               TodosStatsPage(),
             ],
           );
+        },
+      ),
+      floatingActionButton: BlocBuilder<HomeCubit, HomeState>(
+        buildWhen: (previous, current) =>
+            previous.selectedTab != current.selectedTab,
+        builder: (context, state) {
+          if (state.selectedTab == HomeTab.todos) {
+            final isDarkTheme = Theme.of(context).brightness == Brightness.dark;
+            return FloatingActionButton(
+              key: const Key('homeView_addTodo_floatingActionButton'),
+              onPressed: () async {
+                final todo = await Navigator.of(context).push<Todo>(
+                  MaterialPageRoute(builder: (_) => const TodosAddPage()),
+                );
+                if (todo != null && context.mounted) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text('Added "${todo.title}"'),
+                      action: SnackBarAction(
+                        label: 'Undo',
+                        onPressed: () {
+                          context
+                              .read<TodosOverviewBloc>()
+                              .add(TodosOverviewDeleteTodo(todo.id));
+                        },
+                      ),
+                    ),
+                  );
+                }
+              },
+              backgroundColor: isDarkTheme ? Colors.grey[800] : Colors.blue,
+              foregroundColor: Colors.white,
+              elevation: isDarkTheme ? 4.0 : 6.0,
+              child: const Icon(Icons.add),
+            );
+          }
+          return const SizedBox();
         },
       ),
       bottomNavigationBar: BlocBuilder<HomeCubit, HomeState>(
