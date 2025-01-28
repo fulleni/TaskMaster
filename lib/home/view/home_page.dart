@@ -82,7 +82,7 @@ class _HomeView extends StatelessWidget {
                   );
                 }
               },
-              backgroundColor: isDarkTheme ? Colors.grey[800] : Colors.blue,
+              backgroundColor: isDarkTheme ? Colors.blueGrey : Colors.blue,
               foregroundColor: Colors.white,
               elevation: isDarkTheme ? 4.0 : 6.0,
               child: const Icon(Icons.add),

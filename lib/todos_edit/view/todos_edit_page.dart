@@ -35,7 +35,7 @@ class TodosEditView extends StatelessWidget {
       listenWhen: (previous, current) => previous.status != current.status,
       listener: (context, state) {
         if (state.status == TodosEditStatus.success) {
-          Navigator.of(context).pop();
+          Navigator.of(context).pop(state.todo);
         } else if (state.status == TodosEditStatus.failure) {
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(content: Text('Failed to save todo')),

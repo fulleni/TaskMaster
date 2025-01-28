@@ -46,27 +46,6 @@ class _TodosOverviewView extends StatelessWidget {
       ),
       body: MultiBlocListener(
         listeners: [
-          BlocListener<TodosEditBloc, TodosEditState>(
-            // listenWhen: (previous, current) =>
-            //     current.status == TodosEditStatus.success,
-            listener: (context, state) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: Text('Succefully Updated'),
-                  action: SnackBarAction(
-                    label: 'Undo',
-                    onPressed: () {
-                      context
-                          .read<TodosOverviewBloc>()
-                          .add(TodosOverviewUndoUpdate(
-                            initialTodo: state.todo!,
-                          ));
-                    },
-                  ),
-                ),
-              );
-            },
-          ),
           BlocListener<TodosOverviewBloc, TodosOverviewState>(
             listenWhen: (previous, current) =>
                 previous.lastDeletedTodo != current.lastDeletedTodo &&
@@ -97,7 +76,9 @@ class _TodosOverviewView extends StatelessWidget {
             } else if (state.todos.isEmpty) {
               return RefreshIndicator(
                 onRefresh: () async {
-                  context.read<TodosOverviewBloc>().add(TodosOverviewLoadTodos());
+                  context
+                      .read<TodosOverviewBloc>()
+                      .add(TodosOverviewLoadTodos());
                 },
                 child: ListView(
                   children: [
@@ -111,7 +92,9 @@ class _TodosOverviewView extends StatelessWidget {
             } else {
               return RefreshIndicator(
                 onRefresh: () async {
-                  context.read<TodosOverviewBloc>().add(TodosOverviewLoadTodos());
+                  context
+                      .read<TodosOverviewBloc>()
+                      .add(TodosOverviewLoadTodos());
                 },
                 child: ListView.builder(
                   itemCount: state.todos.length,
@@ -133,16 +116,36 @@ class _TodosOverviewView extends StatelessWidget {
                           onChanged: (value) {
                             context.read<TodosOverviewBloc>().add(
                                   TodosOverviewToggleTodoCompleted(
-                                      todo.id, value!),
+                                    todo.id,
+                                    value!,
+                                  ),
                                 );
                           },
                         ),
-                        onTap: () {
-                          Navigator.of(context).push(
+                        onTap: () async {
+                          final updatedTodo = await Navigator.of(context).push<Todo>(
                             MaterialPageRoute(
                               builder: (_) => TodosEditPage(todo: todo),
                             ),
                           );
+
+                          if (updatedTodo != null && context.mounted) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text('Succefully Updated'),
+                                action: SnackBarAction(
+                                  label: 'Undo',
+                                  onPressed: () {
+                                    context
+                                        .read<TodosOverviewBloc>()
+                                        .add(TodosOverviewUndoUpdate(
+                                          initialTodo: updatedTodo!,
+                                        ));
+                                  },
+                                ),
+                              ),
+                            );
+                          }
                         },
                       ),
                     );
