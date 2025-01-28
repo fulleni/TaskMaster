@@ -1,15 +1,18 @@
 part of 'todos_edit_bloc.dart';
 
 /// Status of the todo editing operation
-enum TodosEditStatus { 
+enum TodosEditStatus {
   /// Initial state when the edit page is loaded
-  initial, 
+  initial,
+
   /// State while saving changes
-  loading, 
+  loading,
+
   /// State when changes were saved successfully
-  success, 
+  success,
+
   /// State when saving changes failed
-  failure 
+  failure
 }
 
 /// {@template todos_edit_state}
@@ -20,38 +23,38 @@ class TodosEditState extends Equatable {
   /// {@macro todos_edit_state}
   const TodosEditState({
     this.status = TodosEditStatus.initial,
-    this.initialTodo,
+    this.todo,
     this.title = '',
     this.description = '',
   });
 
   /// Current status of the editing operation
   final TodosEditStatus status;
-  
+
   /// The original todo being edited, used as reference
-  final Todo? initialTodo;
-  
+  final Todo? todo;
+
   /// The current value of the title field
   final String title;
-  
+
   /// The current value of the description field
   final String description;
 
   /// Creates a copy of this state with the given fields replaced with new values
   TodosEditState copyWith({
     TodosEditStatus? status,
-    Todo? initialTodo,
+    Todo? todo,
     String? title,
     String? description,
   }) {
     return TodosEditState(
       status: status ?? this.status,
-      initialTodo: initialTodo ?? this.initialTodo,
+      todo: todo ?? this.todo,
       title: title ?? this.title,
       description: description ?? this.description,
     );
   }
 
   @override
-  List<Object?> get props => [status, initialTodo, title, description];
+  List<Object?> get props => [status, todo, title, description];
 }

@@ -27,10 +27,9 @@ class TodosEditBloc extends Bloc<TodosEditEvent, TodosEditState> {
   /// Emits a new state with the todo's current values.
   /// Throws [StateError] if the todo is null.
   void _onLoadTodo(TodosEditLoadTodo event, Emitter<TodosEditState> emit) {
-    
     try {
       emit(state.copyWith(
-        initialTodo: event.todo,
+        todo: event.todo,
         title: event.todo.title,
         description: event.todo.description,
       ));
@@ -90,7 +89,7 @@ class TodosEditBloc extends Bloc<TodosEditEvent, TodosEditState> {
     try {
       emit(state.copyWith(status: TodosEditStatus.loading));
 
-      if (state.initialTodo == null) {
+      if (state.todo == null) {
         throw StateError('Cannot submit without initial todo');
       }
 
@@ -98,12 +97,12 @@ class TodosEditBloc extends Bloc<TodosEditEvent, TodosEditState> {
         throw ArgumentError('Title cannot be empty');
       }
 
-      final todo = state.initialTodo!.copyWith(
+      final updatedTodo = state.todo!.copyWith(
         title: state.title,
         description: state.description,
       );
 
-      await _todosRepository.saveTodo(todo);
+      await _todosRepository.saveTodo(updatedTodo);
       emit(state.copyWith(status: TodosEditStatus.success));
     } catch (e) {
       emit(state.copyWith(

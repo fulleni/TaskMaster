@@ -16,6 +16,7 @@ class TodosOverviewBloc extends Bloc<TodosOverviewEvent, TodosOverviewState> {
     on<TodosOverviewToggleCompleteAll>(_onToggleCompleteAll);
     on<TodosOverviewDeleteCompleted>(_onDeleteCompleted);
     on<TodosOverviewFilterTodos>(_onFilterTodos);
+    on<TodosOverviewUndoUpdate>(_onUndoUpdate);
   }
 
   final TodosRepository _todosRepository;
@@ -159,6 +160,31 @@ class TodosOverviewBloc extends Bloc<TodosOverviewEvent, TodosOverviewState> {
         todos: filteredTodos,
         status: TodosOverviewStatus.success,
       ));
+    } catch (_) {
+      emit(state.copyWith(status: TodosOverviewStatus.failure));
+    }
+  }
+
+  /// Handles the [TodosOverviewUndoUpdate] event.
+  Future<void> _onUndoUpdate(
+    TodosOverviewUndoUpdate event,
+    Emitter<TodosOverviewState> emit,
+  ) async {
+    emit(state.copyWith(status: TodosOverviewStatus.loading));
+    try {
+      // insert the original todo to db.
+      // 
+      // note:
+      // "updated todo" and the "initial todo" has the same id, 
+      //  so,
+      // "updated todo" will be overridden by the "initial todo".
+      await _todosRepository.saveTodo(event.initialTodo);
+      emit(state.copyWith(
+        status: TodosOverviewStatus.success,
+      ));
+
+      // load the updated todos list from db.
+      add(TodosOverviewLoadTodos());
     } catch (_) {
       emit(state.copyWith(status: TodosOverviewStatus.failure));
     }

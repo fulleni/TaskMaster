@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:taskmaster/todos_edit/bloc/todos_edit_bloc.dart';
 import 'package:todos_repository/todos_repository.dart';
 import '../bloc/todos_overview_bloc.dart';
 import '../../todos_edit/view/todos_edit_page.dart';
@@ -13,10 +14,20 @@ class TodosOverviewPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => TodosOverviewBloc(
-        todosRepository: context.read<TodosRepository>(),
-      )..add(TodosOverviewLoadTodos()),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => TodosOverviewBloc(
+            todosRepository: context.read<TodosRepository>(),
+          )..add(TodosOverviewLoadTodos()),
+        ),
+        BlocProvider(
+          lazy: true,
+          create: (context) => TodosEditBloc(
+            todosRepository: context.read<TodosRepository>(),
+          ),
+        ),
+      ],
       child: _TodosOverviewView(),
     );
   }
@@ -33,26 +44,50 @@ class _TodosOverviewView extends StatelessWidget {
           _TodosOverviewOptionsButton(),
         ],
       ),
-      body: BlocListener<TodosOverviewBloc, TodosOverviewState>(
-        listenWhen: (previous, current) =>
-            previous.lastDeletedTodo != current.lastDeletedTodo &&
-            current.lastDeletedTodo != null,
-        listener: (context, state) {
-          final deletedTodo = state.lastDeletedTodo!;
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text('Deleted "${deletedTodo.title}"'),
-              action: SnackBarAction(
-                label: 'Undo',
-                onPressed: () {
-                  context
-                      .read<TodosOverviewBloc>()
-                      .add(TodosOverviewUndoDelete());
-                },
-              ),
-            ),
-          );
-        },
+      body: MultiBlocListener(
+        listeners: [
+          BlocListener<TodosEditBloc, TodosEditState>(
+            // listenWhen: (previous, current) =>
+            //     current.status == TodosEditStatus.success,
+            listener: (context, state) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text('Succefully Updated'),
+                  action: SnackBarAction(
+                    label: 'Undo',
+                    onPressed: () {
+                      context
+                          .read<TodosOverviewBloc>()
+                          .add(TodosOverviewUndoUpdate(
+                            initialTodo: state.todo!,
+                          ));
+                    },
+                  ),
+                ),
+              );
+            },
+          ),
+          BlocListener<TodosOverviewBloc, TodosOverviewState>(
+            listenWhen: (previous, current) =>
+                previous.lastDeletedTodo != current.lastDeletedTodo &&
+                current.lastDeletedTodo != null,
+            listener: (context, state) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text('Succefully Deleted'),
+                  action: SnackBarAction(
+                    label: 'Undo',
+                    onPressed: () {
+                      context
+                          .read<TodosOverviewBloc>()
+                          .add(TodosOverviewUndoDelete());
+                    },
+                  ),
+                ),
+              );
+            },
+          ),
+        ],
         child: BlocBuilder<TodosOverviewBloc, TodosOverviewState>(
           builder: (context, state) {
             if (state.status == TodosOverviewStatus.loading) {

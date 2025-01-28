@@ -40,7 +40,12 @@ final class TodosOverviewState extends Equatable {
   }
 
   @override
-  List<Object?> get props => [todos, status, lastDeletedTodo, filter];
+  List<Object?> get props => [
+        todos,
+        status,
+        lastDeletedTodo,
+        filter,
+      ];
 }
 
 /// The status of the todos overview.
