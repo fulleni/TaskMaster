@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todos_repository/todos_repository.dart';
 import '../bloc/todos_overview_bloc.dart';
+import '../../todos_edit/view/todos_edit_page.dart';
 
 /// {@template todos_overview}
 /// A widget that displays an overview of todos.
@@ -85,6 +86,13 @@ class _TodosOverviewView extends StatelessWidget {
                               );
                         },
                       ),
+                      onTap: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (_) => TodosEditPage(todo: todo),
+                          ),
+                        );
+                      },
                     ),
                   );
                 },
