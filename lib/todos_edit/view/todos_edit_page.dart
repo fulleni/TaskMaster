@@ -69,18 +69,41 @@ class TodosEditView extends StatelessWidget {
   }
 }
 
-class _TitleField extends StatelessWidget {
+class _TitleField extends StatefulWidget {
+  @override
+  State<_TitleField> createState() => _TitleFieldState();
+}
+
+class _TitleFieldState extends State<_TitleField> {
+  late TextEditingController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = TextEditingController();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<TodosEditBloc, TodosEditState>(
       builder: (context, state) {
-        final titleController = TextEditingController(text: state.title);
+        _controller.text = state.title;
+        _controller.selection = TextSelection.fromPosition(
+          TextPosition(offset: _controller.text.length),
+        );
+
         final isDarkTheme = Theme.of(context).brightness == Brightness.dark;
         final textColor = isDarkTheme ? Colors.white : Colors.black;
 
         return TextFormField(
           key: const Key('todosEditView_title_textFormField'),
-          controller: titleController,
+          controller: _controller,
           decoration: const InputDecoration(
             labelText: 'Title',
             border: OutlineInputBorder(),
@@ -95,19 +118,41 @@ class _TitleField extends StatelessWidget {
   }
 }
 
-class _DescriptionField extends StatelessWidget {
+class _DescriptionField extends StatefulWidget {
+  @override
+  State<_DescriptionField> createState() => _DescriptionFieldState();
+}
+
+class _DescriptionFieldState extends State<_DescriptionField> {
+  late TextEditingController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = TextEditingController();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<TodosEditBloc, TodosEditState>(
       builder: (context, state) {
-        final descriptionController =
-            TextEditingController(text: state.description);
+        _controller.text = state.description;
+        _controller.selection = TextSelection.fromPosition(
+          TextPosition(offset: _controller.text.length),
+        );
+
         final isDarkTheme = Theme.of(context).brightness == Brightness.dark;
         final textColor = isDarkTheme ? Colors.white : Colors.black;
 
         return TextFormField(
           key: const Key('todosEditView_description_textFormField'),
-          controller: descriptionController,
+          controller: _controller,
           decoration: const InputDecoration(
             labelText: 'Description',
             border: OutlineInputBorder(),

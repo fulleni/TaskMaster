@@ -27,6 +27,7 @@ class TodosEditBloc extends Bloc<TodosEditEvent, TodosEditState> {
   /// Emits a new state with the todo's current values.
   /// Throws [StateError] if the todo is null.
   void _onLoadTodo(TodosEditLoadTodo event, Emitter<TodosEditState> emit) {
+    
     try {
       emit(state.copyWith(
         initialTodo: event.todo,
@@ -43,7 +44,9 @@ class TodosEditBloc extends Bloc<TodosEditEvent, TodosEditState> {
   /// Emits a new state with the updated title.
   /// Validates that title is not null.
   void _onTitleChanged(
-      TodosEditTitleChanged event, Emitter<TodosEditState> emit) {
+    TodosEditTitleChanged event,
+    Emitter<TodosEditState> emit,
+  ) {
     try {
       emit(state.copyWith(
         title: event.title,
