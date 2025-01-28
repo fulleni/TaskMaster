@@ -1,6 +1,6 @@
 ## TaskMaster: A Streamlined Productivity Solution 🎯
 
-**TaskMaster** is a thoughtfully designed to-do list flutter application prioritizing simplicity and ease of use. Recognizing the value of a streamlined workflow, TaskMaster focuses on core functionalities to help users effectively manage their tasks without unnecessary complexity.
+**TaskMaster** is a thoughtfully built to-do list flutter application prioritizing simplicity and ease of use. Recognizing the value of a streamlined workflow, TaskMaster focuses on core functionalities to help users effectively manage their tasks without unnecessary complexity.
 
 **Core Features:**
 
