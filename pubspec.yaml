@@ -1,7 +1,7 @@
 name: taskmaster
 description: TaskMaster is a user-friendly task management application built with Flutter, designed to help you stay organized and productive.
 publish_to: "none"
-version: 0.8.2
+version: 0.9.0
 
 environment:
   sdk: ^3.6.1
@@ -18,11 +18,13 @@ dependencies:
   intl: ^0.19.0
   local_storage_todos_client:
     path: ./packages/todos/local_storage_todos_client
+  local_storage_user_preferences_client:
+    path: ./packages/user_preferences/local_storage_user_preferences_client
   shared_preferences: ^2.4.0
-  todos_client:
-    path: ./packages/todos/todos_client
   todos_repository:
     path: ./packages/todos/todos_repository
+  user_preferences_repository:
+    path: ./packages/user_preferences/user_preferences_repository
 
 dev_dependencies:
   flutter_test:

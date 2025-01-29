@@ -21,7 +21,7 @@ void main() {
 
     setUp(() {
       plugin = MockSharedPreferences();
-      client = LocalStorageTodosClient(plugin: plugin);
+      client = LocalStorageTodosClient(sharedPreferences: plugin);
     });
 
     test('initializes with empty list if no todos are stored', () {

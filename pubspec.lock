@@ -297,6 +297,13 @@ packages:
       relative: true
     source: path
     version: "0.0.0"
+  local_storage_user_preferences_client:
+    dependency: "direct main"
+    description:
+      path: "packages/user_preferences/local_storage_user_preferences_client"
+      relative: true
+    source: path
+    version: "0.1.0"
   logging:
     dependency: transitive
     description:
@@ -583,7 +590,7 @@ packages:
     source: hosted
     version: "0.7.3"
   todos_client:
-    dependency: "direct main"
+    dependency: transitive
     description:
       path: "packages/todos/todos_client"
       relative: true
@@ -604,6 +611,20 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.4.0"
+  user_preferences_client:
+    dependency: transitive
+    description:
+      path: "packages/user_preferences/user_preferences_client"
+      relative: true
+    source: path
+    version: "0.3.0"
+  user_preferences_repository:
+    dependency: "direct main"
+    description:
+      path: "packages/user_preferences/user_preferences_repository"
+      relative: true
+    source: path
+    version: "1.0.0"
   uuid:
     dependency: transitive
     description:

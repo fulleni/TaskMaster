@@ -14,8 +14,8 @@ import 'package:todos_client/todos_client.dart';
 class LocalStorageTodosClient extends TodosClient {
   /// {@macro local_storage_todos_client}
   LocalStorageTodosClient({
-    required SharedPreferences plugin,
-  }) : _plugin = plugin {
+    required SharedPreferences sharedPreferences,
+  }) : _plugin = sharedPreferences {
     _init();
   }
 

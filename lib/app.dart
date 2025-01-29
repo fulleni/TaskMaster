@@ -4,19 +4,29 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:taskmaster/home/view/home_page.dart';
 import 'package:todos_repository/todos_repository.dart';
+import 'package:user_preferences_repository/user_preferences_repository.dart';
 
 class App extends StatelessWidget {
   const App({
     required this.todosRepository,
+    required this.userPreferencesRepository,
     super.key,
   });
 
   final TodosRepository todosRepository;
+  final UserPreferencesRepository userPreferencesRepository;
 
   @override
   Widget build(BuildContext context) {
-    return RepositoryProvider.value(
-      value: todosRepository,
+    return MultiRepositoryProvider(
+      providers: [
+        RepositoryProvider.value(
+          value: todosRepository,
+        ),
+        RepositoryProvider.value(
+          value: (context) => userPreferencesRepository,
+        ),
+      ],
       child: _AppView(),
     );
   }
@@ -70,7 +80,8 @@ class _AppView extends StatelessWidget {
       ],
       supportedLocales: const [
         Locale('en', ''), // English
-        // Add other supported locales here
+        Locale('ar', ''), // Arabic
+
       ],
       builder: (context, child) {
         return MediaQuery(
