@@ -1,0 +1,14 @@
+name: user_preferences_repository
+description: Repository that manages user preferences.
+version: 1.0.0
+publish_to: none
+
+environment:
+  sdk: ^3.6.1
+
+dependencies:
+  user_preferences_client:
+    path: ../user_preferences_client
+
+dev_dependencies:
+  lints: ^5.0.0
