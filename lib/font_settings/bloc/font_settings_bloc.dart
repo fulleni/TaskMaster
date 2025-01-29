@@ -24,15 +24,16 @@ class FontSettingsBloc extends Bloc<FontSettingsEvent, FontSettingsState> {
       LoadFontSettings event, Emitter<FontSettingsState> emit) async {
     emit(state.copyWith(isLoading: true));
     try {
-      final titleFontSize = await _userPreferencesRepository.getTitleFontSize();
-      final bodyFontSize = await _userPreferencesRepository.getBodyFontSize();
-      final fontFamily = await _userPreferencesRepository.getFontFamily();
-      emit(state.copyWith(
-        titleFontSize: titleFontSize,
-        bodyFontSize: bodyFontSize,
-        fontFamily: fontFamily,
-        isLoading: false,
-      ));
+      await emit.forEach<UserPreferences>(
+        _userPreferencesRepository.getAllPreferences(),
+        onData: (preferences) => state.copyWith(
+          titleFontSize: preferences.titleFontSize,
+          bodyFontSize: preferences.bodyFontSize,
+          fontFamily: preferences.fontFamily,
+          isLoading: false,
+        ),
+        onError: (_, __) => state.copyWith(isLoading: false, hasError: true),
+      );
     } catch (_) {
       emit(state.copyWith(isLoading: false, hasError: true));
     }

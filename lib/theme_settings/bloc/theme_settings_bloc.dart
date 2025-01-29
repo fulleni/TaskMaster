@@ -25,18 +25,15 @@ class ThemeSettingsBloc extends Bloc<ThemeSettingsEvent, ThemeSettingsState> {
   Future<void> _onLoadThemeSettings(
       LoadThemeSettings event, Emitter<ThemeSettingsState> emit) async {
     emit(state.copyWith(isLoading: true));
-    try {
-      final themeMode = await _userPreferencesRepository.getThemeMode();
-      final accentColor =
-          await _userPreferencesRepository.getThemeAccentColor();
-      emit(state.copyWith(
-        themeMode: themeMode,
-        accentColor: accentColor,
+    await emit.forEach<UserPreferences>(
+      _userPreferencesRepository.getAllPreferences(),
+      onData: (preferences) => state.copyWith(
+        themeMode: preferences.themeMode,
+        accentColor: preferences.themeAccentColor,
         isLoading: false,
-      ));
-    } catch (_) {
-      emit(state.copyWith(isLoading: false, hasError: true));
-    }
+      ),
+      onError: (_, __) => state.copyWith(isLoading: false, hasError: true),
+    );
   }
 
   /// Handles the [UpdateThemeMode] event.
