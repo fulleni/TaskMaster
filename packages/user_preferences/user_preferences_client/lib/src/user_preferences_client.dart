@@ -58,6 +58,7 @@ abstract class UserPreferencesClient {
   Future<UserPreferenceLanguage> getLanguage();
 
   /// Resets all preferences to their default values.
+  /// Throws [ResetPreferencesException] if the preferences cannot be reset.
   Future<void> resetPreferences();
 
   /// Gets all preferences at once.
@@ -263,6 +264,12 @@ class SetLanguageException implements Exception {
 class GetLanguageException implements Exception {
   final String message;
   GetLanguageException(this.message);
+}
+
+/// Exception thrown when preferences cannot be reset.
+class ResetPreferencesException implements Exception {
+  final String message;
+  ResetPreferencesException(this.message);
 }
 
 /// Exception thrown when all preferences cannot be retrieved.
