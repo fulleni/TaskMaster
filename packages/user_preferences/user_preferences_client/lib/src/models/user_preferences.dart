@@ -1,10 +1,11 @@
+import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:user_preferences_client/src/user_preferences_client.dart';
 part 'user_preferences.g.dart';
 
 /// Model representing all user preferences.
 @JsonSerializable()
-class UserPreferences {
+class UserPreferences extends Equatable {
   final UserPreferenceThemeMode themeMode;
   final UserPreferenceAccentColor themeAccentColor;
   final UserPreferenceFontSize titleFontSize;
@@ -20,6 +21,14 @@ class UserPreferences {
     required this.fontFamily,
     required this.language,
   });
+
+  UserPreferences.defaults()
+      : themeMode = UserPreferenceThemeMode.system,
+        themeAccentColor = UserPreferenceAccentColor.accentOne,
+        titleFontSize = UserPreferenceFontSize.medium,
+        bodyFontSize = UserPreferenceFontSize.medium,
+        fontFamily = UserPreferenceGoogleFontsFamily.roboto,
+        language = UserPreferenceLanguage.english;
 
   /// Resets all preferences to their default values.
   UserPreferences resetToDefaults() {
@@ -52,18 +61,18 @@ class UserPreferences {
     );
   }
 
-  /// Compares two `UserPreferences` instances.
-  bool isEqual(UserPreferences other) {
-    return themeMode == other.themeMode &&
-        themeAccentColor == other.themeAccentColor &&
-        titleFontSize == other.titleFontSize &&
-        bodyFontSize == other.bodyFontSize &&
-        fontFamily == other.fontFamily &&
-        language == other.language;
-  }
-
   factory UserPreferences.fromJson(Map<String, dynamic> json) =>
       _$UserPreferencesFromJson(json);
 
   Map<String, dynamic> toJson() => _$UserPreferencesToJson(this);
+
+  @override
+  List<Object?> get props => [
+        themeMode,
+        themeAccentColor,
+        titleFontSize,
+        bodyFontSize,
+        fontFamily,
+        language,
+      ];
 }

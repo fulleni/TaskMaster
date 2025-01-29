@@ -8,6 +8,7 @@ environment:
 
 dependencies:
   json_annotation: ^4.9.0
+  equatable: ^2.0.7
 
 dev_dependencies:
   json_serializable: ^6.9.3
