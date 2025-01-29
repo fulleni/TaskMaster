@@ -27,7 +27,7 @@ class TodosAddView extends StatelessWidget {
           previous.status != current.status &&
           current.status == TodosAddStatus.success,
       listener: (context, state) {
-        Navigator.of(context).pop(state.todo);
+        Navigator.of(context).pop();
       },
       child: Scaffold(
         appBar: AppBar(
@@ -62,14 +62,32 @@ class _TitleField extends StatelessWidget {
     return BlocBuilder<TodosAddBloc, TodosAddState>(
       buildWhen: (previous, current) => previous.title != current.title,
       builder: (context, state) {
+        final textColor = Theme.of(context).brightness == Brightness.dark
+            ? Colors.white
+            : Colors.black;
         return TextField(
           key: const Key('todosAddView_title_textField'),
           onChanged: (value) {
             context.read<TodosAddBloc>().add(TodosAddTitleChanged(value));
           },
-          decoration: const InputDecoration(
+          style: TextStyle(
+            color: textColor,
+            fontSize: 18,
+          ),
+          decoration: InputDecoration(
             labelText: 'Title',
-            border: OutlineInputBorder(),
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(12),
+            ),
+            filled: true,
+            fillColor: Theme.of(context).brightness == Brightness.dark
+                ? Colors.grey[800]
+                : Colors.grey[100],
+            labelStyle: TextStyle(
+              color: Theme.of(context).brightness == Brightness.dark
+                  ? Colors.white70
+                  : Colors.black54,
+            ),
           ),
         );
       },
@@ -84,11 +102,15 @@ class _DescriptionField extends StatelessWidget {
       buildWhen: (previous, current) =>
           previous.description != current.description,
       builder: (context, state) {
+        final textColor = Theme.of(context).brightness == Brightness.dark
+            ? Colors.white
+            : Colors.black;
         return TextField(
           key: const Key('todosAddView_description_textField'),
           onChanged: (value) {
             context.read<TodosAddBloc>().add(TodosAddDescriptionChanged(value));
           },
+          style: TextStyle(color: textColor),
           decoration: const InputDecoration(
             labelText: 'Description',
             border: OutlineInputBorder(),

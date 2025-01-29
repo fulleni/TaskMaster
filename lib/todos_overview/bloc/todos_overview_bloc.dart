@@ -56,7 +56,6 @@ class TodosOverviewBloc extends Bloc<TodosOverviewEvent, TodosOverviewState> {
   ) async {
     emit(state.copyWith(status: TodosOverviewStatus.loading));
     try {
-      print('Deleting todo with id: ${event.id}');
       final todo = state.todos.firstWhere((todo) => todo.id == event.id);
       await _todosRepository.deleteTodo(event.id);
       emit(state.copyWith(lastDeletedTodo: todo));

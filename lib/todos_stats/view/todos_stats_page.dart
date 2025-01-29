@@ -45,12 +45,54 @@ class _TodosStatsView extends StatelessWidget {
             return Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('Completed Todos: ${state.numCompleted}',
-                      style: TextStyle(color: textColor)),
-                  Text('Active Todos: ${state.numActive}',
-                      style: TextStyle(color: textColor)),
+                  Card(
+                    margin: const EdgeInsets.all(16),
+                    child: Padding(
+                      padding: const EdgeInsets.all(16),
+                      child: Column(
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Icon(
+                                Icons.check_circle,
+                                color: Colors.green,
+                                size: 30,
+                              ),
+                              Text(
+                                'Completed Todos: ${state.numCompleted}',
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  color: textColor,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 16),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Icon(
+                                Icons.pending_actions,
+                                color: Colors.orange,
+                                size: 30,
+                              ),
+                              Text(
+                                'Active Todos: ${state.numActive}',
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  color: textColor,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
                 ],
               ),
             );

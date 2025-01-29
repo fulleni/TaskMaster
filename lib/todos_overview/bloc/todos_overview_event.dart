@@ -89,7 +89,8 @@ final class TodosOverviewUndoUpdate extends TodosOverviewEvent {
     required this.initialTodo,
   });
 
-  /// the todo before the update, it will be used to override the the updated todo.
+  /// the todo before it was updated, 
+  /// it will be used to override the updated todo.
   final Todo initialTodo;
 
 

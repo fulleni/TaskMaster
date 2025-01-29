@@ -46,6 +46,27 @@ class _TodosOverviewView extends StatelessWidget {
       ),
       body: MultiBlocListener(
         listeners: [
+          BlocListener<TodosEditBloc, TodosEditState>(
+            listenWhen: (previous, current) =>
+                current.status == TodosEditStatus.success,
+            listener: (context, state) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text('Succefully Updated'),
+                  action: SnackBarAction(
+                    label: 'Undo',
+                    onPressed: () {
+                      context
+                          .read<TodosOverviewBloc>()
+                          .add(TodosOverviewUndoUpdate(
+                            initialTodo: state.todo!,
+                          ));
+                    },
+                  ),
+                ),
+              );
+            },
+          ),
           BlocListener<TodosOverviewBloc, TodosOverviewState>(
             listenWhen: (previous, current) =>
                 previous.lastDeletedTodo != current.lastDeletedTodo &&
@@ -72,7 +93,12 @@ class _TodosOverviewView extends StatelessWidget {
             if (state.status == TodosOverviewStatus.loading) {
               return Center(child: CircularProgressIndicator());
             } else if (state.status == TodosOverviewStatus.failure) {
-              return Center(child: Text('Failed to load todos'));
+              final textColor = Theme.of(context).brightness == Brightness.dark
+                  ? Colors.white
+                  : Colors.black;
+              return Center(
+                  child: Text('Failed to load todos',
+                      style: TextStyle(color: textColor)));
             } else if (state.todos.isEmpty) {
               return RefreshIndicator(
                 onRefresh: () async {
@@ -84,7 +110,17 @@ class _TodosOverviewView extends StatelessWidget {
                   children: [
                     SizedBox(
                       height: MediaQuery.of(context).size.height / 2,
-                      child: Center(child: Text('No todos available')),
+                      child: Center(
+                        child: Text(
+                          'No todos available',
+                          style: TextStyle(
+                            color:
+                                Theme.of(context).brightness == Brightness.dark
+                                    ? Colors.white
+                                    : Colors.black,
+                          ),
+                        ),
+                      ),
                     ),
                   ],
                 ),
@@ -107,46 +143,65 @@ class _TodosOverviewView extends StatelessWidget {
                               TodosOverviewDeleteTodo(todo.id),
                             );
                       },
-                      background: Container(color: Colors.red),
-                      child: ListTile(
-                        title: Text(todo.title),
-                        subtitle: Text(todo.description),
-                        trailing: Checkbox(
-                          value: todo.isCompleted,
-                          onChanged: (value) {
-                            context.read<TodosOverviewBloc>().add(
-                                  TodosOverviewToggleTodoCompleted(
-                                    todo.id,
-                                    value!,
-                                  ),
-                                );
-                          },
+                      background: Container(
+                        color: Colors.red.shade300,
+                        alignment: Alignment.centerRight,
+                        padding: const EdgeInsets.only(right: 16),
+                        child: const Icon(Icons.delete, color: Colors.white),
+                      ),
+                      child: Card(
+                        margin: const EdgeInsets.symmetric(
+                          horizontal: 16,
+                          vertical: 8,
                         ),
-                        onTap: () async {
-                          final updatedTodo = await Navigator.of(context).push<Todo>(
-                            MaterialPageRoute(
-                              builder: (_) => TodosEditPage(todo: todo),
+                        elevation: 2,
+                        child: ListTile(
+                          contentPadding: const EdgeInsets.symmetric(
+                            horizontal: 16,
+                            vertical: 8,
+                          ),
+                          title: Text(
+                            todo.title,
+                            style: TextStyle(
+                              fontSize: 18,
+                              decoration: todo.isCompleted
+                                  ? TextDecoration.lineThrough
+                                  : null,
+                              color: Theme.of(context).brightness ==
+                                      Brightness.dark
+                                  ? Colors.white
+                                  : Colors.black87,
                             ),
-                          );
-
-                          if (updatedTodo != null && context.mounted) {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                content: Text('Succefully Updated'),
-                                action: SnackBarAction(
-                                  label: 'Undo',
-                                  onPressed: () {
-                                    context
-                                        .read<TodosOverviewBloc>()
-                                        .add(TodosOverviewUndoUpdate(
-                                          initialTodo: updatedTodo!,
-                                        ));
-                                  },
-                                ),
+                          ),
+                          subtitle: Text(
+                            todo.description,
+                            style: TextStyle(
+                              color: Theme.of(context).brightness ==
+                                      Brightness.dark
+                                  ? Colors.white70
+                                  : Colors.black54,
+                            ),
+                          ),
+                          trailing: Transform.scale(
+                            scale: 1.2,
+                            child: Checkbox(
+                              value: todo.isCompleted,
+                              onChanged: (value) {
+                                context.read<TodosOverviewBloc>().add(
+                                      TodosOverviewToggleTodoCompleted(
+                                          todo.id, value!),
+                                    );
+                              },
+                            ),
+                          ),
+                          onTap: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (_) => TodosEditPage(todo: todo),
                               ),
                             );
-                          }
-                        },
+                          },
+                        ),
                       ),
                     );
                   },
