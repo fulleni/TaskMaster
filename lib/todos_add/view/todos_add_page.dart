@@ -33,10 +33,20 @@ class TodosAddView extends StatelessWidget {
         appBar: AppBar(
           title: const Text('Add Todo'),
           actions: [
-            IconButton(
-              icon: const Icon(Icons.check),
-              onPressed: () {
-                context.read<TodosAddBloc>().add(const TodosAddSubmitted());
+            BlocBuilder<TodosAddBloc, TodosAddState>(
+              buildWhen: (previous, current) =>
+                  previous.isValid != current.isValid,
+              builder: (context, state) {
+                return IconButton(
+                  icon: const Icon(Icons.check),
+                  onPressed: state.isValid
+                      ? () {
+                          context
+                              .read<TodosAddBloc>()
+                              .add(const TodosAddSubmitted());
+                        }
+                      : null,
+                );
               },
             ),
           ],
@@ -88,6 +98,8 @@ class _TitleField extends StatelessWidget {
                   ? Colors.white70
                   : Colors.black54,
             ),
+            errorText: state.title.isEmpty ? 'Title cannot be empty' : null,
+            helperText: 'Required',
           ),
         );
       },

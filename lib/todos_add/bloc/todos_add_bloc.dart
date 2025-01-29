@@ -21,7 +21,11 @@ class TodosAddBloc extends Bloc<TodosAddEvent, TodosAddState> {
     TodosAddTitleChanged event,
     Emitter<TodosAddState> emit,
   ) {
-    emit(state.copyWith(title: event.title));
+    final title = event.title.trim();
+    emit(state.copyWith(
+      title: title,
+      isValid: title.isNotEmpty,
+    ));
   }
 
   void _onDescriptionChanged(
