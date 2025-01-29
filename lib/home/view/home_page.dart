@@ -52,15 +52,11 @@ class _HomeView extends StatelessWidget {
             previous.selectedTab != current.selectedTab,
         builder: (context, state) {
           if (state.selectedTab == HomeTab.todos) {
-            final isDarkTheme = Theme.of(context).brightness == Brightness.dark;
             return FloatingActionButton(
               key: const Key('homeView_addTodo_floatingActionButton'),
               onPressed: () => Navigator.of(context).push<Todo>(
                 MaterialPageRoute(builder: (_) => const TodosAddPage()),
               ),
-              backgroundColor: isDarkTheme ? Colors.blueGrey : Colors.blue,
-              foregroundColor: Colors.white,
-              elevation: isDarkTheme ? 4.0 : 6.0,
               child: const Icon(Icons.add),
             );
           }

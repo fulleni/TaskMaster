@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:local_storage_todos_client/local_storage_todos_client.dart';
 import 'package:local_storage_user_preferences_client/local_storage_user_preferences_client.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:taskmaster/app.dart';
+import 'package:taskmaster/app/view/app.dart';
 import 'package:todos_repository/todos_repository.dart';
 import 'package:user_preferences_repository/user_preferences_repository.dart';
 
