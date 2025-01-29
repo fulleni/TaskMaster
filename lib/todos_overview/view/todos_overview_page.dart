@@ -218,9 +218,7 @@ class _TodosOverviewView extends StatelessWidget {
 }
 
 class _TodosOverviewSettingsButton extends StatelessWidget {
-  const _TodosOverviewSettingsButton({
-    super.key,
-  });
+  const _TodosOverviewSettingsButton();
 
   @override
   Widget build(BuildContext context) {
@@ -236,44 +234,44 @@ class _TodosOverviewSettingsButton extends StatelessWidget {
   }
 }
 
-class _TodosOverviewOptionsButton extends StatelessWidget {
-  const _TodosOverviewOptionsButton();
+// class _TodosOverviewOptionsButton extends StatelessWidget {
+//   const _TodosOverviewOptionsButton();
 
-  @override
-  Widget build(BuildContext context) {
-    return PopupMenuButton<String>(
-      onSelected: (value) {
-        switch (value) {
-          case 'toggleAll':
-            final allCompleted = context
-                .read<TodosOverviewBloc>()
-                .state
-                .todos
-                .every((todo) => todo.isCompleted);
-            context
-                .read<TodosOverviewBloc>()
-                .add(TodosOverviewToggleCompleteAll(!allCompleted));
-            break;
-          case 'deleteCompleted':
-            context
-                .read<TodosOverviewBloc>()
-                .add(TodosOverviewDeleteCompleted());
-            break;
-        }
-      },
-      itemBuilder: (context) => <PopupMenuEntry<String>>[
-        const PopupMenuItem<String>(
-          value: 'toggleAll',
-          child: Text('Toggle All'),
-        ),
-        const PopupMenuItem<String>(
-          value: 'deleteCompleted',
-          child: Text('Delete Completed'),
-        ),
-      ],
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return PopupMenuButton<String>(
+//       onSelected: (value) {
+//         switch (value) {
+//           case 'toggleAll':
+//             final allCompleted = context
+//                 .read<TodosOverviewBloc>()
+//                 .state
+//                 .todos
+//                 .every((todo) => todo.isCompleted);
+//             context
+//                 .read<TodosOverviewBloc>()
+//                 .add(TodosOverviewToggleCompleteAll(!allCompleted));
+//             break;
+//           case 'deleteCompleted':
+//             context
+//                 .read<TodosOverviewBloc>()
+//                 .add(TodosOverviewDeleteCompleted());
+//             break;
+//         }
+//       },
+//       itemBuilder: (context) => <PopupMenuEntry<String>>[
+//         const PopupMenuItem<String>(
+//           value: 'toggleAll',
+//           child: Text('Toggle All'),
+//         ),
+//         const PopupMenuItem<String>(
+//           value: 'deleteCompleted',
+//           child: Text('Delete Completed'),
+//         ),
+//       ],
+//     );
+//   }
+// }
 
 class _TodosOverviewFilterButton extends StatelessWidget {
   const _TodosOverviewFilterButton();
