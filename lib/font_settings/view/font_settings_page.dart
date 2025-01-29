@@ -10,7 +10,7 @@ class FontSettingsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => FontSettingsBloc(
-        RepositoryProvider.of<UserPreferencesRepository>(context),
+        userPreferencesRepository: context.read<UserPreferencesRepository>(),
       )..add(LoadFontSettings()),
       child: const _FontSettingsView(),
     );
@@ -48,7 +48,9 @@ class _FontSettingsView extends StatelessWidget {
                     }).toList(),
                     onChanged: (fontSize) {
                       if (fontSize != null) {
-                        context.read<FontSettingsBloc>().add(UpdateTitleFontSize(fontSize));
+                        context
+                            .read<FontSettingsBloc>()
+                            .add(UpdateTitleFontSize(fontSize));
                       }
                     },
                   ),
@@ -64,7 +66,9 @@ class _FontSettingsView extends StatelessWidget {
                     }).toList(),
                     onChanged: (fontSize) {
                       if (fontSize != null) {
-                        context.read<FontSettingsBloc>().add(UpdateBodyFontSize(fontSize));
+                        context
+                            .read<FontSettingsBloc>()
+                            .add(UpdateBodyFontSize(fontSize));
                       }
                     },
                   ),
@@ -72,7 +76,8 @@ class _FontSettingsView extends StatelessWidget {
                   DropdownButton<UserPreferenceGoogleFontsFamily>(
                     value: state.fontFamily,
                     hint: const Text('Select Font Family'),
-                    items: UserPreferenceGoogleFontsFamily.values.map((fontFamily) {
+                    items: UserPreferenceGoogleFontsFamily.values
+                        .map((fontFamily) {
                       return DropdownMenuItem(
                         value: fontFamily,
                         child: Text(fontFamily.toString().split('.').last),
@@ -80,7 +85,9 @@ class _FontSettingsView extends StatelessWidget {
                     }).toList(),
                     onChanged: (fontFamily) {
                       if (fontFamily != null) {
-                        context.read<FontSettingsBloc>().add(UpdateFontFamily(fontFamily));
+                        context
+                            .read<FontSettingsBloc>()
+                            .add(UpdateFontFamily(fontFamily));
                       }
                     },
                   ),

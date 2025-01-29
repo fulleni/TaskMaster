@@ -10,7 +10,7 @@ class ThemeSettingsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => ThemeSettingsBloc(
-        RepositoryProvider.of<UserPreferencesRepository>(context),
+        userPreferencesRepository: context.read<UserPreferencesRepository>(),
       )..add(const LoadThemeSettings()),
       child: const _ThemeSettingsView(),
     );
@@ -48,7 +48,9 @@ class _ThemeSettingsView extends StatelessWidget {
                     }).toList(),
                     onChanged: (themeMode) {
                       if (themeMode != null) {
-                        context.read<ThemeSettingsBloc>().add(UpdateThemeMode(themeMode));
+                        context
+                            .read<ThemeSettingsBloc>()
+                            .add(UpdateThemeMode(themeMode));
                       }
                     },
                   ),
@@ -64,7 +66,9 @@ class _ThemeSettingsView extends StatelessWidget {
                     }).toList(),
                     onChanged: (accentColor) {
                       if (accentColor != null) {
-                        context.read<ThemeSettingsBloc>().add(UpdateThemeAccentColor(accentColor));
+                        context
+                            .read<ThemeSettingsBloc>()
+                            .add(UpdateThemeAccentColor(accentColor));
                       }
                     },
                   ),

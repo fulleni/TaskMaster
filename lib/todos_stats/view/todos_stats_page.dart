@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todos_repository/todos_repository.dart';
+import 'package:taskmaster/settings/view/settings_page.dart';
 import '../bloc/todos_stats_bloc.dart';
 
 /// {@template todos_stats_page}
@@ -29,6 +30,17 @@ class _TodosStatsView extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('🎯 TaskManager'),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.settings),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const SettingsPage()),
+              );
+            },
+          ),
+        ],
       ),
       body: BlocBuilder<TodosStatsBloc, TodosStatsState>(
         builder: (context, state) {

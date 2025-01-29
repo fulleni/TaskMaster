@@ -7,10 +7,13 @@ part 'font_settings_state.dart';
 
 /// Bloc that manages the state of font settings.
 class FontSettingsBloc extends Bloc<FontSettingsEvent, FontSettingsState> {
-  final UserPreferencesRepository _repository;
+  final UserPreferencesRepository _userPreferencesRepository;
 
   /// Creates a [FontSettingsBloc] with the given [UserPreferencesRepository].
-  FontSettingsBloc(this._repository) : super(const FontSettingsState()) {
+  FontSettingsBloc({
+    required UserPreferencesRepository userPreferencesRepository,
+  })  : _userPreferencesRepository = userPreferencesRepository,
+        super(const FontSettingsState()) {
     on<LoadFontSettings>(_onLoadFontSettings);
     on<UpdateTitleFontSize>(_onUpdateTitleFontSize);
     on<UpdateBodyFontSize>(_onUpdateBodyFontSize);
@@ -21,9 +24,9 @@ class FontSettingsBloc extends Bloc<FontSettingsEvent, FontSettingsState> {
       LoadFontSettings event, Emitter<FontSettingsState> emit) async {
     emit(state.copyWith(isLoading: true));
     try {
-      final titleFontSize = await _repository.getTitleFontSize();
-      final bodyFontSize = await _repository.getBodyFontSize();
-      final fontFamily = await _repository.getFontFamily();
+      final titleFontSize = await _userPreferencesRepository.getTitleFontSize();
+      final bodyFontSize = await _userPreferencesRepository.getBodyFontSize();
+      final fontFamily = await _userPreferencesRepository.getFontFamily();
       emit(state.copyWith(
         titleFontSize: titleFontSize,
         bodyFontSize: bodyFontSize,
@@ -38,8 +41,8 @@ class FontSettingsBloc extends Bloc<FontSettingsEvent, FontSettingsState> {
   Future<void> _onUpdateTitleFontSize(
       UpdateTitleFontSize event, Emitter<FontSettingsState> emit) async {
     try {
-      await _repository.setTitleFontSize(event.fontSize);
-      final titleFontSize = await _repository.getTitleFontSize();
+      await _userPreferencesRepository.setTitleFontSize(event.fontSize);
+      final titleFontSize = await _userPreferencesRepository.getTitleFontSize();
       emit(state.copyWith(titleFontSize: titleFontSize));
     } catch (_) {
       emit(state.copyWith(hasError: true));
@@ -49,8 +52,8 @@ class FontSettingsBloc extends Bloc<FontSettingsEvent, FontSettingsState> {
   Future<void> _onUpdateBodyFontSize(
       UpdateBodyFontSize event, Emitter<FontSettingsState> emit) async {
     try {
-      await _repository.setBodyFontSize(event.fontSize);
-      final bodyFontSize = await _repository.getBodyFontSize();
+      await _userPreferencesRepository.setBodyFontSize(event.fontSize);
+      final bodyFontSize = await _userPreferencesRepository.getBodyFontSize();
       emit(state.copyWith(bodyFontSize: bodyFontSize));
     } catch (_) {
       emit(state.copyWith(hasError: true));
@@ -60,8 +63,8 @@ class FontSettingsBloc extends Bloc<FontSettingsEvent, FontSettingsState> {
   Future<void> _onUpdateFontFamily(
       UpdateFontFamily event, Emitter<FontSettingsState> emit) async {
     try {
-      await _repository.setFontFamily(event.fontFamily);
-      final fontFamily = await _repository.getFontFamily();
+      await _userPreferencesRepository.setFontFamily(event.fontFamily);
+      final fontFamily = await _userPreferencesRepository.getFontFamily();
       emit(state.copyWith(fontFamily: fontFamily));
     } catch (_) {
       emit(state.copyWith(hasError: true));

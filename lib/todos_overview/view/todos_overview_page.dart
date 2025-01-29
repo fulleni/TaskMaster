@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:taskmaster/settings/view/settings_page.dart';
 import 'package:taskmaster/todos_edit/bloc/todos_edit_bloc.dart';
 import 'package:todos_repository/todos_repository.dart';
 import '../bloc/todos_overview_bloc.dart';
@@ -41,7 +42,8 @@ class _TodosOverviewView extends StatelessWidget {
         title: Text('🎯 TaskManager'),
         actions: [
           _TodosOverviewFilterButton(),
-          _TodosOverviewOptionsButton(),
+          // _TodosOverviewOptionsButton(),
+          _TodosOverviewSettingsButton(),
         ],
       ),
       body: MultiBlocListener(
@@ -211,6 +213,25 @@ class _TodosOverviewView extends StatelessWidget {
           },
         ),
       ),
+    );
+  }
+}
+
+class _TodosOverviewSettingsButton extends StatelessWidget {
+  const _TodosOverviewSettingsButton({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return IconButton(
+      icon: Icon(Icons.settings),
+      onPressed: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const SettingsPage()),
+        );
+      },
     );
   }
 }

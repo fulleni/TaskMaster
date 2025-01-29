@@ -24,7 +24,7 @@ class App extends StatelessWidget {
           value: todosRepository,
         ),
         RepositoryProvider.value(
-          value: (context) => userPreferencesRepository,
+          value: userPreferencesRepository,
         ),
       ],
       child: _AppView(),
@@ -81,7 +81,6 @@ class _AppView extends StatelessWidget {
       supportedLocales: const [
         Locale('en', ''), // English
         Locale('ar', ''), // Arabic
-
       ],
       builder: (context, child) {
         return MediaQuery(

@@ -7,10 +7,13 @@ part 'theme_settings_state.dart';
 
 /// Bloc that manages the state of theme settings.
 class ThemeSettingsBloc extends Bloc<ThemeSettingsEvent, ThemeSettingsState> {
-  final UserPreferencesRepository _repository;
+  final UserPreferencesRepository _userPreferencesRepository;
 
   /// Creates a [ThemeSettingsBloc] with the given [UserPreferencesRepository].
-  ThemeSettingsBloc(this._repository) : super(const ThemeSettingsState()) {
+  ThemeSettingsBloc({
+    required UserPreferencesRepository userPreferencesRepository,
+  })  : _userPreferencesRepository = userPreferencesRepository,
+        super(const ThemeSettingsState()) {
     on<LoadThemeSettings>(_onLoadThemeSettings);
     on<UpdateThemeMode>(_onUpdateThemeMode);
     on<UpdateThemeAccentColor>(_onUpdateThemeAccentColor);
@@ -23,8 +26,9 @@ class ThemeSettingsBloc extends Bloc<ThemeSettingsEvent, ThemeSettingsState> {
       LoadThemeSettings event, Emitter<ThemeSettingsState> emit) async {
     emit(state.copyWith(isLoading: true));
     try {
-      final themeMode = await _repository.getThemeMode();
-      final accentColor = await _repository.getThemeAccentColor();
+      final themeMode = await _userPreferencesRepository.getThemeMode();
+      final accentColor =
+          await _userPreferencesRepository.getThemeAccentColor();
       emit(state.copyWith(
         themeMode: themeMode,
         accentColor: accentColor,
@@ -41,8 +45,8 @@ class ThemeSettingsBloc extends Bloc<ThemeSettingsEvent, ThemeSettingsState> {
   Future<void> _onUpdateThemeMode(
       UpdateThemeMode event, Emitter<ThemeSettingsState> emit) async {
     try {
-      await _repository.setThemeMode(event.themeMode);
-      final themeMode = await _repository.getThemeMode();
+      await _userPreferencesRepository.setThemeMode(event.themeMode);
+      final themeMode = await _userPreferencesRepository.getThemeMode();
       emit(state.copyWith(themeMode: themeMode));
     } catch (_) {
       emit(state.copyWith(hasError: true));
@@ -55,8 +59,9 @@ class ThemeSettingsBloc extends Bloc<ThemeSettingsEvent, ThemeSettingsState> {
   Future<void> _onUpdateThemeAccentColor(
       UpdateThemeAccentColor event, Emitter<ThemeSettingsState> emit) async {
     try {
-      await _repository.setThemeAccentColor(event.accentColor);
-      final accentColor = await _repository.getThemeAccentColor();
+      await _userPreferencesRepository.setThemeAccentColor(event.accentColor);
+      final accentColor =
+          await _userPreferencesRepository.getThemeAccentColor();
       emit(state.copyWith(accentColor: accentColor));
     } catch (_) {
       emit(state.copyWith(hasError: true));
