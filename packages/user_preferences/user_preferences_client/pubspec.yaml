@@ -1,19 +1,14 @@
 name: user_preferences_client
 description: "Handles all user preferences for the client side of the application."
-version: 0.1.0
+version: 0.3.0
 publish_to: none
 
 environment:
   sdk: ^3.6.1
-  flutter: ">=1.17.0"
 
 dependencies:
-  flutter:
-    sdk: flutter
+  json_annotation: ^4.9.0
 
 dev_dependencies:
-  mockito: ^5.4.5
-  flutter_test:
-    sdk: flutter
-  flutter_lints: ^5.0.0
-
+  json_serializable: ^6.9.3
+  build_runner: ^2.4.14

@@ -1,49 +1,106 @@
-import 'package:flutter/material.dart';
+import 'package:user_preferences_client/src/models/user_preferences.dart';
 
 /// An abstract class that defines methods for managing user preferences
 /// related to theme settings in a Flutter application.
 abstract class UserPreferencesClient {
-  /// Changes the theme mode.
+  /// Sets the theme mode.
   /// [themeMode] The new theme mode to be set (light, dark, or system).
-  Future<void> setThemeMode(ThemeMode themeMode);
+  /// Throws [SetThemeModeException] if the theme mode cannot be set.
+  Future<void> setThemeMode(UserPreferenceThemeMode themeMode);
 
   /// Gets the current theme mode.
-  Future<ThemeMode> getThemeMode();
+  /// Throws [GetThemeModeException] if the theme mode cannot be retrieved.
+  Future<UserPreferenceThemeMode> getThemeMode();
 
-  /// Changes the main accent color of the theme.
+  /// Sets the main accent color of the theme.
   /// [color] The new primary color to be set.
-  Future<void> setThemeAccentColor(MaterialColor color);
+  /// Throws [SetThemeAccentColorException] if the accent color cannot be set.
+  Future<void> setThemeAccentColor(UserPreferenceAccentColor color);
 
   /// Gets the current theme accent color.
-  Future<MaterialColor> getThemeAccentColor();
+  /// Throws [GetThemeAccentColorException] if the accent color cannot be retrieved.
+  Future<UserPreferenceAccentColor> getThemeAccentColor();
 
   /// Sets the title font size.
   /// [fontSize] The new title font size to be set (small, medium, large).
+  /// Throws [SetTitleFontSizeException] if the title font size cannot be set.
   Future<void> setTitleFontSize(UserPreferenceFontSize fontSize);
 
   /// Gets the current title font size.
+  /// Throws [GetTitleFontSizeException] if the title font size cannot be retrieved.
   Future<UserPreferenceFontSize> getTitleFontSize();
 
   /// Sets the body font size.
   /// [fontSize] The new body font size to be set (small, medium, large).
+  /// Throws [SetBodyFontSizeException] if the body font size cannot be set.
   Future<void> setBodyFontSize(UserPreferenceFontSize fontSize);
 
   /// Gets the current body font size.
+  /// Throws [GetBodyFontSizeException] if the body font size cannot be retrieved.
   Future<UserPreferenceFontSize> getBodyFontSize();
 
   /// Sets the font family.
   /// [fontFamily] The new font family to be set.
+  /// Throws [SetFontFamilyException] if the font family cannot be set.
   Future<void> setFontFamily(UserPreferenceGoogleFontsFamily fontFamily);
 
   /// Gets the current font family.
+  /// Throws [GetFontFamilyException] if the font family cannot be retrieved.
   Future<UserPreferenceGoogleFontsFamily> getFontFamily();
 
   /// Sets the language.
   /// [language] The new language to be set (English, Arabic).
+  /// Throws [SetLanguageException] if the language cannot be set.
   Future<void> setLanguage(UserPreferenceLanguage language);
 
   /// Gets the current language.
+  /// Throws [GetLanguageException] if the language cannot be retrieved.
   Future<UserPreferenceLanguage> getLanguage();
+
+  /// Resets all preferences to their default values.
+  Future<void> resetPreferences();
+
+  /// Gets all preferences at once.
+  /// Throws [GetAllPreferencesException] if the preferences cannot be retrieved.
+  Stream<UserPreferences> getAllPreferences();
+}
+
+/// Enum representing different theme modes.
+enum UserPreferenceThemeMode {
+  light,
+  dark,
+  system,
+}
+
+/// Enum representing different accent colors suitable for a dark grey background.
+enum UserPreferenceAccentColor {
+  accentOne,
+  accentTwo,
+  accentThree,
+}
+
+extension UserPreferenceAccentColorExtension on UserPreferenceAccentColor {
+  String get forLightTheme {
+    switch (this) {
+      case UserPreferenceAccentColor.accentOne:
+        return 'blue';
+      case UserPreferenceAccentColor.accentTwo:
+        return 'teal';
+      case UserPreferenceAccentColor.accentThree:
+        return 'amber';
+    }
+  }
+
+  String get forDarkTheme {
+    switch (this) {
+      case UserPreferenceAccentColor.accentOne:
+        return 'lightBlue';
+      case UserPreferenceAccentColor.accentTwo:
+        return 'Cyan';
+      case UserPreferenceAccentColor.accentThree:
+        return 'Lime';
+    }
+  }
 }
 
 /// Enum representing different font sizes.
@@ -91,7 +148,8 @@ enum UserPreferenceGoogleFontsFamily {
   ubuntu,
 }
 
-extension UserPreferenceGoogleFontsFamilyExtension on UserPreferenceGoogleFontsFamily {
+extension UserPreferenceGoogleFontsFamilyExtension
+    on UserPreferenceGoogleFontsFamily {
   String get name {
     switch (this) {
       case UserPreferenceGoogleFontsFamily.roboto:
@@ -133,4 +191,82 @@ extension UserPreferenceLanguageExtension on UserPreferenceLanguage {
         return 'ar';
     }
   }
+}
+
+/// Exception thrown when the theme mode cannot be set.
+class SetThemeModeException implements Exception {
+  final String message;
+  SetThemeModeException(this.message);
+}
+
+/// Exception thrown when the theme mode cannot be retrieved.
+class GetThemeModeException implements Exception {
+  final String message;
+  GetThemeModeException(this.message);
+}
+
+/// Exception thrown when the theme accent color cannot be set.
+class SetThemeAccentColorException implements Exception {
+  final String message;
+  SetThemeAccentColorException(this.message);
+}
+
+/// Exception thrown when the theme accent color cannot be retrieved.
+class GetThemeAccentColorException implements Exception {
+  final String message;
+  GetThemeAccentColorException(this.message);
+}
+
+/// Exception thrown when the title font size cannot be set.
+class SetTitleFontSizeException implements Exception {
+  final String message;
+  SetTitleFontSizeException(this.message);
+}
+
+/// Exception thrown when the title font size cannot be retrieved.
+class GetTitleFontSizeException implements Exception {
+  final String message;
+  GetTitleFontSizeException(this.message);
+}
+
+/// Exception thrown when the body font size cannot be set.
+class SetBodyFontSizeException implements Exception {
+  final String message;
+  SetBodyFontSizeException(this.message);
+}
+
+/// Exception thrown when the body font size cannot be retrieved.
+class GetBodyFontSizeException implements Exception {
+  final String message;
+  GetBodyFontSizeException(this.message);
+}
+
+/// Exception thrown when the font family cannot be set.
+class SetFontFamilyException implements Exception {
+  final String message;
+  SetFontFamilyException(this.message);
+}
+
+/// Exception thrown when the font family cannot be retrieved.
+class GetFontFamilyException implements Exception {
+  final String message;
+  GetFontFamilyException(this.message);
+}
+
+/// Exception thrown when the language cannot be set.
+class SetLanguageException implements Exception {
+  final String message;
+  SetLanguageException(this.message);
+}
+
+/// Exception thrown when the language cannot be retrieved.
+class GetLanguageException implements Exception {
+  final String message;
+  GetLanguageException(this.message);
+}
+
+/// Exception thrown when all preferences cannot be retrieved.
+class GetAllPreferencesException implements Exception {
+  final String message;
+  GetAllPreferencesException(this.message);
 }
