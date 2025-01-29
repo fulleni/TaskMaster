@@ -9,6 +9,7 @@ class TodosAddState extends Equatable {
     this.description = '',
     this.todo,
     this.isValid = false,
+    this.isDirty = false,
   });
 
   final TodosAddStatus status;
@@ -16,6 +17,7 @@ class TodosAddState extends Equatable {
   final String description;
   final Todo? todo;
   final bool isValid;
+  final bool isDirty;  // New field to track if user has started typing
 
   TodosAddState copyWith({
     TodosAddStatus? status,
@@ -23,6 +25,7 @@ class TodosAddState extends Equatable {
     String? description,
     Todo? todo,
     bool? isValid,
+    bool? isDirty,
   }) {
     return TodosAddState(
       status: status ?? this.status,
@@ -30,9 +33,10 @@ class TodosAddState extends Equatable {
       description: description ?? this.description,
       todo: todo ?? this.todo,
       isValid: isValid ?? this.isValid,
+      isDirty: isDirty ?? this.isDirty,
     );
   }
 
   @override
-  List<Object?> get props => [status, title, description, todo, isValid];
+  List<Object?> get props => [status, title, description, todo, isValid, isDirty];
 }

@@ -98,7 +98,9 @@ class _TitleField extends StatelessWidget {
                   ? Colors.white70
                   : Colors.black54,
             ),
-            errorText: state.title.isEmpty ? 'Title cannot be empty' : null,
+            errorText: state.isDirty && state.title.isEmpty 
+                ? 'Title cannot be empty' 
+                : null,
             helperText: 'Required',
           ),
         );

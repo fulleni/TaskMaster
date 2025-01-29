@@ -25,6 +25,7 @@ class TodosAddBloc extends Bloc<TodosAddEvent, TodosAddState> {
     emit(state.copyWith(
       title: title,
       isValid: title.isNotEmpty,
+      isDirty: true,
     ));
   }
 
