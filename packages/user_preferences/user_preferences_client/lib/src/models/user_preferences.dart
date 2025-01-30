@@ -22,7 +22,7 @@ class UserPreferences extends Equatable {
 
   UserPreferences.defaults()
       : themeMode = UserPreferenceThemeMode.system,
-        themeAccentColor = UserPreferenceAccentColor.grey,
+        themeAccentColor = UserPreferenceAccentColor.red,
         fontSize = UserPreferenceFontSize.defaultSize,
         fontFamily = UserPreferenceFontFamily.ubuntu,
         language = UserPreferenceLanguage.english;
@@ -31,7 +31,7 @@ class UserPreferences extends Equatable {
   UserPreferences resetToDefaults() {
     return UserPreferences(
       themeMode: UserPreferenceThemeMode.system,
-      themeAccentColor: UserPreferenceAccentColor.grey,
+      themeAccentColor: UserPreferenceAccentColor.red,
       fontSize: UserPreferenceFontSize.defaultSize,
       fontFamily: UserPreferenceFontFamily.ubuntu,
       language: UserPreferenceLanguage.english,

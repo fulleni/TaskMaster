@@ -78,6 +78,20 @@ enum UserPreferenceFontSize {
   largeSize,
 }
 
+extension UserPreferenceFontSizeX on UserPreferenceFontSize {
+  /// Returns a display string for [UserPreferenceFontSize].
+  static String toDisplayString(UserPreferenceFontSize fontSize) {
+    switch (fontSize) {
+      case UserPreferenceFontSize.defaultSize:
+        return 'default';
+      case UserPreferenceFontSize.mediumSize:
+        return 'medium';
+      case UserPreferenceFontSize.largeSize:
+        return 'large';
+    }
+  }
+}
+
 /// Enum representing different font families from Google Fonts.
 enum UserPreferenceFontFamily {
   roboto,

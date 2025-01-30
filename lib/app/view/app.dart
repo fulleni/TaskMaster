@@ -8,14 +8,19 @@ import 'package:taskmaster/home/view/home_page.dart';
 import 'package:todos_repository/todos_repository.dart';
 import 'package:user_preferences_repository/user_preferences_repository.dart';
 
+/// The main application widget.
 class App extends StatelessWidget {
+  /// Creates an instance of [App].
   const App({
     required this.todosRepository,
     required this.userPreferencesRepository,
     super.key,
   });
 
+  /// The repository for managing todos.
   final TodosRepository todosRepository;
+
+  /// The repository for managing user preferences.
   final UserPreferencesRepository userPreferencesRepository;
 
   @override
@@ -39,6 +44,7 @@ class App extends StatelessWidget {
   }
 }
 
+/// The main view of the application.
 class _AppView extends StatelessWidget {
   const _AppView();
 
@@ -97,7 +103,9 @@ class _AppView extends StatelessWidget {
   }
 }
 
+/// Extension to convert [UserPreferenceThemeMode] to [ThemeMode].
 extension UserPreferenceThemeModeX on UserPreferenceThemeMode {
+  /// Converts [UserPreferenceThemeMode] to [ThemeMode].
   static ThemeMode toFlutterThemeMode(UserPreferenceThemeMode userPreference) {
     switch (userPreference) {
       case UserPreferenceThemeMode.light:
@@ -110,7 +118,9 @@ extension UserPreferenceThemeModeX on UserPreferenceThemeMode {
   }
 }
 
+/// Extension to convert [UserPreferenceAccentColor] to [FlexScheme].
 extension UserPreferenceAccentColorX on UserPreferenceAccentColor {
+  /// Converts [UserPreferenceAccentColor] to [FlexScheme].
   static FlexScheme toFlexScheme(UserPreferenceAccentColor accentColor) {
     switch (accentColor) {
       case UserPreferenceAccentColor.blue:
@@ -123,7 +133,9 @@ extension UserPreferenceAccentColorX on UserPreferenceAccentColor {
   }
 }
 
+/// Extension to convert [UserPreferenceFontSize] to a double value.
 extension UserPreferenceFontSizeX on UserPreferenceFontSize {
+  /// Converts [UserPreferenceFontSize] to a double value.
   static double toFontSize(UserPreferenceFontSize fontSize) {
     switch (fontSize) {
       case UserPreferenceFontSize.defaultSize:
@@ -136,7 +148,9 @@ extension UserPreferenceFontSizeX on UserPreferenceFontSize {
   }
 }
 
+/// Extension to convert [UserPreferenceFontFamily] to a [TextTheme] using GoogleFonts.
 extension UserPreferenceFontFamilyX on UserPreferenceFontFamily {
+  /// Converts [UserPreferenceFontFamily] to a [TextTheme] using GoogleFonts.
   static TextTheme toGoogleFontsTextTheme(
     UserPreferenceFontFamily fontFamily,
     TextTheme baseTextTheme,

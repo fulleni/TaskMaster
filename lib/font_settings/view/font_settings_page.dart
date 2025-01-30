@@ -45,37 +45,6 @@ class _FontSettingsView extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        'Font Size',
-                        style: TextStyle(
-                          color: textColor,
-                        ),
-                      ),
-                      DropdownButton<UserPreferenceFontSize>(
-                        value: state.fontSize,
-                        hint: Text('Select Font Size',
-                            style: TextStyle(color: textColor)),
-                        items: UserPreferenceFontSize.values.map((fontSize) {
-                          return DropdownMenuItem(
-                            value: fontSize,
-                            child: Text(fontSize.toString().split('.').last,
-                                style: TextStyle(color: textColor)),
-                          );
-                        }).toList(),
-                        onChanged: (fontSize) {
-                          if (fontSize != null) {
-                            context
-                                .read<FontSettingsBloc>()
-                                .add(UpdateFontSize(fontSize));
-                          }
-                        },
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 16),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
                         'Font Family',
                         style: TextStyle(
                           color: textColor,
@@ -98,6 +67,41 @@ class _FontSettingsView extends StatelessWidget {
                             context
                                 .read<FontSettingsBloc>()
                                 .add(UpdateFontFamily(fontFamily));
+                          }
+                        },
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 16),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Font Size',
+                        style: TextStyle(
+                          color: textColor,
+                        ),
+                      ),
+                      DropdownButton<UserPreferenceFontSize>(
+                        value: state.fontSize,
+                        hint: Text('Select Font Size',
+                            style: TextStyle(color: textColor)),
+                        items: UserPreferenceFontSize.values.map((fontSize) {
+                          return DropdownMenuItem(
+                            value: fontSize,
+                            child: Text(
+                              UserPreferenceFontSizeX.toDisplayString(
+                                fontSize,
+                              ),
+                              style: TextStyle(color: textColor),
+                            ),
+                          );
+                        }).toList(),
+                        onChanged: (fontSize) {
+                          if (fontSize != null) {
+                            context
+                                .read<FontSettingsBloc>()
+                                .add(UpdateFontSize(fontSize));
                           }
                         },
                       ),
