@@ -47,8 +47,6 @@ class _FontSettingsView extends StatelessWidget {
                       Text(
                         'Title Font Size',
                         style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
                           color: textColor,
                         ),
                       ),
@@ -80,8 +78,6 @@ class _FontSettingsView extends StatelessWidget {
                       Text(
                         'Body Font Size',
                         style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
                           color: textColor,
                         ),
                       ),
@@ -113,8 +109,6 @@ class _FontSettingsView extends StatelessWidget {
                       Text(
                         'Font Family',
                         style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
                           color: textColor,
                         ),
                       ),

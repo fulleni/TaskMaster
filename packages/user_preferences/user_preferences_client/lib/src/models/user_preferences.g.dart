@@ -40,9 +40,9 @@ const _$UserPreferenceThemeModeEnumMap = {
 };
 
 const _$UserPreferenceAccentColorEnumMap = {
-  UserPreferenceAccentColor.accentOne: 'accentOne',
-  UserPreferenceAccentColor.accentTwo: 'accentTwo',
-  UserPreferenceAccentColor.accentThree: 'accentThree',
+  UserPreferenceAccentColor.blue: 'blue',
+  UserPreferenceAccentColor.grey: 'grey',
+  UserPreferenceAccentColor.red: 'red',
 };
 
 const _$UserPreferenceFontSizeEnumMap = {

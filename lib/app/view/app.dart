@@ -1,6 +1,6 @@
+import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:taskmaster/app/bloc/app_bloc.dart';
 import 'package:taskmaster/home/view/home_page.dart';
@@ -49,11 +49,15 @@ class _AppView extends StatelessWidget {
             state.userPreferences ?? UserPreferences.defaults();
         final themeMode =
             ThemeModeExtension.fromUserPreference(userPreferences.themeMode);
+        final flexScheme = FlexSchemeX.fromUserPreference(
+          userPreferences.themeAccentColor,
+        );
+
         return MaterialApp(
           debugShowCheckedModeBanner: false,
           title: 'TaskMaster',
-          theme: lightTheme,
-          darkTheme: darkTheme,
+          theme: FlexThemeData.light(scheme: flexScheme),
+          darkTheme: FlexThemeData.dark(scheme: flexScheme),
           themeMode: themeMode,
           home: const HomePage(),
           localizationsDelegates: const [
@@ -92,183 +96,18 @@ extension ThemeModeExtension on ThemeMode {
   }
 }
 
-extension MaterialColorExtension on MaterialColor {
-  static MaterialColor fromUserPreference({
-    required UserPreferenceAccentColor userPreference,
-    required ThemeMode themeMode,
-  }) {
-    if (themeMode == ThemeMode.dark) {
-      switch (userPreference) {
-        case UserPreferenceAccentColor.accentOne:
-          return Colors.lightBlue;
-        case UserPreferenceAccentColor.accentTwo:
-          return Colors.cyan;
-        case UserPreferenceAccentColor.accentThree:
-          return Colors.lime;
-      }
-    } else {
-      switch (userPreference) {
-        case UserPreferenceAccentColor.accentOne:
-          return Colors.blue;
-        case UserPreferenceAccentColor.accentTwo:
-          return Colors.teal;
-        case UserPreferenceAccentColor.accentThree:
-          return Colors.amber;
-      }
+extension FlexSchemeX on FlexScheme {
+  static FlexScheme fromUserPreference(
+    UserPreferenceAccentColor accentColor,
+  ) {
+    print("WORKING 2: $accentColor");
+    switch (accentColor) {
+      case UserPreferenceAccentColor.blue:
+        return FlexScheme.blue;
+      case UserPreferenceAccentColor.grey:
+        return FlexScheme.greyLaw;
+      case UserPreferenceAccentColor.red:
+        return FlexScheme.mandyRed;
     }
   }
 }
-
-ThemeData lightTheme = ThemeData(
-  useMaterial3: true, // Modern Material Design 3
-  colorScheme: ColorScheme.light(
-    primary: Colors.grey[300]!, // Slightly lighter primary
-    onPrimary: Colors.grey[800]!, // Darker text on primary
-    secondary: Colors.grey[400]!, // A bit darker secondary
-    onSecondary: Colors.grey[900]!, // Dark text on background
-    surface: Colors.grey[200]!, // Light surface (cards, dialogs)
-    onSurface: Colors.grey[800]!, // Dark text on surface
-    error: Colors.red[400]!, // Keep error color distinct
-  ),
-  appBarTheme: AppBarTheme(
-    backgroundColor: Colors.grey[200], // Light app bar
-    foregroundColor: Colors.grey[900], // Dark text on app bar
-    elevation: 1, // Subtle elevation
-    scrolledUnderElevation: 1, // Elevation when scrolled under
-    shadowColor: Colors.grey.withOpacity(0.2), // Shadow for scrolled appbar
-  ),
-  textTheme: TextTheme(
-    bodyLarge: TextStyle(color: Colors.grey[800]),
-    bodyMedium: TextStyle(color: Colors.grey[700]),
-    bodySmall: TextStyle(color: Colors.grey[600]),
-    titleLarge: TextStyle(
-      color: Colors.grey[900],
-      fontWeight: FontWeight.bold,
-    ),
-    titleMedium: TextStyle(
-      color: Colors.grey[800],
-      fontWeight: FontWeight.w500,
-    ),
-    titleSmall: TextStyle(
-      color: Colors.grey[700],
-    ),
-    // ... other text styles
-  ),
-  elevatedButtonTheme: ElevatedButtonThemeData(
-    style: ElevatedButton.styleFrom(
-      backgroundColor: Colors.grey[400],
-      foregroundColor: Colors.grey[900],
-      textStyle: const TextStyle(fontWeight: FontWeight.w500),
-      padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 24),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(8),
-      ),
-    ),
-  ),
-  outlinedButtonTheme: OutlinedButtonThemeData(
-    style: OutlinedButton.styleFrom(
-      foregroundColor: Colors.grey[700],
-      textStyle: const TextStyle(fontWeight: FontWeight.w500),
-      padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 24),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(8),
-      ),
-      side: BorderSide(color: Colors.grey[500]!),
-    ),
-  ),
-  textButtonTheme: TextButtonThemeData(
-    style: TextButton.styleFrom(
-      foregroundColor: Colors.grey[700],
-      textStyle: const TextStyle(fontWeight: FontWeight.w500),
-    ),
-  ),
-  inputDecorationTheme: InputDecorationTheme(
-    filled: true,
-    fillColor: Colors.grey[50],
-    border: OutlineInputBorder(
-      borderSide: BorderSide.none, // No border by default
-      borderRadius: BorderRadius.circular(8),
-    ),
-    hintStyle: TextStyle(color: Colors.grey[600]),
-    labelStyle: TextStyle(color: Colors.grey[700]),
-    prefixIconColor: Colors.grey[600],
-    suffixIconColor: Colors.grey[600],
-  ),
-  // Add other component themes as needed (e.g., BottomAppBarTheme, etc.)
-);
-
-ThemeData darkTheme = ThemeData(
-  useMaterial3: true,
-  colorScheme: ColorScheme.dark(
-    primary: Colors.grey[700]!,
-    onPrimary: Colors.grey[200]!,
-    secondary: Colors.grey[600]!,
-    onSecondary: Colors.grey[100]!,
-    surface: Colors.grey[800]!,
-    onSurface: Colors.grey[200]!,
-    error: Colors.red[600]!,
-  ),
-  appBarTheme: AppBarTheme(
-    backgroundColor: Colors.grey[800],
-    foregroundColor: Colors.grey[200],
-    elevation: 1,
-    scrolledUnderElevation: 1,
-    shadowColor: Colors.black.withOpacity(0.3),
-  ),
-  textTheme: TextTheme(
-    bodyLarge: TextStyle(color: Colors.grey[300]),
-    bodyMedium: TextStyle(color: Colors.grey[400]),
-    bodySmall: TextStyle(color: Colors.grey[500]),
-    titleLarge: TextStyle(
-      color: Colors.grey[100],
-      fontWeight: FontWeight.bold,
-    ),
-    titleMedium: TextStyle(
-      color: Colors.grey[200],
-      fontWeight: FontWeight.w500,
-    ),
-    titleSmall: TextStyle(
-      color: Colors.grey[300],
-    ),
-  ),
-  elevatedButtonTheme: ElevatedButtonThemeData(
-    style: ElevatedButton.styleFrom(
-      backgroundColor: Colors.grey[600],
-      foregroundColor: Colors.grey[100],
-      textStyle: const TextStyle(fontWeight: FontWeight.w500),
-      padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 24),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(8),
-      ),
-    ),
-  ),
-  outlinedButtonTheme: OutlinedButtonThemeData(
-    style: OutlinedButton.styleFrom(
-      foregroundColor: Colors.grey[400],
-      textStyle: const TextStyle(fontWeight: FontWeight.w500),
-      padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 24),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(8),
-      ),
-      side: BorderSide(color: Colors.grey[500]!),
-    ),
-  ),
-  textButtonTheme: TextButtonThemeData(
-    style: TextButton.styleFrom(
-      foregroundColor: Colors.grey[400],
-      textStyle: const TextStyle(fontWeight: FontWeight.w500),
-    ),
-  ),
-  inputDecorationTheme: InputDecorationTheme(
-    filled: true,
-    fillColor: Colors.grey[700],
-    border: OutlineInputBorder(
-      borderSide: BorderSide.none,
-      borderRadius: BorderRadius.circular(8),
-    ),
-    hintStyle: TextStyle(color: Colors.grey[500]),
-    labelStyle: TextStyle(color: Colors.grey[400]),
-    prefixIconColor: Colors.grey[500],
-    suffixIconColor: Colors.grey[500],
-  ),
-);

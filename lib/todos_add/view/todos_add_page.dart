@@ -86,18 +86,7 @@ class _TitleField extends StatelessWidget {
           ),
           decoration: InputDecoration(
             labelText: 'Title',
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(12),
-            ),
-            filled: true,
-            fillColor: Theme.of(context).brightness == Brightness.dark
-                ? Colors.grey[800]
-                : Colors.grey[100],
-            labelStyle: TextStyle(
-              color: Theme.of(context).brightness == Brightness.dark
-                  ? Colors.white70
-                  : Colors.black54,
-            ),
+            border: OutlineInputBorder(),
             errorText: state.isDirty && state.title.isEmpty 
                 ? 'Title cannot be empty' 
                 : null,

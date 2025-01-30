@@ -65,7 +65,6 @@ class _HomeView extends StatelessWidget {
       ),
       bottomNavigationBar: BlocBuilder<HomeCubit, HomeState>(
         builder: (context, state) {
-          final isDarkTheme = Theme.of(context).brightness == Brightness.dark;
           return BottomNavigationBar(
             currentIndex: state.selectedTab.index,
             onTap: (index) =>
@@ -80,9 +79,6 @@ class _HomeView extends StatelessWidget {
                 label: 'Stats',
               ),
             ],
-            backgroundColor: isDarkTheme ? Colors.grey[850] : Colors.white,
-            selectedItemColor: isDarkTheme ? Colors.white : Colors.blue,
-            unselectedItemColor: isDarkTheme ? Colors.grey : Colors.black54,
           );
         },
       ),

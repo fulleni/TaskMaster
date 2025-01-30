@@ -75,33 +75,9 @@ enum UserPreferenceThemeMode {
 
 /// Enum representing different accent colors suitable for a dark grey background.
 enum UserPreferenceAccentColor {
-  accentOne,
-  accentTwo,
-  accentThree,
-}
-
-extension UserPreferenceAccentColorExtension on UserPreferenceAccentColor {
-  String get forLightTheme {
-    switch (this) {
-      case UserPreferenceAccentColor.accentOne:
-        return 'blue';
-      case UserPreferenceAccentColor.accentTwo:
-        return 'teal';
-      case UserPreferenceAccentColor.accentThree:
-        return 'amber';
-    }
-  }
-
-  String get forDarkTheme {
-    switch (this) {
-      case UserPreferenceAccentColor.accentOne:
-        return 'lightBlue';
-      case UserPreferenceAccentColor.accentTwo:
-        return 'Cyan';
-      case UserPreferenceAccentColor.accentThree:
-        return 'Lime';
-    }
-  }
+  blue,
+  grey,
+  red,
 }
 
 /// Enum representing different font sizes.

@@ -47,8 +47,6 @@ class _ThemeSettingsView extends StatelessWidget {
                       Text(
                         'Theme Mode',
                         style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
                           color: textColor,
                         ),
                       ),
@@ -80,8 +78,6 @@ class _ThemeSettingsView extends StatelessWidget {
                       Text(
                         'Accent Color',
                         style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
                           color: textColor,
                         ),
                       ),
@@ -89,7 +85,8 @@ class _ThemeSettingsView extends StatelessWidget {
                         value: state.accentColor,
                         hint: Text('Select Accent Color',
                             style: TextStyle(color: textColor)),
-                        items: UserPreferenceAccentColor.values.map((accentColor) {
+                        items:
+                            UserPreferenceAccentColor.values.map((accentColor) {
                           return DropdownMenuItem(
                             value: accentColor,
                             child: Text(accentColor.toString().split('.').last,

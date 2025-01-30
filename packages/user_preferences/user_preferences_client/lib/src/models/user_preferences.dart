@@ -24,7 +24,7 @@ class UserPreferences extends Equatable {
 
   UserPreferences.defaults()
       : themeMode = UserPreferenceThemeMode.system,
-        themeAccentColor = UserPreferenceAccentColor.accentOne,
+        themeAccentColor = UserPreferenceAccentColor.grey,
         titleFontSize = UserPreferenceFontSize.medium,
         bodyFontSize = UserPreferenceFontSize.medium,
         fontFamily = UserPreferenceGoogleFontsFamily.roboto,
@@ -34,7 +34,7 @@ class UserPreferences extends Equatable {
   UserPreferences resetToDefaults() {
     return UserPreferences(
       themeMode: UserPreferenceThemeMode.system,
-      themeAccentColor: UserPreferenceAccentColor.accentOne,
+      themeAccentColor: UserPreferenceAccentColor.blue,
       titleFontSize: UserPreferenceFontSize.medium,
       bodyFontSize: UserPreferenceFontSize.medium,
       fontFamily: UserPreferenceGoogleFontsFamily.roboto,

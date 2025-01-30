@@ -21,10 +21,12 @@ class AppBloc extends Bloc<AppEvent, AppState> {
     emit(state.copyWith(status: AppStatus.loading));
     await emit.forEach<UserPreferences>(
       _userPreferencesRepository.getAllPreferences(),
-      onData: (preferences) => state.copyWith(
-        status: AppStatus.loaded,
-        userPreferences: preferences,
-      ),
+      onData: (preferences) {
+        return state.copyWith(
+          status: AppStatus.loaded,
+          userPreferences: preferences,
+        );
+      },
       onError: (error, stackTrace) =>
           state.copyWith(status: AppStatus.userPreferencesFailed),
     );
