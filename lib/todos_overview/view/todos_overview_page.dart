@@ -39,7 +39,7 @@ class _TodosOverviewView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('🎯 TaskManager'),
+        title: Text('🎯 TaskMaster'),
         actions: [
           _TodosOverviewFilterButton(),
           // _TodosOverviewOptionsButton(),

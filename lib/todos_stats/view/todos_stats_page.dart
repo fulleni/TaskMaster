@@ -29,7 +29,7 @@ class _TodosStatsView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('🎯 TaskManager'),
+        title: Text('🎯 TaskMaster'),
         actions: [
           IconButton(
             icon: Icon(Icons.settings),

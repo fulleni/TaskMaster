@@ -319,7 +319,7 @@ packages:
       path: "packages/user_preferences/local_storage_user_preferences_client"
       relative: true
     source: path
-    version: "0.1.0"
+    version: "0.2.0"
   logging:
     dependency: transitive
     description:
@@ -633,7 +633,7 @@ packages:
       path: "packages/user_preferences/user_preferences_client"
       relative: true
     source: path
-    version: "0.3.0"
+    version: "0.5.0"
   user_preferences_repository:
     dependency: "direct main"
     description:

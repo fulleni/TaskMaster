@@ -44,7 +44,7 @@ class TodosEditView extends StatelessWidget {
       },
       child: Scaffold(
         appBar: AppBar(
-          title: Text('🎯 TaskManager'),
+          title: Text('🎯 TaskMaster'),
           actions: [
             IconButton(
               icon: const Icon(Icons.check),
