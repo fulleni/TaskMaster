@@ -46,9 +46,9 @@ const _$UserPreferenceAccentColorEnumMap = {
 };
 
 const _$UserPreferenceFontSizeEnumMap = {
-  UserPreferenceFontSize.small: 'small',
-  UserPreferenceFontSize.medium: 'medium',
-  UserPreferenceFontSize.large: 'large',
+  UserPreferenceFontSize.defaultSize: 'small',
+  UserPreferenceFontSize.mediumSize: 'medium',
+  UserPreferenceFontSize.largeSize: 'large',
 };
 
 const _$UserPreferenceGoogleFontsFamilyEnumMap = {

@@ -21,23 +21,14 @@ abstract class UserPreferencesClient {
   /// Throws [GetThemeAccentColorException] if the accent color cannot be retrieved.
   Future<UserPreferenceAccentColor> getThemeAccentColor();
 
-  /// Sets the title font size.
-  /// [fontSize] The new title font size to be set (small, medium, large).
-  /// Throws [SetTitleFontSizeException] if the title font size cannot be set.
-  Future<void> setTitleFontSize(UserPreferenceFontSize fontSize);
+  /// Sets the app font size.
+  /// [fontSize] The new app font size to be set (small, medium, large).
+  /// Throws [SetAppFontSizeException] if the app font size cannot be set.
+  Future<void> setFontSize(UserPreferenceFontSize fontSize);
 
-  /// Gets the current title font size.
-  /// Throws [GetTitleFontSizeException] if the title font size cannot be retrieved.
-  Future<UserPreferenceFontSize> getTitleFontSize();
-
-  /// Sets the body font size.
-  /// [fontSize] The new body font size to be set (small, medium, large).
-  /// Throws [SetBodyFontSizeException] if the body font size cannot be set.
-  Future<void> setBodyFontSize(UserPreferenceFontSize fontSize);
-
-  /// Gets the current body font size.
-  /// Throws [GetBodyFontSizeException] if the body font size cannot be retrieved.
-  Future<UserPreferenceFontSize> getBodyFontSize();
+  /// Gets the current app font size.
+  /// Throws [GetAppFontSizeException] if the app font size cannot be retrieved.
+  Future<UserPreferenceFontSize> getFontSize();
 
   /// Sets the font family.
   /// [fontFamily] The new font family to be set.
@@ -82,33 +73,9 @@ enum UserPreferenceAccentColor {
 
 /// Enum representing different font sizes.
 enum UserPreferenceFontSize {
-  small,
-  medium,
-  large,
-}
-
-extension UserPreferenceFontSizeExtension on UserPreferenceFontSize {
-  double get titleSize {
-    switch (this) {
-      case UserPreferenceFontSize.small:
-        return 18.0;
-      case UserPreferenceFontSize.medium:
-        return 24.0;
-      case UserPreferenceFontSize.large:
-        return 30.0;
-    }
-  }
-
-  double get bodySize {
-    switch (this) {
-      case UserPreferenceFontSize.small:
-        return 14.0;
-      case UserPreferenceFontSize.medium:
-        return 16.0;
-      case UserPreferenceFontSize.large:
-        return 18.0;
-    }
-  }
+  defaultSize,
+  mediumSize,
+  largeSize,
 }
 
 /// Enum representing different font families from Google Fonts.
@@ -125,49 +92,10 @@ enum UserPreferenceGoogleFontsFamily {
   ubuntu,
 }
 
-extension UserPreferenceGoogleFontsFamilyExtension
-    on UserPreferenceGoogleFontsFamily {
-  String get name {
-    switch (this) {
-      case UserPreferenceGoogleFontsFamily.roboto:
-        return 'Roboto';
-      case UserPreferenceGoogleFontsFamily.openSans:
-        return 'Open Sans';
-      case UserPreferenceGoogleFontsFamily.lato:
-        return 'Lato';
-      case UserPreferenceGoogleFontsFamily.raleway:
-        return 'Raleway';
-      case UserPreferenceGoogleFontsFamily.montserrat:
-        return 'Montserrat';
-      case UserPreferenceGoogleFontsFamily.merriweather:
-        return 'Merriweather';
-      case UserPreferenceGoogleFontsFamily.nunito:
-        return 'Nunito';
-      case UserPreferenceGoogleFontsFamily.playfairDisplay:
-        return 'Playfair Display';
-      case UserPreferenceGoogleFontsFamily.sourceSansPro:
-        return 'Source Sans Pro';
-      case UserPreferenceGoogleFontsFamily.ubuntu:
-        return 'Ubuntu';
-    }
-  }
-}
-
 /// Enum representing different languages.
 enum UserPreferenceLanguage {
   english,
   arabic,
-}
-
-extension UserPreferenceLanguageExtension on UserPreferenceLanguage {
-  String get code {
-    switch (this) {
-      case UserPreferenceLanguage.english:
-        return 'en';
-      case UserPreferenceLanguage.arabic:
-        return 'ar';
-    }
-  }
 }
 
 /// Exception thrown when the theme mode cannot be set.
@@ -194,28 +122,16 @@ class GetThemeAccentColorException implements Exception {
   GetThemeAccentColorException(this.message);
 }
 
-/// Exception thrown when the title font size cannot be set.
-class SetTitleFontSizeException implements Exception {
+/// Exception thrown when the app font size cannot be set.
+class SetAppFontSizeException implements Exception {
   final String message;
-  SetTitleFontSizeException(this.message);
+  SetAppFontSizeException(this.message);
 }
 
-/// Exception thrown when the title font size cannot be retrieved.
-class GetTitleFontSizeException implements Exception {
+/// Exception thrown when the app font size cannot be retrieved.
+class GetAppFontSizeException implements Exception {
   final String message;
-  GetTitleFontSizeException(this.message);
-}
-
-/// Exception thrown when the body font size cannot be set.
-class SetBodyFontSizeException implements Exception {
-  final String message;
-  SetBodyFontSizeException(this.message);
-}
-
-/// Exception thrown when the body font size cannot be retrieved.
-class GetBodyFontSizeException implements Exception {
-  final String message;
-  GetBodyFontSizeException(this.message);
+  GetAppFontSizeException(this.message);
 }
 
 /// Exception thrown when the font family cannot be set.

@@ -12,7 +12,8 @@ class LocalStorageUserPreferencesClient implements UserPreferencesClient {
   final SharedPreferences _sharedPreferences;
 
   /// A [BehaviorSubject] that holds the current user preferences.
-  late final _userPreferencesStreamController = BehaviorSubject<UserPreferences>.seeded(
+  late final _userPreferencesStreamController =
+      BehaviorSubject<UserPreferences>.seeded(
     UserPreferences.defaults(),
   );
 
@@ -31,10 +32,12 @@ class LocalStorageUserPreferencesClient implements UserPreferencesClient {
   @override
   Future<void> setThemeMode(UserPreferenceThemeMode themeMode) async {
     try {
-      final success = await _sharedPreferences.setString(_themeModeKey, themeMode.toString());
+      final success = await _sharedPreferences.setString(
+          _themeModeKey, themeMode.toString());
       if (!success) throw SetThemeModeException('Failed to set theme mode');
       _updateStreamController(
-        (await _userPreferencesStreamController.first).copyWith(themeMode: themeMode),
+        (await _userPreferencesStreamController.first)
+            .copyWith(themeMode: themeMode),
       );
     } catch (e) {
       throw SetThemeModeException(e.toString());
@@ -45,8 +48,10 @@ class LocalStorageUserPreferencesClient implements UserPreferencesClient {
   Future<UserPreferenceThemeMode> getThemeMode() async {
     try {
       final themeModeString = _sharedPreferences.getString(_themeModeKey);
-      if (themeModeString == null) throw GetThemeModeException('Failed to get theme mode');
-      return UserPreferenceThemeMode.values.firstWhere((e) => e.toString() == themeModeString);
+      if (themeModeString == null)
+        throw GetThemeModeException('Failed to get theme mode');
+      return UserPreferenceThemeMode.values
+          .firstWhere((e) => e.toString() == themeModeString);
     } catch (e) {
       throw GetThemeModeException(e.toString());
     }
@@ -55,10 +60,13 @@ class LocalStorageUserPreferencesClient implements UserPreferencesClient {
   @override
   Future<void> setThemeAccentColor(UserPreferenceAccentColor color) async {
     try {
-      final success = await _sharedPreferences.setString(_themeAccentColorKey, color.toString());
-      if (!success) throw SetThemeAccentColorException('Failed to set theme accent color');
+      final success = await _sharedPreferences.setString(
+          _themeAccentColorKey, color.toString());
+      if (!success)
+        throw SetThemeAccentColorException('Failed to set theme accent color');
       _updateStreamController(
-        (await _userPreferencesStreamController.first).copyWith(themeAccentColor: color),
+        (await _userPreferencesStreamController.first)
+            .copyWith(themeAccentColor: color),
       );
     } catch (e) {
       throw SetThemeAccentColorException(e.toString());
@@ -69,44 +77,54 @@ class LocalStorageUserPreferencesClient implements UserPreferencesClient {
   Future<UserPreferenceAccentColor> getThemeAccentColor() async {
     try {
       final colorString = _sharedPreferences.getString(_themeAccentColorKey);
-      if (colorString == null) throw GetThemeAccentColorException('Failed to get theme accent color');
-      return UserPreferenceAccentColor.values.firstWhere((e) => e.toString() == colorString);
+      if (colorString == null)
+        throw GetThemeAccentColorException('Failed to get theme accent color');
+      return UserPreferenceAccentColor.values
+          .firstWhere((e) => e.toString() == colorString);
     } catch (e) {
       throw GetThemeAccentColorException(e.toString());
     }
   }
 
   @override
-  Future<void> setTitleFontSize(UserPreferenceFontSize fontSize) async {
+  Future<void> setFontSize(UserPreferenceFontSize fontSize) async {
     try {
-      final success = await _sharedPreferences.setString(_titleFontSizeKey, fontSize.toString());
-      if (!success) throw SetTitleFontSizeException('Failed to set title font size');
+      final success = await _sharedPreferences.setString(
+          _titleFontSizeKey, fontSize.toString());
+      if (!success)
+        throw SetAppFontSizeException('Failed to set title font size');
       _updateStreamController(
-        (await _userPreferencesStreamController.first).copyWith(titleFontSize: fontSize),
+        (await _userPreferencesStreamController.first)
+            .copyWith(titleFontSize: fontSize),
       );
     } catch (e) {
-      throw SetTitleFontSizeException(e.toString());
+      throw SetAppFontSizeException(e.toString());
     }
   }
 
   @override
-  Future<UserPreferenceFontSize> getTitleFontSize() async {
+  Future<UserPreferenceFontSize> getFontSize() async {
     try {
       final fontSizeString = _sharedPreferences.getString(_titleFontSizeKey);
-      if (fontSizeString == null) throw GetTitleFontSizeException('Failed to get title font size');
-      return UserPreferenceFontSize.values.firstWhere((e) => e.toString() == fontSizeString);
+      if (fontSizeString == null)
+        throw GetAppFontSizeException('Failed to get title font size');
+      return UserPreferenceFontSize.values
+          .firstWhere((e) => e.toString() == fontSizeString);
     } catch (e) {
-      throw GetTitleFontSizeException(e.toString());
+      throw GetAppFontSizeException(e.toString());
     }
   }
 
   @override
   Future<void> setBodyFontSize(UserPreferenceFontSize fontSize) async {
     try {
-      final success = await _sharedPreferences.setString(_bodyFontSizeKey, fontSize.toString());
-      if (!success) throw SetBodyFontSizeException('Failed to set body font size');
+      final success = await _sharedPreferences.setString(
+          _bodyFontSizeKey, fontSize.toString());
+      if (!success)
+        throw SetBodyFontSizeException('Failed to set body font size');
       _updateStreamController(
-        (await _userPreferencesStreamController.first).copyWith(bodyFontSize: fontSize),
+        (await _userPreferencesStreamController.first)
+            .copyWith(bodyFontSize: fontSize),
       );
     } catch (e) {
       throw SetBodyFontSizeException(e.toString());
@@ -117,8 +135,10 @@ class LocalStorageUserPreferencesClient implements UserPreferencesClient {
   Future<UserPreferenceFontSize> getBodyFontSize() async {
     try {
       final fontSizeString = _sharedPreferences.getString(_bodyFontSizeKey);
-      if (fontSizeString == null) throw GetBodyFontSizeException('Failed to get body font size');
-      return UserPreferenceFontSize.values.firstWhere((e) => e.toString() == fontSizeString);
+      if (fontSizeString == null)
+        throw GetBodyFontSizeException('Failed to get body font size');
+      return UserPreferenceFontSize.values
+          .firstWhere((e) => e.toString() == fontSizeString);
     } catch (e) {
       throw GetBodyFontSizeException(e.toString());
     }
@@ -127,10 +147,12 @@ class LocalStorageUserPreferencesClient implements UserPreferencesClient {
   @override
   Future<void> setFontFamily(UserPreferenceGoogleFontsFamily fontFamily) async {
     try {
-      final success = await _sharedPreferences.setString(_fontFamilyKey, fontFamily.toString());
+      final success = await _sharedPreferences.setString(
+          _fontFamilyKey, fontFamily.toString());
       if (!success) throw SetFontFamilyException('Failed to set font family');
       _updateStreamController(
-        (await _userPreferencesStreamController.first).copyWith(fontFamily: fontFamily),
+        (await _userPreferencesStreamController.first)
+            .copyWith(fontFamily: fontFamily),
       );
     } catch (e) {
       throw SetFontFamilyException(e.toString());
@@ -141,8 +163,10 @@ class LocalStorageUserPreferencesClient implements UserPreferencesClient {
   Future<UserPreferenceGoogleFontsFamily> getFontFamily() async {
     try {
       final fontFamilyString = _sharedPreferences.getString(_fontFamilyKey);
-      if (fontFamilyString == null) throw GetFontFamilyException('Failed to get font family');
-      return UserPreferenceGoogleFontsFamily.values.firstWhere((e) => e.toString() == fontFamilyString);
+      if (fontFamilyString == null)
+        throw GetFontFamilyException('Failed to get font family');
+      return UserPreferenceGoogleFontsFamily.values
+          .firstWhere((e) => e.toString() == fontFamilyString);
     } catch (e) {
       throw GetFontFamilyException(e.toString());
     }
@@ -151,10 +175,12 @@ class LocalStorageUserPreferencesClient implements UserPreferencesClient {
   @override
   Future<void> setLanguage(UserPreferenceLanguage language) async {
     try {
-      final success = await _sharedPreferences.setString(_languageKey, language.toString());
+      final success =
+          await _sharedPreferences.setString(_languageKey, language.toString());
       if (!success) throw SetLanguageException('Failed to set language');
       _updateStreamController(
-        (await _userPreferencesStreamController.first).copyWith(language: language),
+        (await _userPreferencesStreamController.first)
+            .copyWith(language: language),
       );
     } catch (e) {
       throw SetLanguageException(e.toString());
@@ -165,8 +191,10 @@ class LocalStorageUserPreferencesClient implements UserPreferencesClient {
   Future<UserPreferenceLanguage> getLanguage() async {
     try {
       final languageString = _sharedPreferences.getString(_languageKey);
-      if (languageString == null) throw GetLanguageException('Failed to get language');
-      return UserPreferenceLanguage.values.firstWhere((e) => e.toString() == languageString);
+      if (languageString == null)
+        throw GetLanguageException('Failed to get language');
+      return UserPreferenceLanguage.values
+          .firstWhere((e) => e.toString() == languageString);
     } catch (e) {
       throw GetLanguageException(e.toString());
     }

@@ -58,23 +58,23 @@ class UserPreferencesRepository {
 
   /// Sets the title font size.
   ///
-  /// Throws [SetTitleFontSizeException] if the title font size cannot be set.
+  /// Throws [SetAppFontSizeException] if the title font size cannot be set.
   Future<void> setTitleFontSize(UserPreferenceFontSize fontSize) async {
     try {
-      await _client.setTitleFontSize(fontSize);
+      await _client.setFontSize(fontSize);
     } catch (e) {
-      throw SetTitleFontSizeException('Failed to set title font size: $e');
+      throw SetAppFontSizeException('Failed to set title font size: $e');
     }
   }
 
   /// Gets the current title font size.
   ///
-  /// Throws [GetTitleFontSizeException] if the title font size cannot be retrieved.
+  /// Throws [GetAppFontSizeException] if the title font size cannot be retrieved.
   Future<UserPreferenceFontSize> getTitleFontSize() async {
     try {
-      return await _client.getTitleFontSize();
+      return await _client.getFontSize();
     } catch (e) {
-      throw GetTitleFontSizeException('Failed to get title font size: $e');
+      throw GetAppFontSizeException('Failed to get title font size: $e');
     }
   }
 

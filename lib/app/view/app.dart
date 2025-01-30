@@ -56,7 +56,7 @@ class _AppView extends StatelessWidget {
         return MaterialApp(
           debugShowCheckedModeBanner: false,
           title: 'TaskMaster',
-          theme: FlexThemeData.light(scheme: flexScheme),
+          theme: FlexThemeData.light(scheme: flexScheme).copyWith(),
           darkTheme: FlexThemeData.dark(scheme: flexScheme),
           themeMode: themeMode,
           home: const HomePage(),
@@ -100,7 +100,6 @@ extension FlexSchemeX on FlexScheme {
   static FlexScheme fromUserPreference(
     UserPreferenceAccentColor accentColor,
   ) {
-    print("WORKING 2: $accentColor");
     switch (accentColor) {
       case UserPreferenceAccentColor.blue:
         return FlexScheme.blue;
