@@ -121,7 +121,7 @@ class LocalStorageUserPreferencesClient implements UserPreferencesClient {
   }
 
   @override
-  Future<void> setFontFamily(UserPreferenceGoogleFontsFamily fontFamily) async {
+  Future<void> setFontFamily(UserPreferenceFontFamily fontFamily) async {
     try {
       final success = await _sharedPreferences.setString(
           _fontFamilyKey, fontFamily.toString());
@@ -136,13 +136,13 @@ class LocalStorageUserPreferencesClient implements UserPreferencesClient {
   }
 
   @override
-  Future<UserPreferenceGoogleFontsFamily> getFontFamily() async {
+  Future<UserPreferenceFontFamily> getFontFamily() async {
     try {
       final fontFamilyString = _sharedPreferences.getString(_fontFamilyKey);
       if (fontFamilyString == null) {
         throw GetFontFamilyException('Failed to get font family');
       }
-      return UserPreferenceGoogleFontsFamily.values
+      return UserPreferenceFontFamily.values
           .firstWhere((e) => e.toString() == fontFamilyString);
     } catch (e) {
       throw GetFontFamilyException(e.toString());

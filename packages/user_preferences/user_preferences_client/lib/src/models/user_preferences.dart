@@ -9,7 +9,7 @@ class UserPreferences extends Equatable {
   final UserPreferenceThemeMode themeMode;
   final UserPreferenceAccentColor themeAccentColor;
   final UserPreferenceFontSize fontSize;
-  final UserPreferenceGoogleFontsFamily fontFamily;
+  final UserPreferenceFontFamily fontFamily;
   final UserPreferenceLanguage language;
 
   UserPreferences({
@@ -23,17 +23,17 @@ class UserPreferences extends Equatable {
   UserPreferences.defaults()
       : themeMode = UserPreferenceThemeMode.system,
         themeAccentColor = UserPreferenceAccentColor.grey,
-        fontSize = UserPreferenceFontSize.mediumSize,
-        fontFamily = UserPreferenceGoogleFontsFamily.roboto,
+        fontSize = UserPreferenceFontSize.defaultSize,
+        fontFamily = UserPreferenceFontFamily.ubuntu,
         language = UserPreferenceLanguage.english;
 
   /// Resets all preferences to their default values.
   UserPreferences resetToDefaults() {
     return UserPreferences(
       themeMode: UserPreferenceThemeMode.system,
-      themeAccentColor: UserPreferenceAccentColor.blue,
-      fontSize: UserPreferenceFontSize.mediumSize,
-      fontFamily: UserPreferenceGoogleFontsFamily.roboto,
+      themeAccentColor: UserPreferenceAccentColor.grey,
+      fontSize: UserPreferenceFontSize.defaultSize,
+      fontFamily: UserPreferenceFontFamily.ubuntu,
       language: UserPreferenceLanguage.english,
     );
   }
@@ -43,7 +43,7 @@ class UserPreferences extends Equatable {
     UserPreferenceThemeMode? themeMode,
     UserPreferenceAccentColor? themeAccentColor,
     UserPreferenceFontSize? fontSize,
-    UserPreferenceGoogleFontsFamily? fontFamily,
+    UserPreferenceFontFamily? fontFamily,
     UserPreferenceLanguage? language,
   }) {
     return UserPreferences(

@@ -6,7 +6,7 @@ class FontSettingsState extends Equatable {
   final UserPreferenceFontSize? fontSize;
 
   /// The font family.
-  final UserPreferenceGoogleFontsFamily? fontFamily;
+  final UserPreferenceFontFamily? fontFamily;
 
   /// Indicates whether the state is currently loading.
   final bool isLoading;
@@ -29,7 +29,7 @@ class FontSettingsState extends Equatable {
   /// Any parameter that is not provided will default to the current value.
   FontSettingsState copyWith({
     UserPreferenceFontSize? fontSize,
-    UserPreferenceGoogleFontsFamily? fontFamily,
+    UserPreferenceFontFamily? fontFamily,
     bool? isLoading,
     bool? hasError,
   }) {

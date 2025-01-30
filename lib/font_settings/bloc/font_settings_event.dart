@@ -24,7 +24,7 @@ final class UpdateFontSize extends FontSettingsEvent {
 
 /// Event to update the font family.
 final class UpdateFontFamily extends FontSettingsEvent {
-  final UserPreferenceGoogleFontsFamily fontFamily;
+  final UserPreferenceFontFamily fontFamily;
 
   /// Creates an [UpdateFontFamily] event with the given [fontFamily].
   const UpdateFontFamily(this.fontFamily);

@@ -33,11 +33,11 @@ abstract class UserPreferencesClient {
   /// Sets the font family.
   /// [fontFamily] The new font family to be set.
   /// Throws [SetFontFamilyException] if the font family cannot be set.
-  Future<void> setFontFamily(UserPreferenceGoogleFontsFamily fontFamily);
+  Future<void> setFontFamily(UserPreferenceFontFamily fontFamily);
 
   /// Gets the current font family.
   /// Throws [GetFontFamilyException] if the font family cannot be retrieved.
-  Future<UserPreferenceGoogleFontsFamily> getFontFamily();
+  Future<UserPreferenceFontFamily> getFontFamily();
 
   /// Sets the language.
   /// [language] The new language to be set (English, Arabic).
@@ -79,7 +79,7 @@ enum UserPreferenceFontSize {
 }
 
 /// Enum representing different font families from Google Fonts.
-enum UserPreferenceGoogleFontsFamily {
+enum UserPreferenceFontFamily {
   roboto,
   openSans,
   lato,

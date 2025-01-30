@@ -13,8 +13,8 @@ UserPreferences _$UserPreferencesFromJson(Map<String, dynamic> json) =>
       themeAccentColor: $enumDecode(
           _$UserPreferenceAccentColorEnumMap, json['themeAccentColor']),
       fontSize: $enumDecode(_$UserPreferenceFontSizeEnumMap, json['fontSize']),
-      fontFamily: $enumDecode(
-          _$UserPreferenceGoogleFontsFamilyEnumMap, json['fontFamily']),
+      fontFamily:
+          $enumDecode(_$UserPreferenceFontFamilyEnumMap, json['fontFamily']),
       language: $enumDecode(_$UserPreferenceLanguageEnumMap, json['language']),
     );
 
@@ -24,8 +24,7 @@ Map<String, dynamic> _$UserPreferencesToJson(UserPreferences instance) =>
       'themeAccentColor':
           _$UserPreferenceAccentColorEnumMap[instance.themeAccentColor]!,
       'fontSize': _$UserPreferenceFontSizeEnumMap[instance.fontSize]!,
-      'fontFamily':
-          _$UserPreferenceGoogleFontsFamilyEnumMap[instance.fontFamily]!,
+      'fontFamily': _$UserPreferenceFontFamilyEnumMap[instance.fontFamily]!,
       'language': _$UserPreferenceLanguageEnumMap[instance.language]!,
     };
 
@@ -47,17 +46,17 @@ const _$UserPreferenceFontSizeEnumMap = {
   UserPreferenceFontSize.largeSize: 'largeSize',
 };
 
-const _$UserPreferenceGoogleFontsFamilyEnumMap = {
-  UserPreferenceGoogleFontsFamily.roboto: 'roboto',
-  UserPreferenceGoogleFontsFamily.openSans: 'openSans',
-  UserPreferenceGoogleFontsFamily.lato: 'lato',
-  UserPreferenceGoogleFontsFamily.raleway: 'raleway',
-  UserPreferenceGoogleFontsFamily.montserrat: 'montserrat',
-  UserPreferenceGoogleFontsFamily.merriweather: 'merriweather',
-  UserPreferenceGoogleFontsFamily.nunito: 'nunito',
-  UserPreferenceGoogleFontsFamily.playfairDisplay: 'playfairDisplay',
-  UserPreferenceGoogleFontsFamily.sourceSansPro: 'sourceSansPro',
-  UserPreferenceGoogleFontsFamily.ubuntu: 'ubuntu',
+const _$UserPreferenceFontFamilyEnumMap = {
+  UserPreferenceFontFamily.roboto: 'roboto',
+  UserPreferenceFontFamily.openSans: 'openSans',
+  UserPreferenceFontFamily.lato: 'lato',
+  UserPreferenceFontFamily.raleway: 'raleway',
+  UserPreferenceFontFamily.montserrat: 'montserrat',
+  UserPreferenceFontFamily.merriweather: 'merriweather',
+  UserPreferenceFontFamily.nunito: 'nunito',
+  UserPreferenceFontFamily.playfairDisplay: 'playfairDisplay',
+  UserPreferenceFontFamily.sourceSansPro: 'sourceSansPro',
+  UserPreferenceFontFamily.ubuntu: 'ubuntu',
 };
 
 const _$UserPreferenceLanguageEnumMap = {

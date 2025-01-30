@@ -81,12 +81,12 @@ class _FontSettingsView extends StatelessWidget {
                           color: textColor,
                         ),
                       ),
-                      DropdownButton<UserPreferenceGoogleFontsFamily>(
+                      DropdownButton<UserPreferenceFontFamily>(
                         value: state.fontFamily,
                         hint: Text('Select Font Family',
                             style: TextStyle(color: textColor)),
-                        items: UserPreferenceGoogleFontsFamily.values
-                            .map((fontFamily) {
+                        items:
+                            UserPreferenceFontFamily.values.map((fontFamily) {
                           return DropdownMenuItem(
                             value: fontFamily,
                             child: Text(fontFamily.toString().split('.').last,

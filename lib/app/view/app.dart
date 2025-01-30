@@ -2,6 +2,7 @@ import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:taskmaster/app/bloc/app_bloc.dart';
 import 'package:taskmaster/home/view/home_page.dart';
 import 'package:todos_repository/todos_repository.dart';
@@ -56,11 +57,21 @@ class _AppView extends StatelessWidget {
           userPreferences.fontSize,
         );
 
+        final textTheme =
+            UserPreferenceFontFamilyX.toGoogleFontsTextTheme(
+          userPreferences.fontFamily,
+          Theme.of(context).textTheme,
+        );
+
         return MaterialApp(
           debugShowCheckedModeBanner: false,
           title: 'TaskMaster',
-          theme: FlexThemeData.light(scheme: flexScheme).copyWith(),
-          darkTheme: FlexThemeData.dark(scheme: flexScheme),
+          theme: FlexThemeData.light(scheme: flexScheme).copyWith(
+            textTheme: textTheme,
+          ),
+          darkTheme: FlexThemeData.dark(scheme: flexScheme).copyWith(
+            textTheme: textTheme,
+          ),
           themeMode: themeMode,
           home: const HomePage(),
           localizationsDelegates: const [
@@ -121,6 +132,36 @@ extension UserPreferenceFontSizeX on UserPreferenceFontSize {
         return 1.1;
       case UserPreferenceFontSize.largeSize:
         return 1.2;
+    }
+  }
+}
+
+extension UserPreferenceFontFamilyX on UserPreferenceFontFamily {
+  static TextTheme toGoogleFontsTextTheme(
+    UserPreferenceFontFamily fontFamily,
+    TextTheme baseTextTheme,
+  ) {
+    switch (fontFamily) {
+      case UserPreferenceFontFamily.roboto:
+        return GoogleFonts.robotoTextTheme(baseTextTheme);
+      case UserPreferenceFontFamily.openSans:
+        return GoogleFonts.openSansTextTheme(baseTextTheme);
+      case UserPreferenceFontFamily.lato:
+        return GoogleFonts.latoTextTheme(baseTextTheme);
+      case UserPreferenceFontFamily.raleway:
+        return GoogleFonts.ralewayTextTheme(baseTextTheme);
+      case UserPreferenceFontFamily.montserrat:
+        return GoogleFonts.montserratTextTheme(baseTextTheme);
+      case UserPreferenceFontFamily.merriweather:
+        return GoogleFonts.merriweatherTextTheme(baseTextTheme);
+      case UserPreferenceFontFamily.nunito:
+        return GoogleFonts.nunitoTextTheme(baseTextTheme);
+      case UserPreferenceFontFamily.playfairDisplay:
+        return GoogleFonts.playfairDisplayTextTheme(baseTextTheme);
+      case UserPreferenceFontFamily.sourceSansPro:
+        return GoogleFonts.sourceSans3TextTheme(baseTextTheme);
+      case UserPreferenceFontFamily.ubuntu:
+        return GoogleFonts.ubuntuTextTheme(baseTextTheme);
     }
   }
 }

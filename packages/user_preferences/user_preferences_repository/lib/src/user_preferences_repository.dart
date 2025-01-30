@@ -81,7 +81,7 @@ class UserPreferencesRepository {
   /// Sets the font family.
   ///
   /// Throws [SetFontFamilyException] if the font family cannot be set.
-  Future<void> setFontFamily(UserPreferenceGoogleFontsFamily fontFamily) async {
+  Future<void> setFontFamily(UserPreferenceFontFamily fontFamily) async {
     try {
       await _client.setFontFamily(fontFamily);
     } catch (e) {
@@ -92,7 +92,7 @@ class UserPreferencesRepository {
   /// Gets the current font family.
   ///
   /// Throws [GetFontFamilyException] if the font family cannot be retrieved.
-  Future<UserPreferenceGoogleFontsFamily> getFontFamily() async {
+  Future<UserPreferenceFontFamily> getFontFamily() async {
     try {
       return await _client.getFontFamily();
     } catch (e) {
