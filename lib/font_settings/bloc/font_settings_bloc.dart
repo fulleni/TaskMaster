@@ -15,8 +15,7 @@ class FontSettingsBloc extends Bloc<FontSettingsEvent, FontSettingsState> {
   })  : _userPreferencesRepository = userPreferencesRepository,
         super(const FontSettingsState()) {
     on<LoadFontSettings>(_onLoadFontSettings);
-    on<UpdateTitleFontSize>(_onUpdateTitleFontSize);
-    on<UpdateBodyFontSize>(_onUpdateBodyFontSize);
+    on<UpdateFontSize>(_onUpdateFontSize);
     on<UpdateFontFamily>(_onUpdateFontFamily);
   }
 
@@ -27,8 +26,7 @@ class FontSettingsBloc extends Bloc<FontSettingsEvent, FontSettingsState> {
       await emit.forEach<UserPreferences>(
         _userPreferencesRepository.getAllPreferences(),
         onData: (preferences) => state.copyWith(
-          titleFontSize: preferences.titleFontSize,
-          bodyFontSize: preferences.bodyFontSize,
+          fontSize: preferences.fontSize,
           fontFamily: preferences.fontFamily,
           isLoading: false,
         ),
@@ -39,23 +37,12 @@ class FontSettingsBloc extends Bloc<FontSettingsEvent, FontSettingsState> {
     }
   }
 
-  Future<void> _onUpdateTitleFontSize(
-      UpdateTitleFontSize event, Emitter<FontSettingsState> emit) async {
+  Future<void> _onUpdateFontSize(
+      UpdateFontSize event, Emitter<FontSettingsState> emit) async {
     try {
-      await _userPreferencesRepository.setTitleFontSize(event.fontSize);
-      final titleFontSize = await _userPreferencesRepository.getTitleFontSize();
-      emit(state.copyWith(titleFontSize: titleFontSize));
-    } catch (_) {
-      emit(state.copyWith(hasError: true));
-    }
-  }
-
-  Future<void> _onUpdateBodyFontSize(
-      UpdateBodyFontSize event, Emitter<FontSettingsState> emit) async {
-    try {
-      await _userPreferencesRepository.setBodyFontSize(event.fontSize);
-      final bodyFontSize = await _userPreferencesRepository.getBodyFontSize();
-      emit(state.copyWith(bodyFontSize: bodyFontSize));
+      await _userPreferencesRepository.setFontSize(event.fontSize);
+      final fontSize = await _userPreferencesRepository.getFontSize();
+      emit(state.copyWith(fontSize: fontSize));
     } catch (_) {
       emit(state.copyWith(hasError: true));
     }

@@ -45,14 +45,14 @@ class _FontSettingsView extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        'Title Font Size',
+                        'Font Size',
                         style: TextStyle(
                           color: textColor,
                         ),
                       ),
                       DropdownButton<UserPreferenceFontSize>(
-                        value: state.titleFontSize,
-                        hint: Text('Select Title Font Size',
+                        value: state.fontSize,
+                        hint: Text('Select Font Size',
                             style: TextStyle(color: textColor)),
                         items: UserPreferenceFontSize.values.map((fontSize) {
                           return DropdownMenuItem(
@@ -65,38 +65,7 @@ class _FontSettingsView extends StatelessWidget {
                           if (fontSize != null) {
                             context
                                 .read<FontSettingsBloc>()
-                                .add(UpdateTitleFontSize(fontSize));
-                          }
-                        },
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 16),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'Body Font Size',
-                        style: TextStyle(
-                          color: textColor,
-                        ),
-                      ),
-                      DropdownButton<UserPreferenceFontSize>(
-                        value: state.bodyFontSize,
-                        hint: Text('Select Body Font Size',
-                            style: TextStyle(color: textColor)),
-                        items: UserPreferenceFontSize.values.map((fontSize) {
-                          return DropdownMenuItem(
-                            value: fontSize,
-                            child: Text(fontSize.toString().split('.').last,
-                                style: TextStyle(color: textColor)),
-                          );
-                        }).toList(),
-                        onChanged: (fontSize) {
-                          if (fontSize != null) {
-                            context
-                                .read<FontSettingsBloc>()
-                                .add(UpdateBodyFontSize(fontSize));
+                                .add(UpdateFontSize(fontSize));
                           }
                         },
                       ),

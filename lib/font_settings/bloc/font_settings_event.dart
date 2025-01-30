@@ -11,23 +11,12 @@ sealed class FontSettingsEvent extends Equatable {
 /// Event to load the current font settings.
 final class LoadFontSettings extends FontSettingsEvent {}
 
-/// Event to update the title font size.
-final class UpdateTitleFontSize extends FontSettingsEvent {
+/// Event to update the font size.
+final class UpdateFontSize extends FontSettingsEvent {
   final UserPreferenceFontSize fontSize;
 
-  /// Creates an [UpdateTitleFontSize] event with the given [fontSize].
-  const UpdateTitleFontSize(this.fontSize);
-
-  @override
-  List<Object> get props => [fontSize];
-}
-
-/// Event to update the body font size.
-final class UpdateBodyFontSize extends FontSettingsEvent {
-  final UserPreferenceFontSize fontSize;
-
-  /// Creates an [UpdateBodyFontSize] event with the given [fontSize].
-  const UpdateBodyFontSize(this.fontSize);
+  /// Creates an [UpdateFontSize] event with the given [fontSize].
+  const UpdateFontSize(this.fontSize);
 
   @override
   List<Object> get props => [fontSize];

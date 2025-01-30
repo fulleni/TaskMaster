@@ -2,11 +2,8 @@ part of 'font_settings_bloc.dart';
 
 /// Represents the state of font settings in the application.
 class FontSettingsState extends Equatable {
-  /// The font size for titles.
-  final UserPreferenceFontSize? titleFontSize;
-
-  /// The font size for body text.
-  final UserPreferenceFontSize? bodyFontSize;
+  /// The font size .
+  final UserPreferenceFontSize? fontSize;
 
   /// The font family.
   final UserPreferenceGoogleFontsFamily? fontFamily;
@@ -21,8 +18,7 @@ class FontSettingsState extends Equatable {
   ///
   /// All parameters are optional and default to `null` or `false`.
   const FontSettingsState({
-    this.titleFontSize,
-    this.bodyFontSize,
+    this.fontSize,
     this.fontFamily,
     this.isLoading = false,
     this.hasError = false,
@@ -32,15 +28,13 @@ class FontSettingsState extends Equatable {
   ///
   /// Any parameter that is not provided will default to the current value.
   FontSettingsState copyWith({
-    UserPreferenceFontSize? titleFontSize,
-    UserPreferenceFontSize? bodyFontSize,
+    UserPreferenceFontSize? fontSize,
     UserPreferenceGoogleFontsFamily? fontFamily,
     bool? isLoading,
     bool? hasError,
   }) {
     return FontSettingsState(
-      titleFontSize: titleFontSize ?? this.titleFontSize,
-      bodyFontSize: bodyFontSize ?? this.bodyFontSize,
+      fontSize: fontSize ?? this.fontSize,
       fontFamily: fontFamily ?? this.fontFamily,
       isLoading: isLoading ?? this.isLoading,
       hasError: hasError ?? this.hasError,
@@ -49,8 +43,7 @@ class FontSettingsState extends Equatable {
 
   @override
   List<Object?> get props => [
-        titleFontSize,
-        bodyFontSize,
+        fontSize,
         fontFamily,
         isLoading,
         hasError,

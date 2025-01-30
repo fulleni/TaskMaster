@@ -47,10 +47,13 @@ class _AppView extends StatelessWidget {
       builder: (context, state) {
         final userPreferences =
             state.userPreferences ?? UserPreferences.defaults();
-        final themeMode =
-            ThemeModeExtension.fromUserPreference(userPreferences.themeMode);
-        final flexScheme = FlexSchemeX.fromUserPreference(
+        final themeMode = UserPreferenceThemeModeX.toFlutterThemeMode(
+            userPreferences.themeMode);
+        final flexScheme = UserPreferenceAccentColorX.toFlexScheme(
           userPreferences.themeAccentColor,
+        );
+        final fontScale = UserPreferenceFontSizeX.toFontSize(
+          userPreferences.fontSize,
         );
 
         return MaterialApp(
@@ -72,7 +75,7 @@ class _AppView extends StatelessWidget {
           builder: (context, child) {
             return MediaQuery(
               data: MediaQuery.of(context).copyWith(
-                textScaler: TextScaler.linear(1.0),
+                textScaler: TextScaler.linear(fontScale),
               ),
               child: child!,
             );
@@ -83,8 +86,8 @@ class _AppView extends StatelessWidget {
   }
 }
 
-extension ThemeModeExtension on ThemeMode {
-  static ThemeMode fromUserPreference(UserPreferenceThemeMode userPreference) {
+extension UserPreferenceThemeModeX on UserPreferenceThemeMode {
+  static ThemeMode toFlutterThemeMode(UserPreferenceThemeMode userPreference) {
     switch (userPreference) {
       case UserPreferenceThemeMode.light:
         return ThemeMode.light;
@@ -96,17 +99,28 @@ extension ThemeModeExtension on ThemeMode {
   }
 }
 
-extension FlexSchemeX on FlexScheme {
-  static FlexScheme fromUserPreference(
-    UserPreferenceAccentColor accentColor,
-  ) {
+extension UserPreferenceAccentColorX on UserPreferenceAccentColor {
+  static FlexScheme toFlexScheme(UserPreferenceAccentColor accentColor) {
     switch (accentColor) {
       case UserPreferenceAccentColor.blue:
         return FlexScheme.blue;
       case UserPreferenceAccentColor.grey:
-        return FlexScheme.greyLaw;
+        return FlexScheme.greys;
       case UserPreferenceAccentColor.red:
-        return FlexScheme.mandyRed;
+        return FlexScheme.red;
+    }
+  }
+}
+
+extension UserPreferenceFontSizeX on UserPreferenceFontSize {
+  static double toFontSize(UserPreferenceFontSize fontSize) {
+    switch (fontSize) {
+      case UserPreferenceFontSize.defaultSize:
+        return 1.0;
+      case UserPreferenceFontSize.mediumSize:
+        return 1.1;
+      case UserPreferenceFontSize.largeSize:
+        return 1.2;
     }
   }
 }
