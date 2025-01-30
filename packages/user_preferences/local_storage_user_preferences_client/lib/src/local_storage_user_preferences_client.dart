@@ -95,7 +95,7 @@ class LocalStorageUserPreferencesClient implements UserPreferencesClient {
       final success = await _sharedPreferences.setString(
           _titleFontSizeKey, fontSize.toString());
       if (!success) {
-        throw SetAppFontSizeException('Failed to set title font size');
+        throw SetAppFontSizeException('Failed to set app font size');
       }
       _updateStreamController(
         (await _userPreferencesStreamController.first)
@@ -111,7 +111,7 @@ class LocalStorageUserPreferencesClient implements UserPreferencesClient {
     try {
       final fontSizeString = _sharedPreferences.getString(_titleFontSizeKey);
       if (fontSizeString == null) {
-        throw GetAppFontSizeException('Failed to get title font size');
+        throw GetAppFontSizeException('Failed to get app font size');
       }
       return UserPreferenceFontSize.values
           .firstWhere((e) => e.toString() == fontSizeString);

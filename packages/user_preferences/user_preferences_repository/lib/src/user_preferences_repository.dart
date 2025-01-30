@@ -56,47 +56,25 @@ class UserPreferencesRepository {
     }
   }
 
-  /// Sets the title font size.
+  /// Sets the app font size.
   ///
   /// Throws [SetAppFontSizeException] if the title font size cannot be set.
-  Future<void> setTitleFontSize(UserPreferenceFontSize fontSize) async {
+  Future<void> setFontSize(UserPreferenceFontSize fontSize) async {
     try {
       await _client.setFontSize(fontSize);
     } catch (e) {
-      throw SetAppFontSizeException('Failed to set title font size: $e');
+      throw SetAppFontSizeException('Failed to set app font size: $e');
     }
   }
 
-  /// Gets the current title font size.
+  /// Gets the current app font size.
   ///
   /// Throws [GetAppFontSizeException] if the title font size cannot be retrieved.
-  Future<UserPreferenceFontSize> getTitleFontSize() async {
+  Future<UserPreferenceFontSize> getFontSize() async {
     try {
       return await _client.getFontSize();
     } catch (e) {
-      throw GetAppFontSizeException('Failed to get title font size: $e');
-    }
-  }
-
-  /// Sets the body font size.
-  ///
-  /// Throws [SetBodyFontSizeException] if the body font size cannot be set.
-  Future<void> setBodyFontSize(UserPreferenceFontSize fontSize) async {
-    try {
-      await _client.setBodyFontSize(fontSize);
-    } catch (e) {
-      throw SetBodyFontSizeException('Failed to set body font size: $e');
-    }
-  }
-
-  /// Gets the current body font size.
-  ///
-  /// Throws [GetBodyFontSizeException] if the body font size cannot be retrieved.
-  Future<UserPreferenceFontSize> getBodyFontSize() async {
-    try {
-      return await _client.getBodyFontSize();
-    } catch (e) {
-      throw GetBodyFontSizeException('Failed to get body font size: $e');
+      throw GetAppFontSizeException('Failed to get app font size: $e');
     }
   }
 
