@@ -23,14 +23,20 @@ class LanguageSettingBloc
   ) async {
     emit(state.copyWith(isLoading: true));
     try {
-      final language = await _userPreferencesRepository.getLanguage();
+      final languageEnum = await _userPreferencesRepository.getLanguage();
+
+      print(languageEnum);
+
+      final languasgeStringified = languageEnum.toLanguage;
+      print(languasgeStringified);
+
       emit(state.copyWith(
-        languageCode: language.toLanguageCode,
+        language: languageEnum.toLanguage,
         isLoading: false,
       ));
     } catch (e) {
       emit(state.copyWith(
-        error: e.toString(),
+        error: 'e.toString()',
         isLoading: false,
       ));
     }
@@ -42,15 +48,9 @@ class LanguageSettingBloc
   ) async {
     emit(state.copyWith(isLoading: true));
     try {
-      await emit.forEach<UserPreferences>(
-        _userPreferencesRepository.getAllPreferences(),
-        onData: (preferences) => state.copyWith(
-          languageCode: preferences.language.toLanguageCode,
-          isLoading: false,
-        ),
-        onError: (e, __) =>
-            state.copyWith(isLoading: false, error: e.toString()),
-      );
+      await _userPreferencesRepository
+          .setLanguage(event.language.toUserPreferenceLanguage);
+      emit(state.copyWith(language: event.language, isLoading: false));
     } catch (e) {
       emit(state.copyWith(
         error: e.toString(),
@@ -63,9 +63,9 @@ class LanguageSettingBloc
 extension StringX on String {
   UserPreferenceLanguage get toUserPreferenceLanguage {
     switch (this) {
-      case 'en':
+      case 'english':
         return UserPreferenceLanguage.english;
-      case 'ar':
+      case 'arabic':
         return UserPreferenceLanguage.arabic;
       default:
         return UserPreferenceLanguage.english;
@@ -74,12 +74,12 @@ extension StringX on String {
 }
 
 extension UserPreferenceLanguageX on UserPreferenceLanguage {
-  String get toLanguageCode {
+  String get toLanguage {
     switch (this) {
       case UserPreferenceLanguage.english:
-        return 'en';
+        return 'english';
       case UserPreferenceLanguage.arabic:
-        return 'ar';
+        return 'arabic';
     }
   }
 }

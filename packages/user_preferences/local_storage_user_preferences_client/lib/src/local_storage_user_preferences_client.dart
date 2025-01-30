@@ -91,8 +91,8 @@ class LocalStorageUserPreferencesClient implements UserPreferencesClient {
   @override
   Future<void> setFontSize(UserPreferenceFontSize fontSize) async {
     try {
-      final success = await _sharedPreferences.setString(
-          _fontSizeKey, fontSize.toString());
+      final success =
+          await _sharedPreferences.setString(_fontSizeKey, fontSize.toString());
       if (!success) {
         throw SetAppFontSizeException('Failed to set app font size');
       }

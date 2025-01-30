@@ -10,10 +10,10 @@ sealed class LanguageSettingEvent extends Equatable {
 class LoadLanguageSettings extends LanguageSettingEvent {}
 
 class UpdateLanguage extends LanguageSettingEvent {
-  final String languageCode;
+  final String language;
 
-  const UpdateLanguage(this.languageCode);
+  const UpdateLanguage(this.language);
 
   @override
-  List<Object> get props => [languageCode];
+  List<Object> get props => [language];
 }

@@ -39,8 +39,8 @@ class _LanguageSettingView extends StatelessWidget {
             children: [
               RadioListTile<String>(
                 title: Text(l10n.englishLanguage),
-                value: 'en',
-                groupValue: state.languageCode,
+                value: 'english',
+                groupValue: state.language,
                 onChanged: (value) {
                   context
                       .read<LanguageSettingBloc>()
@@ -49,8 +49,8 @@ class _LanguageSettingView extends StatelessWidget {
               ),
               RadioListTile<String>(
                 title: Text(l10n.arabicLanguage),
-                value: 'ar',
-                groupValue: state.languageCode,
+                value: 'arabic',
+                groupValue: state.language,
                 onChanged: (value) {
                   context
                       .read<LanguageSettingBloc>()
