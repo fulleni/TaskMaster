@@ -8,16 +8,14 @@ part 'user_preferences.g.dart';
 class UserPreferences extends Equatable {
   final UserPreferenceThemeMode themeMode;
   final UserPreferenceAccentColor themeAccentColor;
-  final UserPreferenceFontSize titleFontSize;
-  final UserPreferenceFontSize bodyFontSize;
+  final UserPreferenceFontSize fontSize;
   final UserPreferenceGoogleFontsFamily fontFamily;
   final UserPreferenceLanguage language;
 
   UserPreferences({
     required this.themeMode,
     required this.themeAccentColor,
-    required this.titleFontSize,
-    required this.bodyFontSize,
+    required this.fontSize,
     required this.fontFamily,
     required this.language,
   });
@@ -25,8 +23,7 @@ class UserPreferences extends Equatable {
   UserPreferences.defaults()
       : themeMode = UserPreferenceThemeMode.system,
         themeAccentColor = UserPreferenceAccentColor.grey,
-        titleFontSize = UserPreferenceFontSize.mediumSize,
-        bodyFontSize = UserPreferenceFontSize.mediumSize,
+        fontSize = UserPreferenceFontSize.mediumSize,
         fontFamily = UserPreferenceGoogleFontsFamily.roboto,
         language = UserPreferenceLanguage.english;
 
@@ -35,8 +32,7 @@ class UserPreferences extends Equatable {
     return UserPreferences(
       themeMode: UserPreferenceThemeMode.system,
       themeAccentColor: UserPreferenceAccentColor.blue,
-      titleFontSize: UserPreferenceFontSize.mediumSize,
-      bodyFontSize: UserPreferenceFontSize.mediumSize,
+      fontSize: UserPreferenceFontSize.mediumSize,
       fontFamily: UserPreferenceGoogleFontsFamily.roboto,
       language: UserPreferenceLanguage.english,
     );
@@ -46,16 +42,14 @@ class UserPreferences extends Equatable {
   UserPreferences copyWith({
     UserPreferenceThemeMode? themeMode,
     UserPreferenceAccentColor? themeAccentColor,
-    UserPreferenceFontSize? titleFontSize,
-    UserPreferenceFontSize? bodyFontSize,
+    UserPreferenceFontSize? fontSize,
     UserPreferenceGoogleFontsFamily? fontFamily,
     UserPreferenceLanguage? language,
   }) {
     return UserPreferences(
       themeMode: themeMode ?? this.themeMode,
       themeAccentColor: themeAccentColor ?? this.themeAccentColor,
-      titleFontSize: titleFontSize ?? this.titleFontSize,
-      bodyFontSize: bodyFontSize ?? this.bodyFontSize,
+      fontSize: fontSize ?? this.fontSize,
       fontFamily: fontFamily ?? this.fontFamily,
       language: language ?? this.language,
     );
@@ -70,8 +64,7 @@ class UserPreferences extends Equatable {
   List<Object?> get props => [
         themeMode,
         themeAccentColor,
-        titleFontSize,
-        bodyFontSize,
+        fontSize,
         fontFamily,
         language,
       ];

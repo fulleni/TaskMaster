@@ -12,10 +12,7 @@ UserPreferences _$UserPreferencesFromJson(Map<String, dynamic> json) =>
           $enumDecode(_$UserPreferenceThemeModeEnumMap, json['themeMode']),
       themeAccentColor: $enumDecode(
           _$UserPreferenceAccentColorEnumMap, json['themeAccentColor']),
-      titleFontSize:
-          $enumDecode(_$UserPreferenceFontSizeEnumMap, json['titleFontSize']),
-      bodyFontSize:
-          $enumDecode(_$UserPreferenceFontSizeEnumMap, json['bodyFontSize']),
+      fontSize: $enumDecode(_$UserPreferenceFontSizeEnumMap, json['fontSize']),
       fontFamily: $enumDecode(
           _$UserPreferenceGoogleFontsFamilyEnumMap, json['fontFamily']),
       language: $enumDecode(_$UserPreferenceLanguageEnumMap, json['language']),
@@ -26,8 +23,7 @@ Map<String, dynamic> _$UserPreferencesToJson(UserPreferences instance) =>
       'themeMode': _$UserPreferenceThemeModeEnumMap[instance.themeMode]!,
       'themeAccentColor':
           _$UserPreferenceAccentColorEnumMap[instance.themeAccentColor]!,
-      'titleFontSize': _$UserPreferenceFontSizeEnumMap[instance.titleFontSize]!,
-      'bodyFontSize': _$UserPreferenceFontSizeEnumMap[instance.bodyFontSize]!,
+      'fontSize': _$UserPreferenceFontSizeEnumMap[instance.fontSize]!,
       'fontFamily':
           _$UserPreferenceGoogleFontsFamilyEnumMap[instance.fontFamily]!,
       'language': _$UserPreferenceLanguageEnumMap[instance.language]!,
@@ -46,9 +42,9 @@ const _$UserPreferenceAccentColorEnumMap = {
 };
 
 const _$UserPreferenceFontSizeEnumMap = {
-  UserPreferenceFontSize.defaultSize: 'small',
-  UserPreferenceFontSize.mediumSize: 'medium',
-  UserPreferenceFontSize.largeSize: 'large',
+  UserPreferenceFontSize.defaultSize: 'defaultSize',
+  UserPreferenceFontSize.mediumSize: 'mediumSize',
+  UserPreferenceFontSize.largeSize: 'largeSize',
 };
 
 const _$UserPreferenceGoogleFontsFamilyEnumMap = {
