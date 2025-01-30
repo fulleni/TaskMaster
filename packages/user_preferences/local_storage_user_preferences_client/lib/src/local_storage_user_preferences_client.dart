@@ -48,8 +48,9 @@ class LocalStorageUserPreferencesClient implements UserPreferencesClient {
   Future<UserPreferenceThemeMode> getThemeMode() async {
     try {
       final themeModeString = _sharedPreferences.getString(_themeModeKey);
-      if (themeModeString == null)
+      if (themeModeString == null) {
         throw GetThemeModeException('Failed to get theme mode');
+      }
       return UserPreferenceThemeMode.values
           .firstWhere((e) => e.toString() == themeModeString);
     } catch (e) {
@@ -62,8 +63,9 @@ class LocalStorageUserPreferencesClient implements UserPreferencesClient {
     try {
       final success = await _sharedPreferences.setString(
           _themeAccentColorKey, color.toString());
-      if (!success)
+      if (!success) {
         throw SetThemeAccentColorException('Failed to set theme accent color');
+      }
       _updateStreamController(
         (await _userPreferencesStreamController.first)
             .copyWith(themeAccentColor: color),
@@ -77,8 +79,9 @@ class LocalStorageUserPreferencesClient implements UserPreferencesClient {
   Future<UserPreferenceAccentColor> getThemeAccentColor() async {
     try {
       final colorString = _sharedPreferences.getString(_themeAccentColorKey);
-      if (colorString == null)
+      if (colorString == null) {
         throw GetThemeAccentColorException('Failed to get theme accent color');
+      }
       return UserPreferenceAccentColor.values
           .firstWhere((e) => e.toString() == colorString);
     } catch (e) {
@@ -91,11 +94,12 @@ class LocalStorageUserPreferencesClient implements UserPreferencesClient {
     try {
       final success = await _sharedPreferences.setString(
           _titleFontSizeKey, fontSize.toString());
-      if (!success)
+      if (!success) {
         throw SetAppFontSizeException('Failed to set title font size');
+      }
       _updateStreamController(
         (await _userPreferencesStreamController.first)
-            .copyWith(titleFontSize: fontSize),
+            .copyWith(fontSize: fontSize),
       );
     } catch (e) {
       throw SetAppFontSizeException(e.toString());
@@ -106,41 +110,13 @@ class LocalStorageUserPreferencesClient implements UserPreferencesClient {
   Future<UserPreferenceFontSize> getFontSize() async {
     try {
       final fontSizeString = _sharedPreferences.getString(_titleFontSizeKey);
-      if (fontSizeString == null)
+      if (fontSizeString == null) {
         throw GetAppFontSizeException('Failed to get title font size');
+      }
       return UserPreferenceFontSize.values
           .firstWhere((e) => e.toString() == fontSizeString);
     } catch (e) {
       throw GetAppFontSizeException(e.toString());
-    }
-  }
-
-  @override
-  Future<void> setBodyFontSize(UserPreferenceFontSize fontSize) async {
-    try {
-      final success = await _sharedPreferences.setString(
-          _bodyFontSizeKey, fontSize.toString());
-      if (!success)
-        throw SetBodyFontSizeException('Failed to set body font size');
-      _updateStreamController(
-        (await _userPreferencesStreamController.first)
-            .copyWith(bodyFontSize: fontSize),
-      );
-    } catch (e) {
-      throw SetBodyFontSizeException(e.toString());
-    }
-  }
-
-  @override
-  Future<UserPreferenceFontSize> getBodyFontSize() async {
-    try {
-      final fontSizeString = _sharedPreferences.getString(_bodyFontSizeKey);
-      if (fontSizeString == null)
-        throw GetBodyFontSizeException('Failed to get body font size');
-      return UserPreferenceFontSize.values
-          .firstWhere((e) => e.toString() == fontSizeString);
-    } catch (e) {
-      throw GetBodyFontSizeException(e.toString());
     }
   }
 
@@ -163,8 +139,9 @@ class LocalStorageUserPreferencesClient implements UserPreferencesClient {
   Future<UserPreferenceGoogleFontsFamily> getFontFamily() async {
     try {
       final fontFamilyString = _sharedPreferences.getString(_fontFamilyKey);
-      if (fontFamilyString == null)
+      if (fontFamilyString == null) {
         throw GetFontFamilyException('Failed to get font family');
+      }
       return UserPreferenceGoogleFontsFamily.values
           .firstWhere((e) => e.toString() == fontFamilyString);
     } catch (e) {
@@ -191,8 +168,9 @@ class LocalStorageUserPreferencesClient implements UserPreferencesClient {
   Future<UserPreferenceLanguage> getLanguage() async {
     try {
       final languageString = _sharedPreferences.getString(_languageKey);
-      if (languageString == null)
+      if (languageString == null) {
         throw GetLanguageException('Failed to get language');
+      }
       return UserPreferenceLanguage.values
           .firstWhere((e) => e.toString() == languageString);
     } catch (e) {

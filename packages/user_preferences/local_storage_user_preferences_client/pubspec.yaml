@@ -1,6 +1,6 @@
 name: local_storage_user_preferences_client
 description: "A UserPreferencesClient implementation that uses the local storage."
-version: 0.1.0
+version: 0.2.0
 publish_to: none
 
 environment:
