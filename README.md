@@ -22,15 +22,15 @@ Here's a visual overview of TaskMaster's key features and screens, showcasing bo
 
 | Feature/Page | LTR | RTL |
 |---|---|---|
-| Todos Overview | [link](https://github.com/fulleni/TaskMaster/blob/main/assets/screenshots/todos_overview_ltr.png?raw=true) | [link](https://github.com/fulleni/TaskMaster/blob/main/assets/screenshots/todos_overview_rtl.png?raw=true) |
-| Add Todo | [link](https://github.com/fulleni/TaskMaster/blob/main/assets/screenshots/add_todo_ltr.png?raw=true) | [link](https://github.com/fulleni/TaskMaster/blob/main/assets/screenshots/add_todo_rtl.png?raw=true) |
-| Todos Stats | [link](https://github.com/fulleni/TaskMaster/blob/main/assets/screenshots/todos_stats_ltr.png?raw=true) | [link](https://github.com/fulleni/TaskMaster/blob/main/assets/screenshots/todos_stats_rtl.png?raw=true) |
-| Language Settings | [link](https://github.com/fulleni/TaskMaster/blob/main/assets/screenshots/language_settings_ltr.png?raw=true) | [link](https://github.com/fulleni/TaskMaster/blob/main/assets/screenshots/language_settings_rtl.png?raw=true) |
-| Theme Settings | [link](https://github.com/fulleni/TaskMaster/blob/main/assets/screenshots/theme_settings_ltr.png?raw=true) | [link](https://github.com/fulleni/TaskMaster/blob/main/assets/screenshots/theme_settings_rtl.png?raw=true) |
-| Font Settings | [link](https://github.com/fulleni/TaskMaster/blob/main/assets/screenshots/font_settings_ltr.png?raw=true) | [link](https://github.com/fulleni/TaskMaster/blob/main/assets/screenshots/font_settings_rtl.png?raw=true) |
-| Light Mode | [link](https://github.com/fulleni/TaskMaster/blob/main/assets/screenshots/light_mode_ltr.png?raw=true) | [link](https://github.com/fulleni/TaskMaster/blob/main/assets/screenshots/light_mode_rtl.png?raw=true) |
-| About Us | [link](https://github.com/fulleni/TaskMaster/blob/main/assets/screenshots/about_us_ltr.png?raw=true) | [link](https://github.com/fulleni/TaskMaster/blob/main/assets/screenshots/about_us_rtl.png?raw=true) |
-| Error | [link](https://github.com/fulleni/TaskMaster/blob/main/assets/screenshots/error_ltr.png?raw=true) | [link](https://github.com/fulleni/TaskMaster/blob/main/assets/screenshots/error_rtl.png?raw=true) |
+| Todos Overview | <a href="https://github.com/fulleni/TaskMaster/blob/main/assets/screenshots/todos_overview_ltr.png?raw=true" target="_blank">link</a> | <a href="https://github.com/fulleni/TaskMaster/blob/main/assets/screenshots/todos_overview_rtl.png?raw=true" target="_blank">link</a> |
+| Add Todo | <a href="https://github.com/fulleni/TaskMaster/blob/main/assets/screenshots/add_todo_ltr.png?raw=true" target="_blank">link</a> | <a href="https://github.com/fulleni/TaskMaster/blob/main/assets/screenshots/add_todo_rtl.png?raw=true" target="_blank">link</a> |
+| Todos Stats | <a href="https://github.com/fulleni/TaskMaster/blob/main/assets/screenshots/todos_stats_ltr.png?raw=true" target="_blank">link</a> | <a href="https://github.com/fulleni/TaskMaster/blob/main/assets/screenshots/todos_stats_rtl.png?raw=true" target="_blank">link</a> |
+| Language Settings | <a href="https://github.com/fulleni/TaskMaster/blob/main/assets/screenshots/language_settings_ltr.png?raw=true" target="_blank">link</a> | <a href="https://github.com/fulleni/TaskMaster/blob/main/assets/screenshots/language_settings_rtl.png?raw=true" target="_blank">link</a> |
+| Theme Settings | <a href="https://github.com/fulleni/TaskMaster/blob/main/assets/screenshots/theme_settings_ltr.png?raw=true" target="_blank">link</a> | <a href="https://github.com/fulleni/TaskMaster/blob/main/assets/screenshots/theme_settings_rtl.png?raw=true" target="_blank">link</a> |
+| Font Settings | <a href="https://github.com/fulleni/TaskMaster/blob/main/assets/screenshots/font_settings_ltr.png?raw=true" target="_blank">link</a> | <a href="https://github.com/fulleni/TaskMaster/blob/main/assets/screenshots/font_settings_rtl.png?raw=true" target="_blank">link</a> |
+| Light Mode | <a href="https://github.com/fulleni/TaskMaster/blob/main/assets/screenshots/light_mode_ltr.png?raw=true" target="_blank">link</a> | <a href="https://github.com/fulleni/TaskMaster/blob/main/assets/screenshots/light_mode_rtl.png?raw=true" target="_blank">link</a> |
+| About Us | <a href="https://github.com/fulleni/TaskMaster/blob/main/assets/screenshots/about_us_ltr.png?raw=true" target="_blank">link</a> | <a href="https://github.com/fulleni/TaskMaster/blob/main/assets/screenshots/about_us_rtl.png?raw=true" target="_blank">link</a> |
+| Error | <a href="https://github.com/fulleni/TaskMaster/blob/main/assets/screenshots/error_ltr.png?raw=true" target="_blank">link</a> | <a href="https://github.com/fulleni/TaskMaster/blob/main/assets/screenshots/error_rtl.png?raw=true" target="_blank">link</a> |
 
 ## 🏗️ Architecture
 
