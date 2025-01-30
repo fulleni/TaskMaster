@@ -1,7 +1,7 @@
 name: taskmaster
 description: TaskMaster is a user-friendly task management application built to help you stay organized and productive.
 publish_to: "none"
-version: 0.17.0
+version: 0.17.1
 
 environment:
   sdk: ^3.6.1

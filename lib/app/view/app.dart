@@ -6,7 +6,6 @@ import 'package:taskmaster/app/bloc/app_bloc.dart';
 import 'package:taskmaster/home/view/home_page.dart';
 import 'package:todos_repository/todos_repository.dart';
 import 'package:user_preferences_repository/user_preferences_repository.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/services.dart'; // Add this import
 
 /// The main application widget.
@@ -84,7 +83,7 @@ class _AppView extends StatelessWidget {
             : const Locale('en');
 
         final title = userPreferences.language == UserPreferenceLanguage.arabic
-            ? '🎯 تاسك ماستر'
+            ? 'تاسك ماستر'
             : 'TaskMaster';
 
         final themeMode = UserPreferenceThemeModeX.toFlutterThemeMode(
