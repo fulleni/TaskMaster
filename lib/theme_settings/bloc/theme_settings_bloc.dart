@@ -24,15 +24,15 @@ class ThemeSettingsBloc extends Bloc<ThemeSettingsEvent, ThemeSettingsState> {
   /// Loads the current theme settings from the repository and updates the state.
   Future<void> _onLoadThemeSettings(
       LoadThemeSettings event, Emitter<ThemeSettingsState> emit) async {
-    emit(state.copyWith(isLoading: true));
+    emit(state.copyWith(status: ThemeSettingsStatus.loading));
     await emit.forEach<UserPreferences>(
       _userPreferencesRepository.getAllPreferences(),
       onData: (preferences) => state.copyWith(
         themeMode: preferences.themeMode,
         accentColor: preferences.themeAccentColor,
-        isLoading: false,
+        status: ThemeSettingsStatus.success,
       ),
-      onError: (_, __) => state.copyWith(isLoading: false, hasError: true),
+      onError: (_, __) => state.copyWith(status: ThemeSettingsStatus.failure),
     );
   }
 
@@ -44,9 +44,12 @@ class ThemeSettingsBloc extends Bloc<ThemeSettingsEvent, ThemeSettingsState> {
     try {
       await _userPreferencesRepository.setThemeMode(event.themeMode);
       final themeMode = await _userPreferencesRepository.getThemeMode();
-      emit(state.copyWith(themeMode: themeMode));
+      emit(state.copyWith(
+        themeMode: themeMode,
+        status: ThemeSettingsStatus.success,
+      ));
     } catch (_) {
-      emit(state.copyWith(hasError: true));
+      emit(state.copyWith(status: ThemeSettingsStatus.failure));
     }
   }
 
@@ -57,11 +60,13 @@ class ThemeSettingsBloc extends Bloc<ThemeSettingsEvent, ThemeSettingsState> {
       UpdateThemeAccentColor event, Emitter<ThemeSettingsState> emit) async {
     try {
       await _userPreferencesRepository.setThemeAccentColor(event.accentColor);
-      final accentColor =
-          await _userPreferencesRepository.getThemeAccentColor();
-      emit(state.copyWith(accentColor: accentColor));
+      final accentColor = await _userPreferencesRepository.getThemeAccentColor();
+      emit(state.copyWith(
+        accentColor: accentColor,
+        status: ThemeSettingsStatus.success,
+      ));
     } catch (_) {
-      emit(state.copyWith(hasError: true));
+      emit(state.copyWith(status: ThemeSettingsStatus.failure));
     }
   }
 }

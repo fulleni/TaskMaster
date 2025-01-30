@@ -21,19 +21,20 @@ class FontSettingsBloc extends Bloc<FontSettingsEvent, FontSettingsState> {
 
   Future<void> _onLoadFontSettings(
       LoadFontSettings event, Emitter<FontSettingsState> emit) async {
-    emit(state.copyWith(isLoading: true));
+    emit(state.copyWith(status: FontSettingsStatus.loading));
     try {
       await emit.forEach<UserPreferences>(
         _userPreferencesRepository.getAllPreferences(),
         onData: (preferences) => state.copyWith(
           fontSize: preferences.fontSize,
           fontFamily: preferences.fontFamily,
-          isLoading: false,
+          status: FontSettingsStatus.success,
         ),
-        onError: (_, __) => state.copyWith(isLoading: false, hasError: true),
+        onError: (_, __) =>
+            state.copyWith(status: FontSettingsStatus.failure),
       );
     } catch (_) {
-      emit(state.copyWith(isLoading: false, hasError: true));
+      emit(state.copyWith(status: FontSettingsStatus.failure));
     }
   }
 
@@ -42,9 +43,12 @@ class FontSettingsBloc extends Bloc<FontSettingsEvent, FontSettingsState> {
     try {
       await _userPreferencesRepository.setFontSize(event.fontSize);
       final fontSize = await _userPreferencesRepository.getFontSize();
-      emit(state.copyWith(fontSize: fontSize));
+      emit(state.copyWith(
+        fontSize: fontSize,
+        status: FontSettingsStatus.success,
+      ));
     } catch (_) {
-      emit(state.copyWith(hasError: true));
+      emit(state.copyWith(status: FontSettingsStatus.failure));
     }
   }
 
@@ -53,9 +57,12 @@ class FontSettingsBloc extends Bloc<FontSettingsEvent, FontSettingsState> {
     try {
       await _userPreferencesRepository.setFontFamily(event.fontFamily);
       final fontFamily = await _userPreferencesRepository.getFontFamily();
-      emit(state.copyWith(fontFamily: fontFamily));
+      emit(state.copyWith(
+        fontFamily: fontFamily,
+        status: FontSettingsStatus.success,
+      ));
     } catch (_) {
-      emit(state.copyWith(hasError: true));
+      emit(state.copyWith(status: FontSettingsStatus.failure));
     }
   }
 }

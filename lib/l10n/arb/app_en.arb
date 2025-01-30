@@ -178,6 +178,10 @@
   "@failedToLoadFontSettings": {
     "description": "Error message when font settings fail to load"
   },
+  "failedToLoadLanguageSettings": "Failed to load language settings",
+  "@failedToLoadLanguageSettings": {
+    "description": "Error message when language settings fail to load"
+  },
   "taskmasterWithEmoji": "🎯 TaskMaster",
   "@taskmasterWithEmoji": {
     "description": "App name with emoji in header"
@@ -185,5 +189,13 @@
   "tapToAddFirstTask": "Tap + to add your first task",
   "@tapToAddFirstTask": {
     "description": "Helper text shown when there are no todos"
+  },
+  "retry": "Retry",
+  "@retry": {
+    "description": "Text shown on retry button when an error occurs"
+  },
+  "anErrorOccurred": "An error occurred",
+  "@anErrorOccurred": {
+    "description": "Generic error message shown when something goes wrong"
   }
 }

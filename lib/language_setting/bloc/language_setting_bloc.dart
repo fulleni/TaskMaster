@@ -21,23 +21,17 @@ class LanguageSettingBloc
     LoadLanguageSettings event,
     Emitter<LanguageSettingState> emit,
   ) async {
-    emit(state.copyWith(isLoading: true));
+    emit(state.copyWith(status: Status.loading));
     try {
       final languageEnum = await _userPreferencesRepository.getLanguage();
-
-      print(languageEnum);
-
-      final languasgeStringified = languageEnum.toLanguage;
-      print(languasgeStringified);
-
       emit(state.copyWith(
         language: languageEnum.toLanguage,
-        isLoading: false,
+        status: Status.success,
       ));
     } catch (e) {
       emit(state.copyWith(
-        error: 'e.toString()',
-        isLoading: false,
+        errorMessage: e.toString(),
+        status: Status.failure,
       ));
     }
   }
@@ -46,15 +40,18 @@ class LanguageSettingBloc
     UpdateLanguage event,
     Emitter<LanguageSettingState> emit,
   ) async {
-    emit(state.copyWith(isLoading: true));
+    emit(state.copyWith(status: Status.loading));
     try {
       await _userPreferencesRepository
           .setLanguage(event.language.toUserPreferenceLanguage);
-      emit(state.copyWith(language: event.language, isLoading: false));
+      emit(state.copyWith(
+        language: event.language,
+        status: Status.success,
+      ));
     } catch (e) {
       emit(state.copyWith(
-        error: e.toString(),
-        isLoading: false,
+        errorMessage: e.toString(),
+        status: Status.failure,
       ));
     }
   }

@@ -168,7 +168,7 @@ class LocalStorageUserPreferencesClient implements UserPreferencesClient {
     try {
       final languageString = _sharedPreferences.getString(_languageKey);
       if (languageString == null) {
-        throw GetLanguageException('Failed to get language');
+        return UserPreferenceLanguage.english;
       }
       return UserPreferenceLanguage.values
           .firstWhere((e) => e.toString() == languageString);

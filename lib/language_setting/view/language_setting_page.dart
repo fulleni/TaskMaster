@@ -27,47 +27,85 @@ class _LanguageSettingView extends StatelessWidget {
 
     return BlocBuilder<LanguageSettingBloc, LanguageSettingState>(
       builder: (context, state) {
-        if (state.isLoading) {
-          return const Center(child: CircularProgressIndicator());
-        }
-
         return Scaffold(
           appBar: AppBar(
             title: Text(l10n.languageSettings),
           ),
-          body: ListView(
-            children: [
-              RadioListTile<String>(
-                title: Text(l10n.englishLanguage),
-                value: 'english',
-                groupValue: state.language,
-                onChanged: (value) {
-                  context
-                      .read<LanguageSettingBloc>()
-                      .add(UpdateLanguage(value!));
-                },
+          body: switch (state.status) {
+            Status.loading => const Center(
+                child: CircularProgressIndicator(),
               ),
-              RadioListTile<String>(
-                title: Text(l10n.arabicLanguage),
-                value: 'arabic',
-                groupValue: state.language,
-                onChanged: (value) {
-                  context
-                      .read<LanguageSettingBloc>()
-                      .add(UpdateLanguage(value!));
-                },
-              ),
-              if (state.error != null)
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(
-                    state.error!,
-                    style:
-                        TextStyle(color: Theme.of(context).colorScheme.error),
+            Status.failure => Center(
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Card(
+                    child: Padding(
+                      padding: const EdgeInsets.all(24.0),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Icon(
+                            Icons.error_outline,
+                            size: 64,
+                            color: Theme.of(context).colorScheme.error,
+                          ),
+                          const SizedBox(height: 16),
+                          Text(
+                            l10n.failedToLoadLanguageSettings,
+                            style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                              color: Theme.of(context).colorScheme.onSurface,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                          const SizedBox(height: 24),
+                          ElevatedButton.icon(
+                            onPressed: () => context
+                                .read<LanguageSettingBloc>()
+                                .add(LoadLanguageSettings()),
+                            icon: const Icon(Icons.refresh),
+                            label: Text(l10n.retry),
+                          ),
+                        ],
+                      ),
+                    ),
                   ),
                 ),
-            ],
-          ),
+              ),
+            _ => ListView(
+                children: [
+                  RadioListTile<String>(
+                    title: Text(l10n.englishLanguage),
+                    value: 'english',
+                    groupValue: state.language,
+                    onChanged: (value) {
+                      context
+                          .read<LanguageSettingBloc>()
+                          .add(UpdateLanguage(value!));
+                    },
+                  ),
+                  RadioListTile<String>(
+                    title: Text(l10n.arabicLanguage),
+                    value: 'arabic',
+                    groupValue: state.language,
+                    onChanged: (value) {
+                      context
+                          .read<LanguageSettingBloc>()
+                          .add(UpdateLanguage(value!));
+                    },
+                  ),
+                  if (state.status == Status.failure)
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                        state.errorMessage ?? l10n.failedToLoadLanguageSettings,
+                        style: TextStyle(
+                          color: Theme.of(context).colorScheme.error,
+                        ),
+                      ),
+                    ),
+                ],
+              ),
+          },
         );
       },
     );

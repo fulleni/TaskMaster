@@ -1,5 +1,12 @@
 part of 'font_settings_bloc.dart';
 
+enum FontSettingsStatus {
+  initial,
+  loading,
+  success,
+  failure,
+}
+
 /// Represents the state of font settings in the application.
 class FontSettingsState extends Equatable {
   /// The font size .
@@ -8,20 +15,16 @@ class FontSettingsState extends Equatable {
   /// The font family.
   final UserPreferenceFontFamily? fontFamily;
 
-  /// Indicates whether the state is currently loading.
-  final bool isLoading;
-
-  /// Indicates whether there was an error.
-  final bool hasError;
+  /// The status of the font settings.
+  final FontSettingsStatus status;
 
   /// Creates a new [FontSettingsState].
   ///
-  /// All parameters are optional and default to `null` or `false`.
+  /// All parameters are optional and default to `null` or `FontSettingsStatus.initial`.
   const FontSettingsState({
     this.fontSize,
     this.fontFamily,
-    this.isLoading = false,
-    this.hasError = false,
+    this.status = FontSettingsStatus.initial,
   });
 
   /// Creates a copy of the current state with the given parameters.
@@ -30,14 +33,12 @@ class FontSettingsState extends Equatable {
   FontSettingsState copyWith({
     UserPreferenceFontSize? fontSize,
     UserPreferenceFontFamily? fontFamily,
-    bool? isLoading,
-    bool? hasError,
+    FontSettingsStatus? status,
   }) {
     return FontSettingsState(
       fontSize: fontSize ?? this.fontSize,
       fontFamily: fontFamily ?? this.fontFamily,
-      isLoading: isLoading ?? this.isLoading,
-      hasError: hasError ?? this.hasError,
+      status: status ?? this.status,
     );
   }
 
@@ -45,7 +46,6 @@ class FontSettingsState extends Equatable {
   List<Object?> get props => [
         fontSize,
         fontFamily,
-        isLoading,
-        hasError,
+        status,
       ];
 }
