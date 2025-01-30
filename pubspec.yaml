@@ -1,7 +1,7 @@
 name: taskmaster
 description: TaskMaster is a user-friendly task management application built to help you stay organized and productive.
 publish_to: "none"
-version: 0.15.0
+version: 0.17.0
 
 environment:
   sdk: ^3.6.1
@@ -32,7 +32,19 @@ dev_dependencies:
     sdk: flutter
   flutter_lints: ^5.0.0
   mockito: ^5.4.5
+  flutter_launcher_icons: ^0.13.1
 
 flutter:
   uses-material-design: true
   generate: true
+  assets:
+    - assets/taskMaster.png
+
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: false
+  image_path: "assets/taskMaster.png"
+  min_sdk_android: 21
+  web:
+    generate: true
+    image_path: "assets/taskMaster.png"

@@ -27,6 +27,7 @@ class _FontSettingsView extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
+        leading: Image.asset('assets/taskMaster.png'),
         title: Text(l10n.fontSettings),
       ),
       body: BlocBuilder<FontSettingsBloc, FontSettingsState>(

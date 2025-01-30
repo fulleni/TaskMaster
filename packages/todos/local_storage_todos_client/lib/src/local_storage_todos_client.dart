@@ -59,14 +59,7 @@ class LocalStorageTodosClient extends TodosClient {
           .toList();
       _todoStreamController.add(todos);
     } else {
-      final mockedTodos = List.generate(
-        5,
-        (index) => Todo(
-          title: 'Mocked Todo $index',
-          description: 'Description for mocked todo $index',
-        ),
-      );
-      _todoStreamController.add(mockedTodos);
+      _todoStreamController.add([]);
     }
   }
 

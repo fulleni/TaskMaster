@@ -40,6 +40,13 @@ class _TodosOverviewView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: Padding(
+          padding: const EdgeInsets.fromLTRB(16, 0, 4, 0),
+          child: Image.asset(
+            'assets/taskMaster.png',
+            fit: BoxFit.contain,
+          ),
+        ),
         title: Text(context.l10n.taskmaster),
         actions: [
           _TodosOverviewFilterButton(),
@@ -112,17 +119,43 @@ class _TodosOverviewView extends StatelessWidget {
                 child: ListView(
                   children: [
                     SizedBox(
-                      height: MediaQuery.of(context).size.height / 2,
-                      child: Center(
-                        child: Text(
-                          context.l10n.noTodosAvailable,
-                          style: TextStyle(
-                            color:
-                                Theme.of(context).brightness == Brightness.dark
-                                    ? Colors.white
-                                    : Colors.black,
+                      height: MediaQuery.of(context).size.height * 0.7,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Image.asset(
+                            'assets/taskMaster.png',
+                            width: 120,
+                            height: 120,
+                            opacity: const AlwaysStoppedAnimation(0.7),
                           ),
-                        ),
+                          const SizedBox(height: 32),
+                          Text(
+                            context.l10n.noTodosAvailable,
+                            style: Theme.of(context)
+                                .textTheme
+                                .titleLarge
+                                ?.copyWith(
+                                  color: Theme.of(context).brightness ==
+                                          Brightness.dark
+                                      ? Colors.white70
+                                      : Colors.black54,
+                                ),
+                          ),
+                          const SizedBox(height: 16),
+                          Text(
+                            context.l10n.tapToAddFirstTask,
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyMedium
+                                ?.copyWith(
+                                  color: Theme.of(context).brightness ==
+                                          Brightness.dark
+                                      ? Colors.white60
+                                      : Colors.black45,
+                                ),
+                          ),
+                        ],
                       ),
                     ),
                   ],

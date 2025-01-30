@@ -29,10 +29,17 @@ class _TodosStatsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
-    
+
     return Scaffold(
       appBar: AppBar(
-        title: Text(l10n.taskmasterWithEmoji),
+        leading: Padding(
+          padding: const EdgeInsets.fromLTRB(16, 0, 4, 0),
+          child: Image.asset(
+            'assets/taskMaster.png',
+            fit: BoxFit.contain,
+          ),
+        ),
+        title: Text(l10n.taskmaster),
         actions: [
           IconButton(
             icon: Icon(Icons.settings),

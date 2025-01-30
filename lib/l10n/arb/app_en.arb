@@ -1,6 +1,6 @@
 {
   "@@locale": "en",
-  "taskmaster": "🎯 TaskMaster",
+  "taskmaster": "TaskMaster",
   "@taskmaster": {
     "description": "The app name"
   },
@@ -181,5 +181,9 @@
   "taskmasterWithEmoji": "🎯 TaskMaster",
   "@taskmasterWithEmoji": {
     "description": "App name with emoji in header"
+  },
+  "tapToAddFirstTask": "Tap + to add your first task",
+  "@tapToAddFirstTask": {
+    "description": "Helper text shown when there are no todos"
   }
 }

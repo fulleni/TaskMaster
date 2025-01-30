@@ -7,6 +7,7 @@ import 'package:taskmaster/home/view/home_page.dart';
 import 'package:todos_repository/todos_repository.dart';
 import 'package:user_preferences_repository/user_preferences_repository.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter/services.dart'; // Add this import
 
 /// The main application widget.
 class App extends StatelessWidget {
@@ -64,6 +65,15 @@ class _AppView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Add platform-specific configurations
+    SystemChrome.setSystemUIOverlayStyle(
+      const SystemUiOverlayStyle(
+        statusBarColor: Colors.transparent,
+        statusBarIconBrightness: Brightness.dark,
+        statusBarBrightness: Brightness.light,
+      ),
+    );
+
     return BlocBuilder<AppBloc, AppState>(
       builder: (context, state) {
         final userPreferences =
@@ -97,9 +107,17 @@ class _AppView extends StatelessWidget {
           title: title,
           theme: FlexThemeData.light(scheme: flexScheme).copyWith(
             textTheme: textTheme,
+            platform: TargetPlatform.android,
+            appBarTheme: const AppBarTheme(
+              systemOverlayStyle: SystemUiOverlayStyle.dark,
+            ),
           ),
           darkTheme: FlexThemeData.dark(scheme: flexScheme).copyWith(
             textTheme: textTheme,
+            platform: TargetPlatform.android,
+            appBarTheme: const AppBarTheme(
+              systemOverlayStyle: SystemUiOverlayStyle.light,
+            ),
           ),
           themeMode: themeMode,
           home: const HomePage(),

@@ -1,6 +1,6 @@
 {
   "@@locale": "ar",
-  "taskmaster": " 🎯 تاسك ماستر",
+  "taskmaster": "تاسك ماستر",
   "@taskmaster": {
     "description": "اسم التطبيق"
   },
@@ -94,6 +94,10 @@
   "noTodosAvailable": "لا توجد مهام متاحة",
   "@noTodosAvailable": {
     "description": "الرسالة التي تظهر عندما لا توجد مهام"
+  },
+  "tapToAddFirstTask": "انقر على + لإضافة مهمتك الأولى",
+  "@tapToAddFirstTask": {
+    "description": "نص المساعدة الذي يظهر عندما لا توجد مهام"
   },
   "failedToLoadTodos": "فشل في تحميل المهام",
   "@failedToLoadTodos": {
