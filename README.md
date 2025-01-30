@@ -2,6 +2,7 @@
 
 TaskMaster is a cross-platform (Android, iOS, and Web) task management application developed using Flutter.  It offers a streamlined and intuitive interface for efficient task organization and prioritization.
 
+
 ## ✨ Key Features
 
 *   **📊 Task Overview Dashboard:** A centralized dashboard displays all tasks, with convenient filtering options based on completion status (completed/pending).
@@ -14,6 +15,22 @@ TaskMaster is a cross-platform (Android, iOS, and Web) task management applicati
     *   **🔤 Font Options:** Select from a curated collection of 10 Google Fonts and adjust the font size (Default, Medium, Large) to optimize readability.
     *   **🌐 Localization:** The app supports both English and Arabic languages, with full localization and right-to-left (RTL) layout support.
     *   **ℹ️ About TaskMaster:** Provides information about the application, including a description and a list of open-source licenses for dependencies.
+
+## 📱 App Screenshots
+
+Here's a visual overview of TaskMaster's key features and screens, showcasing both Left-to-Right (LTR) and Right-to-Left (RTL) layouts:
+
+| Feature/Page | LTR | RTL |
+|---|---|---|
+| Todos Overview | [link](https://github.com/fulleni/TaskMaster/blob/main/assets/screenshots/todos_overview_ltr.png?raw=true) | [link](https://github.com/fulleni/TaskMaster/blob/main/assets/screenshots/todos_overview_rtl.png?raw=true) |
+| Add Todo | [link](https://github.com/fulleni/TaskMaster/blob/main/assets/screenshots/add_todo_ltr.png?raw=true) | [link](https://github.com/fulleni/TaskMaster/blob/main/assets/screenshots/add_todo_rtl.png?raw=true) |
+| Todos Stats | [link](https://github.com/fulleni/TaskMaster/blob/main/assets/screenshots/todos_stats_ltr.png?raw=true) | [link](https://github.com/fulleni/TaskMaster/blob/main/assets/screenshots/todos_stats_rtl.png?raw=true) |
+| Language Settings | [link](https://github.com/fulleni/TaskMaster/blob/main/assets/screenshots/language_settings_ltr.png?raw=true) | [link](https://github.com/fulleni/TaskMaster/blob/main/assets/screenshots/language_settings_rtl.png?raw=true) |
+| Theme Settings | [link](https://github.com/fulleni/TaskMaster/blob/main/assets/screenshots/theme_settings_ltr.png?raw=true) | [link](https://github.com/fulleni/TaskMaster/blob/main/assets/screenshots/theme_settings_rtl.png?raw=true) |
+| Font Settings | [link](https://github.com/fulleni/TaskMaster/blob/main/assets/screenshots/font_settings_ltr.png?raw=true) | [link](https://github.com/fulleni/TaskMaster/blob/main/assets/screenshots/font_settings_rtl.png?raw=true) |
+| Light Mode | [link](https://github.com/fulleni/TaskMaster/blob/main/assets/screenshots/light_mode_ltr.png?raw=true) | [link](https://github.com/fulleni/TaskMaster/blob/main/assets/screenshots/light_mode_rtl.png?raw=true) |
+| About Us | [link](https://github.com/fulleni/TaskMaster/blob/main/assets/screenshots/about_us_ltr.png?raw=true) | [link](https://github.com/fulleni/TaskMaster/blob/main/assets/screenshots/about_us_rtl.png?raw=true) |
+| Error | [link](https://github.com/fulleni/TaskMaster/blob/main/assets/screenshots/error_ltr.png?raw=true) | [link](https://github.com/fulleni/TaskMaster/blob/main/assets/screenshots/error_rtl.png?raw=true) |
 
 ## 🏗️ Architecture
 
