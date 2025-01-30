@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:taskmaster/font_settings/bloc/font_settings_bloc.dart';
 import 'package:user_preferences_repository/user_preferences_repository.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class FontSettingsPage extends StatelessWidget {
   const FontSettingsPage({super.key});
@@ -22,16 +23,18 @@ class _FontSettingsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Font Settings'),
+        title: Text(l10n.fontSettings),
       ),
       body: BlocBuilder<FontSettingsBloc, FontSettingsState>(
         builder: (context, state) {
           if (state.isLoading) {
             return const Center(child: CircularProgressIndicator());
           } else if (state.hasError) {
-            return const Center(child: Text('Failed to load font settings'));
+            return Center(child: Text(l10n.failedToLoadFontSettings));
           } else {
             final textColor = Theme.of(context).brightness == Brightness.dark
                 ? Colors.white
@@ -45,14 +48,12 @@ class _FontSettingsView extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        'Font Family',
-                        style: TextStyle(
-                          color: textColor,
-                        ),
+                        l10n.fontFamily,
+                        style: TextStyle(color: textColor),
                       ),
                       DropdownButton<UserPreferenceFontFamily>(
                         value: state.fontFamily,
-                        hint: Text('Select Font Family',
+                        hint: Text(l10n.selectFontFamily,
                             style: TextStyle(color: textColor)),
                         items:
                             UserPreferenceFontFamily.values.map((fontFamily) {
@@ -77,14 +78,12 @@ class _FontSettingsView extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        'Font Size',
-                        style: TextStyle(
-                          color: textColor,
-                        ),
+                        l10n.fontSize,
+                        style: TextStyle(color: textColor),
                       ),
                       DropdownButton<UserPreferenceFontSize>(
                         value: state.fontSize,
-                        hint: Text('Select Font Size',
+                        hint: Text(l10n.selectFontSize,
                             style: TextStyle(color: textColor)),
                         items: UserPreferenceFontSize.values.map((fontSize) {
                           return DropdownMenuItem(

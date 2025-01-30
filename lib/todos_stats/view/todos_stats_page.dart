@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:todos_repository/todos_repository.dart';
 import 'package:taskmaster/settings/view/settings_page.dart';
 import '../bloc/todos_stats_bloc.dart';
@@ -27,9 +28,11 @@ class _TodosStatsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+    
     return Scaffold(
       appBar: AppBar(
-        title: Text('🎯 TaskMaster'),
+        title: Text(l10n.taskmasterWithEmoji),
         actions: [
           IconButton(
             icon: Icon(Icons.settings),
@@ -51,7 +54,7 @@ class _TodosStatsView extends StatelessWidget {
             return Center(child: CircularProgressIndicator());
           } else if (state.status == TodosStatsStatus.failure) {
             return Center(
-                child: Text('Failed to load stats',
+                child: Text(l10n.failedToLoadStats,
                     style: TextStyle(color: textColor)));
           } else if (state.status == TodosStatsStatus.success) {
             return Center(
@@ -73,7 +76,7 @@ class _TodosStatsView extends StatelessWidget {
                                 size: 30,
                               ),
                               Text(
-                                'Completed Todos: ${state.numCompleted}',
+                                l10n.completedTodos(state.numCompleted),
                                 style: TextStyle(
                                   fontSize: 20,
                                   color: textColor,
@@ -88,11 +91,10 @@ class _TodosStatsView extends StatelessWidget {
                             children: [
                               Icon(
                                 Icons.pending_actions,
-                                color: Colors.orange,
                                 size: 30,
                               ),
                               Text(
-                                'Active Todos: ${state.numActive}',
+                                l10n.activeTodos(state.numActive),
                                 style: TextStyle(
                                   fontSize: 20,
                                   color: textColor,

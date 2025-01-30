@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todos_repository/todos_repository.dart';
+import 'package:taskmaster/l10n/l10n.dart';
 import '../bloc/todos_edit_bloc.dart';
 
 /// {@template todos_edit_page}
@@ -38,13 +39,13 @@ class TodosEditView extends StatelessWidget {
           Navigator.of(context).pop(state.todo);
         } else if (state.status == TodosEditStatus.failure) {
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('Failed to save todo')),
+            SnackBar(content: Text(context.l10n.failedToSaveTodo)),
           );
         }
       },
       child: Scaffold(
         appBar: AppBar(
-          title: Text('🎯 TaskMaster'),
+          title: Text(context.l10n.editTodo),
           actions: [
             IconButton(
               icon: const Icon(Icons.check),
@@ -104,8 +105,8 @@ class _TitleFieldState extends State<_TitleField> {
         return TextFormField(
           key: const Key('todosEditView_title_textFormField'),
           controller: _controller,
-          decoration: const InputDecoration(
-            labelText: 'Title',
+          decoration: InputDecoration(
+            labelText: context.l10n.title,
             border: OutlineInputBorder(),
           ),
           style: TextStyle(color: textColor),
@@ -153,8 +154,8 @@ class _DescriptionFieldState extends State<_DescriptionField> {
         return TextFormField(
           key: const Key('todosEditView_description_textFormField'),
           controller: _controller,
-          decoration: const InputDecoration(
-            labelText: 'Description',
+          decoration: InputDecoration(
+            labelText: context.l10n.description,
             border: OutlineInputBorder(),
           ),
           maxLines: 3,

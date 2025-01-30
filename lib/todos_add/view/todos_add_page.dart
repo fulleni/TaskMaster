@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todos_repository/todos_repository.dart';
+import 'package:taskmaster/l10n/l10n.dart';
 import '../bloc/todos_add_bloc.dart';
 
 class TodosAddPage extends StatelessWidget {
@@ -31,7 +32,7 @@ class TodosAddView extends StatelessWidget {
       },
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('Add Todo'),
+          title: Text(context.l10n.addTodo),
           actions: [
             BlocBuilder<TodosAddBloc, TodosAddState>(
               buildWhen: (previous, current) =>
@@ -85,12 +86,12 @@ class _TitleField extends StatelessWidget {
             fontSize: 18,
           ),
           decoration: InputDecoration(
-            labelText: 'Title',
+            labelText: context.l10n.title,
             border: OutlineInputBorder(),
             errorText: state.isDirty && state.title.isEmpty 
-                ? 'Title cannot be empty' 
+                ? context.l10n.titleCannotBeEmpty 
                 : null,
-            helperText: 'Required',
+            helperText: context.l10n.required,
           ),
         );
       },
@@ -114,8 +115,8 @@ class _DescriptionField extends StatelessWidget {
             context.read<TodosAddBloc>().add(TodosAddDescriptionChanged(value));
           },
           style: TextStyle(color: textColor),
-          decoration: const InputDecoration(
-            labelText: 'Description',
+          decoration: InputDecoration(
+            labelText: context.l10n.description,
             border: OutlineInputBorder(),
           ),
           maxLines: 3,

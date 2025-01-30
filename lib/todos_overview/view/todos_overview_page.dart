@@ -5,6 +5,7 @@ import 'package:taskmaster/todos_edit/bloc/todos_edit_bloc.dart';
 import 'package:todos_repository/todos_repository.dart';
 import '../bloc/todos_overview_bloc.dart';
 import '../../todos_edit/view/todos_edit_page.dart';
+import 'package:taskmaster/l10n/l10n.dart';
 
 /// {@template todos_overview}
 /// A widget that displays an overview of todos.
@@ -39,7 +40,7 @@ class _TodosOverviewView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('🎯 TaskMaster'),
+        title: Text(context.l10n.taskmaster),
         actions: [
           _TodosOverviewFilterButton(),
           // _TodosOverviewOptionsButton(),
@@ -54,9 +55,9 @@ class _TodosOverviewView extends StatelessWidget {
             listener: (context, state) {
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
-                  content: Text('Succefully Updated'),
+                  content: Text(context.l10n.successfullyUpdated),
                   action: SnackBarAction(
-                    label: 'Undo',
+                    label: context.l10n.undo,
                     onPressed: () {
                       context
                           .read<TodosOverviewBloc>()
@@ -76,9 +77,9 @@ class _TodosOverviewView extends StatelessWidget {
             listener: (context, state) {
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
-                  content: Text('Succefully Deleted'),
+                  content: Text(context.l10n.successfullyDeleted),
                   action: SnackBarAction(
-                    label: 'Undo',
+                    label: context.l10n.undo,
                     onPressed: () {
                       context
                           .read<TodosOverviewBloc>()
@@ -99,7 +100,7 @@ class _TodosOverviewView extends StatelessWidget {
                   ? Colors.white
                   : Colors.black;
               return Center(
-                  child: Text('Failed to load todos',
+                  child: Text(context.l10n.failedToLoadTodos,
                       style: TextStyle(color: textColor)));
             } else if (state.todos.isEmpty) {
               return RefreshIndicator(
@@ -114,7 +115,7 @@ class _TodosOverviewView extends StatelessWidget {
                       height: MediaQuery.of(context).size.height / 2,
                       child: Center(
                         child: Text(
-                          'No todos available',
+                          context.l10n.noTodosAvailable,
                           style: TextStyle(
                             color:
                                 Theme.of(context).brightness == Brightness.dark
@@ -297,17 +298,17 @@ class _TodosOverviewFilterButton extends StatelessWidget {
           context: context,
           position: position,
           items: <PopupMenuEntry<TodosOverviewFilter>>[
-            const PopupMenuItem<TodosOverviewFilter>(
+            PopupMenuItem<TodosOverviewFilter>(
               value: TodosOverviewFilter.all,
-              child: Text('Show All'),
+              child: Text(context.l10n.showAll),
             ),
-            const PopupMenuItem<TodosOverviewFilter>(
+            PopupMenuItem<TodosOverviewFilter>(
               value: TodosOverviewFilter.completedOnly,
-              child: Text('Show Completed'),
+              child: Text(context.l10n.showCompleted),
             ),
-            const PopupMenuItem<TodosOverviewFilter>(
+            PopupMenuItem<TodosOverviewFilter>(
               value: TodosOverviewFilter.uncompletedOnly,
-              child: Text('Show Uncompleted'),
+              child: Text(context.l10n.showUncompleted),
             ),
           ],
         ).then((filter) {

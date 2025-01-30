@@ -1,0 +1,185 @@
+{
+  "@@locale": "en",
+  "taskmaster": "🎯 TaskMaster",
+  "@taskmaster": {
+    "description": "The app name"
+  },
+  "todos": "Todos",
+  "@todos": {
+    "description": "The todos tab title"
+  },
+  "stats": "Stats",
+  "@stats": {
+    "description": "The stats tab title"
+  },
+  "settings": "Settings",
+  "@settings": {
+    "description": "The settings page title"
+  },
+  "addTodo": "Add Todo",
+  "@addTodo": {
+    "description": "The title of the add todo page"
+  },
+  "editTodo": "Edit Todo",
+  "@editTodo": {
+    "description": "The title of the edit todo page"
+  },
+  "title": "Title",
+  "@title": {
+    "description": "Title field label"
+  },
+  "description": "Description",
+  "@description": {
+    "description": "Description field label"
+  },
+  "required": "Required",
+  "@required": {
+    "description": "Required field helper text"
+  },
+  "titleCannotBeEmpty": "Title cannot be empty",
+  "@titleCannotBeEmpty": {
+    "description": "Error message when title is empty"
+  },
+  "themeSettings": "Theme Settings",
+  "@themeSettings": {
+    "description": "Theme settings page title"
+  },
+  "fontSettings": "Font Settings",
+  "@fontSettings": {
+    "description": "Font settings page title"
+  },
+  "successfullyUpdated": "Successfully Updated",
+  "@successfullyUpdated": {
+    "description": "Message shown when a todo is updated"
+  },
+  "successfullyDeleted": "Successfully Deleted",
+  "@successfullyDeleted": {
+    "description": "Message shown when a todo is deleted"
+  },
+  "undo": "Undo",
+  "@undo": {
+    "description": "Undo action button text"
+  },
+  "failedToSaveTodo": "Failed to save todo",
+  "@failedToSaveTodo": {
+    "description": "Error message when saving todo fails"
+  },
+  "failedToLoadStats": "Failed to load stats",
+  "@failedToLoadStats": {
+    "description": "Error message when loading stats fails"
+  },
+  "completedTodos": "Completed Todos: {count}",
+  "@completedTodos": {
+    "description": "Text showing number of completed todos",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "activeTodos": "Active Todos: {count}",
+  "@activeTodos": {
+    "description": "Text showing number of active todos",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "noTodosAvailable": "No todos available",
+  "@noTodosAvailable": {
+    "description": "Message shown when there are no todos"
+  },
+  "failedToLoadTodos": "Failed to load todos",
+  "@failedToLoadTodos": {
+    "description": "Error message when loading todos fails"
+  },
+  "showAll": "Show All",
+  "@showAll": {
+    "description": "Filter option to show all todos"
+  },
+  "showCompleted": "Show Completed",
+  "@showCompleted": {
+    "description": "Filter option to show completed todos"
+  },
+  "showUncompleted": "Show Uncompleted",
+  "@showUncompleted": {
+    "description": "Filter option to show uncompleted todos"
+  },
+  "theme": "Theme",
+  "@theme": {
+    "description": "Theme settings option"
+  },
+  "font": "Font",
+  "@font": {
+    "description": "Font settings option"
+  },
+  "language": "Language",
+  "@language": {
+    "description": "Language settings option"
+  },
+  "about": "About",
+  "@about": {
+    "description": "About dialog option"
+  },
+  "aboutDescription": "TaskMaster is a user-friendly task management application built to help you stay organized and productive.",
+  "@aboutDescription": {
+    "description": "Description text shown in the about dialog"
+  },
+  "languageSettings": "Language Settings",
+  "@languageSettings": {
+    "description": "Title for the language settings page"
+  },
+  "englishLanguage": "English",
+  "@englishLanguage": {
+    "description": "Name of English language option"
+  },
+  "arabicLanguage": "Arabic",
+  "@arabicLanguage": {
+    "description": "Name of Arabic language option"
+  },
+  "mode": "Mode",
+  "@mode": {
+    "description": "Theme mode selection label"
+  },
+  "selectThemeMode": "Select Theme Mode",
+  "@selectThemeMode": {
+    "description": "Theme mode dropdown hint"
+  },
+  "accentColor": "Accent Color",
+  "@accentColor": {
+    "description": "Accent color selection label"
+  },
+  "selectAccentColor": "Select Accent Color",
+  "@selectAccentColor": {
+    "description": "Accent color dropdown hint"
+  },
+  "fontFamily": "Font Family",
+  "@fontFamily": {
+    "description": "Font family selection label"
+  },
+  "selectFontFamily": "Select Font Family",
+  "@selectFontFamily": {
+    "description": "Font family dropdown hint"
+  },
+  "fontSize": "Font Size",
+  "@fontSize": {
+    "description": "Font size selection label"
+  },
+  "selectFontSize": "Select Font Size",
+  "@selectFontSize": {
+    "description": "Font size dropdown hint"
+  },
+  "failedToLoadThemeSettings": "Failed to load theme settings",
+  "@failedToLoadThemeSettings": {
+    "description": "Error message when theme settings fail to load"
+  },
+  "failedToLoadFontSettings": "Failed to load font settings",
+  "@failedToLoadFontSettings": {
+    "description": "Error message when font settings fail to load"
+  },
+  "taskmasterWithEmoji": "🎯 TaskMaster",
+  "@taskmasterWithEmoji": {
+    "description": "App name with emoji in header"
+  }
+}

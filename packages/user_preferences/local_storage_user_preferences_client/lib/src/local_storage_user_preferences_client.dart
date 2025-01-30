@@ -19,8 +19,7 @@ class LocalStorageUserPreferencesClient implements UserPreferencesClient {
 
   static const String _themeModeKey = 'themeMode';
   static const String _themeAccentColorKey = 'themeAccentColor';
-  static const String _titleFontSizeKey = 'titleFontSize';
-  static const String _bodyFontSizeKey = 'bodyFontSize';
+  static const String _fontSizeKey = 'fontSize';
   static const String _fontFamilyKey = 'fontFamily';
   static const String _languageKey = 'language';
 
@@ -93,7 +92,7 @@ class LocalStorageUserPreferencesClient implements UserPreferencesClient {
   Future<void> setFontSize(UserPreferenceFontSize fontSize) async {
     try {
       final success = await _sharedPreferences.setString(
-          _titleFontSizeKey, fontSize.toString());
+          _fontSizeKey, fontSize.toString());
       if (!success) {
         throw SetAppFontSizeException('Failed to set app font size');
       }
@@ -109,7 +108,7 @@ class LocalStorageUserPreferencesClient implements UserPreferencesClient {
   @override
   Future<UserPreferenceFontSize> getFontSize() async {
     try {
-      final fontSizeString = _sharedPreferences.getString(_titleFontSizeKey);
+      final fontSizeString = _sharedPreferences.getString(_fontSizeKey);
       if (fontSizeString == null) {
         throw GetAppFontSizeException('Failed to get app font size');
       }

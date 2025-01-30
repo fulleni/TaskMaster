@@ -1,12 +1,12 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:taskmaster/app/bloc/app_bloc.dart';
 import 'package:taskmaster/home/view/home_page.dart';
 import 'package:todos_repository/todos_repository.dart';
 import 'package:user_preferences_repository/user_preferences_repository.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 /// The main application widget.
 class App extends StatelessWidget {
@@ -14,6 +14,8 @@ class App extends StatelessWidget {
   const App({
     required this.todosRepository,
     required this.userPreferencesRepository,
+    required this.supportedLocales,
+    required this.localizationsDelegates,
     super.key,
   });
 
@@ -22,6 +24,9 @@ class App extends StatelessWidget {
 
   /// The repository for managing user preferences.
   final UserPreferencesRepository userPreferencesRepository;
+
+  final List<Locale> supportedLocales;
+  final List<LocalizationsDelegate> localizationsDelegates;
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +43,10 @@ class App extends StatelessWidget {
         create: (context) => AppBloc(
           userPreferencesRepository: userPreferencesRepository,
         )..add(AppLoaded()),
-        child: _AppView(),
+        child: _AppView(
+          supportedLocales: supportedLocales,
+          localizationsDelegates: localizationsDelegates,
+        ),
       ),
     );
   }
@@ -46,7 +54,13 @@ class App extends StatelessWidget {
 
 /// The main view of the application.
 class _AppView extends StatelessWidget {
-  const _AppView();
+  const _AppView({
+    required this.supportedLocales,
+    required this.localizationsDelegates,
+  });
+
+  final List<Locale> supportedLocales;
+  final List<LocalizationsDelegate> localizationsDelegates;
 
   @override
   Widget build(BuildContext context) {
@@ -54,6 +68,15 @@ class _AppView extends StatelessWidget {
       builder: (context, state) {
         final userPreferences =
             state.userPreferences ?? UserPreferences.defaults();
+
+        final locale = userPreferences.language == UserPreferenceLanguage.arabic
+            ? const Locale('ar')
+            : const Locale('en');
+
+        final title = userPreferences.language == UserPreferenceLanguage.arabic
+            ? '🎯 تاسك ماستر'
+            : 'TaskMaster';
+
         final themeMode = UserPreferenceThemeModeX.toFlutterThemeMode(
             userPreferences.themeMode);
         final flexScheme = UserPreferenceAccentColorX.toFlexScheme(
@@ -63,15 +86,15 @@ class _AppView extends StatelessWidget {
           userPreferences.fontSize,
         );
 
-        final textTheme =
-            UserPreferenceFontFamilyX.toGoogleFontsTextTheme(
+        final textTheme = UserPreferenceFontFamilyX.toGoogleFontsTextTheme(
           userPreferences.fontFamily,
           Theme.of(context).textTheme,
         );
 
         return MaterialApp(
           debugShowCheckedModeBanner: false,
-          title: 'TaskMaster',
+          locale: locale,
+          title: title,
           theme: FlexThemeData.light(scheme: flexScheme).copyWith(
             textTheme: textTheme,
           ),
@@ -80,15 +103,8 @@ class _AppView extends StatelessWidget {
           ),
           themeMode: themeMode,
           home: const HomePage(),
-          localizationsDelegates: const [
-            GlobalMaterialLocalizations.delegate,
-            GlobalWidgetsLocalizations.delegate,
-            GlobalCupertinoLocalizations.delegate,
-          ],
-          supportedLocales: const [
-            Locale('en', ''), // English
-            Locale('ar', ''), // Arabic
-          ],
+          localizationsDelegates: localizationsDelegates,
+          supportedLocales: supportedLocales,
           builder: (context, child) {
             return MediaQuery(
               data: MediaQuery.of(context).copyWith(

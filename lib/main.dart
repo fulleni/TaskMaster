@@ -5,6 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:taskmaster/app/view/app.dart';
 import 'package:todos_repository/todos_repository.dart';
 import 'package:user_preferences_repository/user_preferences_repository.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -26,6 +27,8 @@ void main() async {
     App(
       todosRepository: todosRepository,
       userPreferencesRepository: userPreferencesRepository,
+      supportedLocales: AppLocalizations.supportedLocales,
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
     ),
   );
 }
