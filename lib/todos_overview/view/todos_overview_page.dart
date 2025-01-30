@@ -41,13 +41,12 @@ class _TodosOverviewView extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         leading: Padding(
-          padding: const EdgeInsets.fromLTRB(16, 0, 4, 0),
+          padding: const EdgeInsets.fromLTRB(16, 16, 0, 16),
           child: Image.asset(
-            'assets/taskMaster.png',
-            fit: BoxFit.contain,
+            'assets/logo/taskMaster.png',
+            opacity: const AlwaysStoppedAnimation(0.9),
           ),
         ),
-        title: Text(context.l10n.taskmaster),
         actions: [
           _TodosOverviewFilterButton(),
           // _TodosOverviewOptionsButton(),
@@ -116,49 +115,65 @@ class _TodosOverviewView extends StatelessWidget {
                       .read<TodosOverviewBloc>()
                       .add(TodosOverviewLoadTodos());
                 },
-                child: ListView(
-                  children: [
-                    SizedBox(
-                      height: MediaQuery.of(context).size.height * 0.7,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Image.asset(
-                            'assets/taskMaster.png',
-                            width: 120,
-                            height: 120,
-                            opacity: const AlwaysStoppedAnimation(0.7),
+                child: LayoutBuilder(
+                  builder: (context, constraints) {
+                    return SingleChildScrollView(
+                      physics: const AlwaysScrollableScrollPhysics(),
+                      child: ConstrainedBox(
+                        constraints: BoxConstraints(
+                          minHeight: constraints.maxHeight,
+                        ),
+                        child: Center(
+                          child: Card(
+                            elevation: 2,
+                            margin: const EdgeInsets.all(16),
+                            child: Padding(
+                              padding: const EdgeInsets.all(32),
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Icon(
+                                    Icons.task_outlined,
+                                    size: 120,
+                                    color: Theme.of(context).brightness ==
+                                            Brightness.dark
+                                        ? Colors.white54
+                                        : Colors.black38,
+                                  ),
+                                  const SizedBox(height: 32),
+                                  Text(
+                                    context.l10n.noTodosAvailable,
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .titleLarge
+                                        ?.copyWith(
+                                          color: Theme.of(context).brightness ==
+                                                  Brightness.dark
+                                              ? Colors.white70
+                                              : Colors.black54,
+                                        ),
+                                  ),
+                                  const SizedBox(height: 16),
+                                  Text(
+                                    context.l10n.tapToAddFirstTask,
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .bodyMedium
+                                        ?.copyWith(
+                                          color: Theme.of(context).brightness ==
+                                                  Brightness.dark
+                                              ? Colors.white60
+                                              : Colors.black45,
+                                        ),
+                                  ),
+                                ],
+                              ),
+                            ),
                           ),
-                          const SizedBox(height: 32),
-                          Text(
-                            context.l10n.noTodosAvailable,
-                            style: Theme.of(context)
-                                .textTheme
-                                .titleLarge
-                                ?.copyWith(
-                                  color: Theme.of(context).brightness ==
-                                          Brightness.dark
-                                      ? Colors.white70
-                                      : Colors.black54,
-                                ),
-                          ),
-                          const SizedBox(height: 16),
-                          Text(
-                            context.l10n.tapToAddFirstTask,
-                            style: Theme.of(context)
-                                .textTheme
-                                .bodyMedium
-                                ?.copyWith(
-                                  color: Theme.of(context).brightness ==
-                                          Brightness.dark
-                                      ? Colors.white60
-                                      : Colors.black45,
-                                ),
-                          ),
-                        ],
+                        ),
                       ),
-                    ),
-                  ],
+                    );
+                  },
                 ),
               );
             } else {

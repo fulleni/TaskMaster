@@ -33,13 +33,12 @@ class _TodosStatsView extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         leading: Padding(
-          padding: const EdgeInsets.fromLTRB(16, 0, 4, 0),
+          padding: const EdgeInsets.fromLTRB(16, 16, 0, 16),
           child: Image.asset(
-            'assets/taskMaster.png',
-            fit: BoxFit.contain,
+            'assets/logo/taskMaster.png',
+            opacity: const AlwaysStoppedAnimation(0.9),
           ),
         ),
-        title: Text(l10n.taskmaster),
         actions: [
           IconButton(
             icon: Icon(Icons.settings),
