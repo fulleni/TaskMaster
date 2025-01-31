@@ -72,7 +72,7 @@ For web deployment:
 
 ## 🙌 Contributing
 
-We welcome contributions from the community! Please submit issues and pull requests through the repository. Detailed contribution guidelines are available in [CONTRIBUTING.md](CONTRIBUTING.md). (Create this file)
+We welcome contributions from the community! Please submit issues and pull requests through the repository.
 
 ## 📜 Licensing
 
