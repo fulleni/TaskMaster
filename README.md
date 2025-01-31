@@ -80,4 +80,4 @@ This project is licensed under the MIT License.
 
 ## 💬 Contact
 
-For bug reports, feature requests, or general inquiries, please use the [issue tracker](https://github.com/fulleni/TaskMaster/issues).
+For bug reports and feature requests, please use the [issue tracker](https://github.com/fulleni/TaskMaster/issues). For general discussions, questions, and community conversations, feel free to use the [issue tracker](https://github.com/fulleni/TaskMaster/discussions) tab.
