@@ -57,7 +57,7 @@ This section outlines the features currently planned for future development.
 ## 🛠️ Installation
 
 1.  Ensure that the Flutter SDK is installed on your development machine. Refer to the official [Flutter installation guide](https://flutter.dev/docs/get-started/install) for detailed instructions.
-2.  Clone the TaskMaster repository: `git clone https://github.com/fulleni/TaskMaster.git` (Replace with your actual repository URL)
+2.  Clone the TaskMaster repository: `git clone https://github.com/fulleni/TaskMaster.git`
 3.  Navigate to the project directory: `cd TaskMaster`
 4.  Install the required dependencies: `flutter pub get`
 
